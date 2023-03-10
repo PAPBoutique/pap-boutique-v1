@@ -1,10 +1,10 @@
-package com.example.papboutiquev1;
+package com.pap.papbackened;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PapBoutiqueV1ApplicationTests {
+class PapBackenedApplicationTests {
 
     @Test
     void contextLoads() {
