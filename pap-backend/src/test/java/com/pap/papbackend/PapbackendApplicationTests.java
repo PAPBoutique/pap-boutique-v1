@@ -1,10 +1,10 @@
-package com.pap.papbackened;
+package com.pap.papbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PapBackenedApplicationTests {
+class PapbackendApplicationTests {
 
     @Test
     void contextLoads() {

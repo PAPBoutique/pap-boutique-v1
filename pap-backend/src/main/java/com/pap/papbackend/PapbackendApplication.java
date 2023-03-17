@@ -1,13 +1,13 @@
-package com.pap.papbackened;
+package com.pap.papbackend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PapBackenedApplication {
+public class PapbackendApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PapBackenedApplication.class, args);
+        SpringApplication.run(PapbackendApplication.class, args);
     }
 
 }
