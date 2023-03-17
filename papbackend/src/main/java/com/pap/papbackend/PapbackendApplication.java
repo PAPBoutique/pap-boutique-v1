@@ -1,0 +1,13 @@
+package com.pap.papbackend;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class PapbackendApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(PapbackendApplication.class, args);
+    }
+
+}
