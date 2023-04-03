@@ -1,1 +1,5 @@
 rootProject.name = 'pap-backend'
+include 'domain'
+include 'application'
+include 'adapter'
+
