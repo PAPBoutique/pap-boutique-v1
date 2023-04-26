@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import { ProductsRoutingModule } from './products-routing.module';
 import { CreateProductComponent } from './page/create-product/create-product.component';
 import { ListProductsComponent } from './page/list-products/list-products.component';
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
+import { ConfirmationService, MessageService } from "primeng/api";
+import { CommonModule } from '@angular/common';
+
 
 
 
@@ -14,9 +15,14 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
     ListProductsComponent
   ],
   imports: [
-    CommonModule,
-    ProductsRoutingModule,
-    SharedComponentsModule
-  ]
+    ProductsRoutingModule, 
+    SharedComponentsModule,
+    CommonModule
+  ], 
+  
+  providers: [ConfirmationService, MessageService],
+
 })
-export class ProductsModule { }
+export class ProductsModule {
+
+ }

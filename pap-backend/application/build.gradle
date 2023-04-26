@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.9'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id'java-library'
 }
 
 group 'com.pap'
@@ -15,9 +16,10 @@ repositories {
 description = "application"
 
 dependencies {
-    implementation 'org.springframework:spring-context:5.1.5.RELEASE'
+    implementation 'org.springframework:spring-context'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
-    implementation project(':domain')
+    api project(':domain')
 }
 
 test {

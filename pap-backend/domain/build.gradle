@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '2.7.9'
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'java-library'
 }
 
 
@@ -16,7 +17,12 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.springframework:spring-context:5.1.5.RELEASE'
+    implementation 'org.springframework:spring-context'
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
+
+    api group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
+    annotationProcessor 'org.projectlombok:lombok:1.18.24'
+
 }
 
 test {
