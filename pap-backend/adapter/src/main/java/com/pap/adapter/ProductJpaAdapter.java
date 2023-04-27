@@ -22,12 +22,4 @@ public class ProductJpaAdapter implements ProductJpaPort {
         return ProductMapper.INSTANCE.productToProductDomainObject(savedProductEntity);
     }
 
-    @Override
-    public List<ProductDomainObject> getProducts() {
-        List<ProductEntity> productList = productRepository.findAll();
-        return ProductMapper.INSTANCE.productListToProductDomainObject(productList);
-    }
-
-
-
 }

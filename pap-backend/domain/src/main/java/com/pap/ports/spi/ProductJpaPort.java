@@ -6,6 +6,5 @@ import java.util.List;
 
 public interface ProductJpaPort {
     List<ProductDomainObject> addProduct(List<ProductDomainObject> productDomainObjectList);
-    List<ProductDomainObject> getProducts();
 
 }

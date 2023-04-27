@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -19,11 +20,11 @@ public class ProductEntity {
     private String description;
     private Integer quantity;
     private  Double price;
-    private Date CreatedDate;
+    private LocalDateTime createdDate;
     @PrePersist
     public void prePersist() {
-        if (CreatedDate == null) {
-            CreatedDate = new Date();
+        if (createdDate == null) {
+            createdDate = LocalDateTime.now();
         }
     }
 }

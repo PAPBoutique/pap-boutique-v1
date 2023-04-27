@@ -13,17 +13,10 @@ import java.util.List;
 @RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
 public class ProductController {
-
     private final ProductServicePort productServicePort;
-
     @PostMapping
-    // todo List<ProductDTO>
     public List<ProductDomainObject> addProduct(@RequestBody List<ProductDTO> productDto) {
         var domainObject = ProductRestMapper.INSTANCE.convertToDomainObject(productDto);
         return productServicePort.addProduct(domainObject);
-    }
-    @GetMapping
-    public List<ProductDomainObject> getAllProducts() {
-        return productServicePort.getProducts();
     }
 }

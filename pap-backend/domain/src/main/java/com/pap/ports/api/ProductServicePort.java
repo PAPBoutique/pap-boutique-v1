@@ -6,7 +6,4 @@ import java.util.List;
 
 public interface ProductServicePort {
     List<ProductDomainObject> addProduct(List<ProductDomainObject> productDomainObjectList);
-    List<ProductDomainObject> getProducts();
-
-
 }
