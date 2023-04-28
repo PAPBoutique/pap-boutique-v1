@@ -10,10 +10,11 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ProductService implements ProductServicePort {
+public class ProductService  implements  ProductServicePort {
     private final ProductJpaPort productJpaPort;
     @Override
     public List<ProductDomainObject> addProduct(List<ProductDomainObject> product) {
         return productJpaPort.addProduct(product);
     }
+    
 }
