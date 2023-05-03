@@ -1,9 +1,10 @@
-package com.pap.ports.api;
+package com.pap.product.ports.spi;
 
-import com.pap.model.product.ProductDomainObject;
+import com.pap.product.model.ProductDomainObject;
 
 import java.util.List;
 
-public interface ProductServicePort {
+public interface ProductJpaPort {
     List<ProductDomainObject> addProduct(List<ProductDomainObject> productDomainObjectList);
+
 }

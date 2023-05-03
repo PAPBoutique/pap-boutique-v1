@@ -8,13 +8,21 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-
 @Service
 @RequiredArgsConstructor
-public class ProductService  implements  ProductServicePort {
+public class ProductServiceImpl implements ProductServicePort {
+
     private final ProductJpaPort productJpaPort;
     @Override
     public List<ProductDomainObject> addProduct(List<ProductDomainObject> product) {
+
         return productJpaPort.addProduct(product);
     }
+
+    @Override
+    public List<ProductDomainObject> getProducts() {
+        return productJpaPort.getProducts();
+
+    }
+
 }

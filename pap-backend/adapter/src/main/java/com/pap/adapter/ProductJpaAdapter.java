@@ -3,8 +3,8 @@ package com.pap.adapter;
 import com.pap.adapter.jpa.entity.ProductEntity;
 import com.pap.adapter.jpa.mapper.ProductMapper;
 import com.pap.adapter.jpa.repository.ProductRepository;
-import com.pap.model.product.ProductDomainObject;
-import com.pap.ports.spi.ProductJpaPort;
+import com.pap.product.model.ProductDomainObject;
+import com.pap.product.ports.spi.ProductJpaPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

@@ -18,7 +18,13 @@ description = "application"
 dependencies {
     implementation 'org.springframework:spring-context'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
+    api 'org.springframework.boot:spring-boot-starter-web'
 
+    //Test
+    api  'org.mockito:mockito-core:3.11.2'
+    api 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    api 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    api 'org.springframework.boot:spring-boot-starter-test:2.6.3'
     api project(':domain')
 }
 

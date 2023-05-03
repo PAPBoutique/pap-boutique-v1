@@ -1,7 +1,7 @@
 package com.pap.adapter.jpa.mapper;
 
 import com.pap.adapter.jpa.entity.ProductEntity;
-import com.pap.model.product.ProductDomainObject;
+import com.pap.product.model.ProductDomainObject;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

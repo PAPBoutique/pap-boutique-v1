@@ -2,7 +2,7 @@ package com.pap.adapter.rest.mapper;
 
 
 import com.pap.adapter.dto.ProductDTO;
-import com.pap.model.product.ProductDomainObject;
+import com.pap.product.model.ProductDomainObject;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
