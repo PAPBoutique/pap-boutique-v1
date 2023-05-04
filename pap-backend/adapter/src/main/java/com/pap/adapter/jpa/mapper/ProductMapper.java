@@ -15,6 +15,4 @@ public interface ProductMapper {
 
     List<ProductEntity> productDomainObjectToProduct(List<ProductDomainObject> productDomainObject);
 
-    List<ProductDomainObject> productListToProductDomainObject(List<ProductEntity> productEntityList);
-
 }
