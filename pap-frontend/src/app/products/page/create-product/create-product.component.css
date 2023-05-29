@@ -1,0 +1,15 @@
+
+:host >>> .user-form {
+    width: 40%;
+    margin-left: 35%;
+    margin-top: 2%;
+  }
+  
+  :host >>> .p-inputtext {
+    width: 100%;
+  }
+
+  .user-form  {
+    text-align: center;
+  }
+

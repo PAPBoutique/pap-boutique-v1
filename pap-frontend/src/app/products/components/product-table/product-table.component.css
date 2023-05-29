@@ -1,0 +1,16 @@
+.card{
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+}   
+
+.add{
+    background-color: #9ab4d6;
+    border: #9ab4d6;
+    margin-left: 24px;
+}
+
+.add :hover{
+    background-color: #9ab4d6;
+}

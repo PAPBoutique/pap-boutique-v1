@@ -1,0 +1,48 @@
+<div class="card">
+  <p-toast></p-toast>
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+  <p-table #dt [value]="products" [lazy]="true" (onLazyLoad)="loadCustomers($event)" [paginator]="true" [rows]="3"
+    [rowsPerPageOptions]="[3, 4, 5]" [alwaysShowPaginator]="true" dataKey="id" [totalRecords]="tableSize">
+
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText #textInput type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
+            placeholder="Search..." />
+        </span>
+        <a routerLink="/products/create">
+          <button pButton pRipple label="New" icon="pi pi-plus" class="p-button add"></button>
+        </a>
+
+      </div>
+
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th width="25%">Name</th>
+        <th width="25%">Price</th>
+        <th width="25%">Quantity</th>
+        <th width="25%"></th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-ri="rowIndex">
+      <tr [pEditableRow]="product">
+        <td>{{product.name}}</td>
+        <td>{{product.price | currency}}</td>
+        <td>{{product.quantity}}</td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button (click)="confirmDelete(product)" pButton icon="pi pi-trash" class="p-button-text p-button-danger"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7">No products found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
