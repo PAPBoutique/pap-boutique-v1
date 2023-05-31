@@ -16,6 +16,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @AllArgsConstructor
@@ -52,8 +53,32 @@ public class ProductJpaAdapter implements ProductJpaPort {
         return PageableMapper.INSTANCE.toPageableContent(productPage);
     }
 
-    public ProductEntity getProductById(Long id){
-        return productRepository.findById(id)
-                .orElseThrow(()-> new ProductNotFoundException(ExceptionMessages.PRODUCTNOTFOUND));
+
+    @Override
+    public ProductDomainObject updateProduct(Long id, ProductDomainObject productDomainObject) throws ProductNotFoundException {
+        Optional<ProductEntity> existingProductEntity = productRepository.findById(id);
+
+        if (existingProductEntity.isPresent()) {
+            ProductEntity updatedProductEntity = existingProductEntity.get();
+            updatedProductEntity.setName(productDomainObject.getName());
+            updatedProductEntity.setDescription(productDomainObject.getDescription());
+            updatedProductEntity.setPrice(productDomainObject.getPrice());
+            updatedProductEntity.setQuantity(productDomainObject.getQuantity());
+
+            ProductEntity savedProductEntity = productRepository.save(updatedProductEntity);
+            return ProductMapper.INSTANCE.productToProductDomain(savedProductEntity);
+        } else {
+            throw new ProductNotFoundException("Product not found with id " + id);
+        }
+    }
+
+    @Override
+    public ProductDomainObject getProductById(Long id) throws ProductNotFoundException {
+        Optional<ProductEntity> productEntity = productRepository.findById(id);
+        if (productEntity.isPresent()) {
+            return ProductMapper.INSTANCE.productToProductDomain(productEntity.get());
+        } else {
+            throw new ProductNotFoundException("Product not found with id " + id);
+        }
     }
 }

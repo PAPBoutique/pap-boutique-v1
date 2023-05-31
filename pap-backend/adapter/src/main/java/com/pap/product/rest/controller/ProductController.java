@@ -1,6 +1,7 @@
 package com.pap.product.rest.controller;
 
 
+import com.pap.product.exception.ProductNotFoundException;
 import com.pap.product.model.PageableContent;
 import com.pap.product.model.ProductDomainObject;
 import com.pap.product.ports.api.ProductServicePort;
@@ -13,8 +14,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Max;
@@ -52,7 +55,31 @@ public class ProductController {
         return productService.findAllByPages(page,size,filterValue);
     }
 
+    @GetMapping("/{id}")
+    @Operation(summary = ProductDocMessages.GET_PRODUCTS)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = ProductDocMessages.GET_PRODUCTS_SUCCESS , content = @Content),
+            @ApiResponse(responseCode = "400" , description = ProductDocMessages.GET_PRODUCTS_FAILED)
+    })
+    public ProductDTO getProductById(@PathVariable("id") Long id) {
+        try {
+            var domainObject = productService.getProductById(id);
+            var productDto = ProductRestMapper.INSTANCE.convertProductDomainObjectToProductDTO(domainObject);
+            return productDto;
+        } catch (ProductNotFoundException ex) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage(), ex);
+        }
+    }
 
+    @PutMapping("/update/{id}")
+    public ProductDomainObject updateProduct(@PathVariable("id") Long id, @RequestBody ProductDTO productDto) {
+        try {
+            var domainObject = ProductRestMapper.INSTANCE.convertProductDtoToDomainObject(productDto);
+            return productService.updateProduct(id, domainObject);
+        } catch (ProductNotFoundException ex) {
+            throw new ProductNotFoundException(ex.getMessage());
+        }
+    }
 
     @Operation(summary = ProductDocMessages.DELETE_PRODUCTS)
     @ApiResponses(value = {
@@ -64,4 +91,10 @@ public class ProductController {
             @Parameter(name = ProductDocMessages.DELETE_PRODUCTS_PARAM) Long id){
         productService.deleteProduct(id);
     }
+
+
+
+
+
+
 }

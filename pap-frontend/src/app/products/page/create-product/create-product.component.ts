@@ -23,6 +23,7 @@ export class CreateProductComponent {
     Quantity: ['', Validators.required],
     myfile: ['']
   });
+  
   products: Product[] = [
     {
       name: '',

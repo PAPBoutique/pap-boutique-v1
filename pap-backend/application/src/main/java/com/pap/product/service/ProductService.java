@@ -27,6 +27,16 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
+    public ProductDomainObject updateProduct(Long id, ProductDomainObject productDomainObjectList) {
+        return productJpaPort.updateProduct(id, productDomainObjectList);
+    }
+
+    @Override
+    public ProductDomainObject getProductById(Long id) {
+        return productJpaPort.getProductById(id);
+    }
+
+    @Override
     public PageableContent<ProductDomainObject> findAllByPages(int page, int size, String filterValue) {
         if(filterValue.isBlank()){
             return productJpaPort.findAllByPage(page,size);

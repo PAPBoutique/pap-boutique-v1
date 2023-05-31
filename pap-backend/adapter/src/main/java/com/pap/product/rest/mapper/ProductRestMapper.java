@@ -11,11 +11,7 @@ import java.util.List;
 public interface ProductRestMapper {
     ProductRestMapper INSTANCE = Mappers.getMapper(ProductRestMapper.class);
 
-
-    ProductDomainObject toProductDomain(ProductDTO productDTO);
-
-
     List<ProductDomainObject> convertToDomainObject(List<ProductDTO> productDTO);
-
-
+    ProductDomainObject convertProductDtoToDomainObject(ProductDTO productDTO);
+    ProductDTO convertProductDomainObjectToProductDTO(ProductDomainObject productDomainObject);
 }

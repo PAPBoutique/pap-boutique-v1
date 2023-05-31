@@ -7,7 +7,9 @@ import { ListProductsComponent } from './page/list-products/list-products.compon
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { ProductTableComponent } from './components/product-table/product-table.component';
 import { ProductService } from '../services/product/product-service';
+import { EditProductComponent } from './edit-product/edit-product/edit-product.component';
 import { CommonModule } from '@angular/common';
+import { HomepageComponent } from './page/homepage/homepage.component';
 
 
 
@@ -15,7 +17,9 @@ import { CommonModule } from '@angular/common';
   declarations: [
     CreateProductComponent,
     ListProductsComponent,
-    ProductTableComponent
+    ProductTableComponent,
+    EditProductComponent,
+    HomepageComponent
   ],
   imports: [
     CommonModule,

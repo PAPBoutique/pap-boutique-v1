@@ -15,6 +15,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
 import { FileUploadModule } from "primeng/fileupload";
+import { DialogModule } from 'primeng/dialog';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ConfirmPopupModule } from "primeng/confirmpopup";
 import { CardModule } from 'primeng/card';
@@ -46,7 +47,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     FormsModule,
     InputTextareaModule,
     RippleModule,
-    SidebarComponent
+    SidebarComponent,
+    DialogModule
   ],
   imports: [
     CommonModule,
@@ -60,6 +62,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     ConfirmPopupModule,
     ToastModule,
     CardModule,
+    DialogModule,
     RouterModule
   ],
   providers:[MessageService,ConfirmationService]
