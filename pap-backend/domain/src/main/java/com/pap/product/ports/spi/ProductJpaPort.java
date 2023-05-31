@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface ProductJpaPort {
     List<ProductDomainObject> addProduct(List<ProductDomainObject> productDomainObjectList);
-
+    ProductDomainObject updateProduct(Long id, ProductDomainObject productDomainObjectList);
+    ProductDomainObject getProductById(Long id);
 
     void deleteProduct(Long id);
     PageableContent<ProductDomainObject> findAllByPage(int page, int size);

@@ -1,13 +1,5 @@
-<div class="container-fluid">
-  <div class="row">
-    <app-sidebar></app-sidebar>
-    <div class="col-9 content">
-      <p-toast (onClose)="closeToast()"></p-toast>
-      <div class="flex align-items-center justify-content-center">
-        <p-card styleClass="user-form">
-          <form [formGroup]="ProductForm" (ngSubmit)="CreateProduct()" novalidate *ngFor="let product of products">
 
-            <h3>Create product</h3>
+<form [formGroup]="ProductForm" (ngSubmit)="CreateProduct()" novalidate *ngFor="let product of products">
             <div class="field">
               <label for="name" class="block">Name</label>
               <input type="text" pInputText placeholder="Name" formControlName="name" [(ngModel)]="product.name" />
@@ -46,14 +38,7 @@
             <div style="text-align: right;">
               <p-button type="submit" label="Submit" icon="pi pi-check" iconPos="left"
                 [disabled]="ProductForm.invalid"></p-button>
-              <button type="reset" pButton pRipple label="Cancel" icon="pi pi-times"
+              <button  type="reset" pButton pRipple label="Clear" icon="pi pi-times"
                 class="p-button-raised p-button-danger" style="margin-left: 12px;"></button>
             </div>
           </form>
-
-        </p-card>
-      </div>
-    </div>
-  </div>
-</div>
-<br><br>

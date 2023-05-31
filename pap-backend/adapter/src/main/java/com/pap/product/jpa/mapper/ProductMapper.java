@@ -12,18 +12,15 @@ import java.util.List;
 public interface ProductMapper {
     ProductMapper INSTANCE= Mappers.getMapper(ProductMapper.class);
 
-
     ProductDomainObject productToProductDomain(ProductEntity productEntity);
-
-
     ProductEntity productDomainToProduct(ProductDomainObject productDomainObject);
-
 
     List<ProductDomainObject> productsToProductDomainObject(List<ProductEntity> productEntity);
 
     List<ProductEntity> productsDomainObjectToProduct(List<ProductDomainObject> productDomainObject);
 
-    List<ProductDomainObject> productsListToProductDomainObject(List<ProductEntity> productEntityList);
+
+
 
 
 }

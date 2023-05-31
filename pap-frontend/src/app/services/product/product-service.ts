@@ -30,4 +30,14 @@ export class ProductService {
     if(filterValue==null) filterValue="";
     return this.http
     .get<PageContent<Product>>(baseUrl+"?page="+page+"&size="+size+"&filterValue="+filterValue);  }
+
+    updateProduct(product: Product): Observable<Product> {
+      const url = `${baseUrl}/update/${product.id}`;
+      return this.http.put<Product>(url, product);
+    }
+    
+    getProductById(id: number): Observable<Product> {
+      const url = `${baseUrl}/${id}`;
+      return this.http.get<Product>(url);
+    }
 }
