@@ -1,1 +1,14 @@
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    font-family: var(--font-family);
+    font-weight: normal;
+    background: #9ab4d6;
+    color: var(--text-color);
+}
 
+.content {
+    margin-left: 280px;
+    padding: 40px;
+}

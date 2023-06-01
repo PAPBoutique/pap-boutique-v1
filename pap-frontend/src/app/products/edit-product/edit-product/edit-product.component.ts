@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product/product';
@@ -34,6 +34,11 @@ export class EditProductComponent {
 
   @Input() selectedProduct!: Product;
   @Input() visible : boolean =false ;
+  @Output() closeDialog = new EventEmitter<any>() ;
+
+  onHide(e:any){
+    this.closeDialog.emit();
+  }
 
   updateProduct(product: Product) {
 

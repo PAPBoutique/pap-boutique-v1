@@ -1,5 +1,7 @@
 <div class="card">
   <p-toast></p-toast>
+  <app-create-product [visible]="visibleAdd" (closeDialog) = "updateAddDialog()"></app-create-product>
+  <app-edit-product [selectedProduct]="selectedProduct" [visible]="visible" (closeDialog) = "updateEditDialog()"></app-edit-product>
   <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
   <p-table #dt [value]="products" [lazy]="true" (onLazyLoad)="loadProducts($event)" [paginator]="true" [rows]="3"
     [rowsPerPageOptions]="[3, 4, 5]" [alwaysShowPaginator]="true" dataKey="id" [totalRecords]="tableSize">
@@ -35,12 +37,6 @@
         <td>{{product.quantity}}</td>
         <td>
           <div class="flex align-items-center justify-content-center gap-2">
-            <app-edit-product [selectedProduct]="selectedProduct" [visible]="visible"></app-edit-product>
-
-            <app-create-product [visible]="visibleAdd"></app-create-product>
-
-
-            <p-toast (onClose)="closeToast()"></p-toast>
             <button (click)="showDialog(product)" pButton icon="pi pi-pencil"
               class="p-button-text p-button-warning"></button>
             <button (click)="confirmDelete(product)" pButton icon="pi pi-trash"
