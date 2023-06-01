@@ -56,7 +56,7 @@ public class ProductController {
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = ProductDocMessages.GET_PRODUCTS)
+    @Operation(summary = ProductDocMessages.GET_PRODUCT_BY_ID)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200" , description = ProductDocMessages.GET_PRODUCTS_SUCCESS , content = @Content),
             @ApiResponse(responseCode = "400" , description = ProductDocMessages.GET_PRODUCTS_FAILED)
@@ -64,14 +64,17 @@ public class ProductController {
     public ProductDTO getProductById(@PathVariable("id") Long id) {
         try {
             var domainObject = productService.getProductById(id);
-            var productDto = ProductRestMapper.INSTANCE.convertProductDomainObjectToProductDTO(domainObject);
-            return productDto;
+            return ProductRestMapper.INSTANCE.convertProductDomainObjectToProductDTO(domainObject);
         } catch (ProductNotFoundException ex) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, ex.getMessage(), ex);
         }
     }
 
     @PutMapping("/update/{id}")
+    @Operation(summary = ProductDocMessages.UPDATE_PRODUCT)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200" , description = ProductDocMessages.UPDATE_PRODUCT_SUCCESS)
+    })
     public ProductDomainObject updateProduct(@PathVariable("id") Long id, @RequestBody ProductDTO productDto) {
         try {
             var domainObject = ProductRestMapper.INSTANCE.convertProductDtoToDomainObject(productDto);

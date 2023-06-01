@@ -11,7 +11,7 @@
           <input pInputText #textInput type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
             placeholder="Search..." />
         </span>
-       
+
         <button (click)="showAddDialog()" pButton pRipple label="New" icon="pi pi-plus" class="p-button add"></button>
 
       </div>
@@ -35,17 +35,16 @@
         <td>{{product.quantity}}</td>
         <td>
           <div class="flex align-items-center justify-content-center gap-2">
-            <p-dialog header="Update your product" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-              <app-edit-product [selectedProduct]="selectedProduct"></app-edit-product>
-            </p-dialog>
+            <app-edit-product [selectedProduct]="selectedProduct" [visible]="visible"></app-edit-product>
 
-            <p-dialog header="Add a new product" [(visible)]="visibleAdd" [modal]="true" [style]="{ width: '50vw' }" [draggable]="false" [resizable]="false">
-              <app-create-product></app-create-product>
-            </p-dialog>
+            <app-create-product [visible]="visibleAdd"></app-create-product>
+
 
             <p-toast (onClose)="closeToast()"></p-toast>
-            <button (click)="showDialog(product)" pButton icon="pi pi-pencil" class="p-button-text p-button-warning"></button>
-            <button (click)="confirmDelete(product)" pButton icon="pi pi-trash" class="p-button-text p-button-danger"></button>
+            <button (click)="showDialog(product)" pButton icon="pi pi-pencil"
+              class="p-button-text p-button-warning"></button>
+            <button (click)="confirmDelete(product)" pButton icon="pi pi-trash"
+              class="p-button-text p-button-danger"></button>
 
           </div>
         </td>

@@ -8,6 +8,7 @@ import com.pap.product.ports.spi.ProductJpaPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,8 +42,9 @@ public class ProductService implements ProductServicePort {
         if(filterValue.isBlank()){
             return productJpaPort.findAllByPage(page,size);
         }else {
-            return productJpaPort.findAllByName(page,size,filterValue.toLowerCase());
-
+            PageableContent<ProductDomainObject> result = productJpaPort.findAllByName(page,size,filterValue.toLowerCase());
+            if(result.getContent()==null) result.setContent(new ArrayList<>());
+            return result;
         }
 
     }
