@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product/product';
@@ -16,9 +16,13 @@ export class CreateProductComponent {
     private productService: ProductService,
     private router: Router) { }
 
-  @Input() visible: boolean = false;
+  @Input() visible?: boolean;
+  @Output() closeDialog = new EventEmitter<any>() ;
   loading: boolean = false;
 
+  onHide(e:any){
+    this.closeDialog.emit();
+  }
 
   ProductForm = this.fb.group({
     name: ['', Validators.required],
@@ -43,7 +47,8 @@ export class CreateProductComponent {
         this.showsuccessMessage();
         this.loading = true ;
         setTimeout(() => {
-          this.router.navigate(['/products/list']);
+          console.log("after loading");
+          window.location.reload();
         }, 3000);
       },
       error => {
@@ -64,5 +69,6 @@ export class CreateProductComponent {
   closeToast() {
     this.router.navigate(['/products/list'])
   }
+
 
 }

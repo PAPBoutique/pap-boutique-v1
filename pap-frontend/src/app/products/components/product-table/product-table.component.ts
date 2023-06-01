@@ -37,6 +37,17 @@ export class ProductTableComponent {
     private productservice: ProductService
   ) {}
 
+  ngOnInit(){
+  }
+
+  updateAddDialog(){
+    this.visibleAdd = false ;
+  }
+  updateEditDialog(){
+    this.visible = false ;
+  }
+
+
   loadProducts(event: LazyLoadEvent) {
     if (event.rows && event.first?.toString) {
       this.pageChange.emit({ page: event.first / event.rows, size: event.rows, filterValue: event.globalFilter });
@@ -78,8 +89,4 @@ export class ProductTableComponent {
     this.visibleAdd = true;
   }
 
-  closeToast() {
-    this.visible = false;
-    window.location.reload();
-  }
 }
