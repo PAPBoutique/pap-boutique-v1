@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product/product';
@@ -16,6 +16,10 @@ export class CreateProductComponent {
     private productService: ProductService,
     private router: Router) { }
 
+  @Input() visible: boolean = false;
+  loading: boolean = false;
+
+
   ProductForm = this.fb.group({
     name: ['', Validators.required],
     Description: ['', Validators.required],
@@ -23,7 +27,7 @@ export class CreateProductComponent {
     Quantity: ['', Validators.required],
     myfile: ['']
   });
-  
+
   products: Product[] = [
     {
       name: '',
@@ -37,6 +41,7 @@ export class CreateProductComponent {
       response => {
         console.log(response)
         this.showsuccessMessage();
+        this.loading = true ;
         setTimeout(() => {
           this.router.navigate(['/products/list']);
         }, 3000);

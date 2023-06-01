@@ -19,7 +19,8 @@ export class EditProductComponent {
     private productService: ProductService,
     private router: Router,
     private route: ActivatedRoute
-  ) {}
+  ) { }
+  loading: boolean = false;
 
   ProductForm = this.fb.group({
     name: ['', Validators.required],
@@ -32,22 +33,26 @@ export class EditProductComponent {
   product!: Product;
 
   @Input() selectedProduct!: Product;
+  @Input() visible : boolean =false ;
+
   updateProduct(product: Product) {
-    
-      this.productService.updateProduct(product).subscribe(
-        (data: Product) => {
-          console.log(data);
-          this.showsuccessMessage();
-          setTimeout(() => {
-            window.location.reload();
-          }, 3000);
-        },
-        (error: any) => {
-          console.log(error);
-          this.showErrorMessage();
-        }
-      );
-    
+
+    this.productService.updateProduct(product).subscribe(
+      (data: Product) => {
+        console.log(data);
+        this.showsuccessMessage();
+        this.loading = true ;
+        console.log(this.loading);
+        setTimeout(() => {
+          window.location.reload();
+        }, 3000);
+      },
+      (error: any) => {
+        console.log(error);
+        this.showErrorMessage();
+      }
+    );
+
   }
 
   showsuccessMessage() {

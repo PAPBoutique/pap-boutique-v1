@@ -20,6 +20,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import { ConfirmPopupModule } from "primeng/confirmpopup";
 import { CardModule } from 'primeng/card';
 import { SidebarComponent } from './sidebar/sidebar.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     PageNotFoundComponent,
     FooterComponent,
     NavbarComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoaderComponent
   ],
   exports: [
     PageNotFoundComponent,
@@ -48,7 +50,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     InputTextareaModule,
     RippleModule,
     SidebarComponent,
-    DialogModule
+    DialogModule,
+    LoaderComponent
   ],
   imports: [
     CommonModule,

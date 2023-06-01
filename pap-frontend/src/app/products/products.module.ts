@@ -9,7 +9,6 @@ import { ProductTableComponent } from './components/product-table/product-table.
 import { ProductService } from '../services/product/product-service';
 import { EditProductComponent } from './edit-product/edit-product/edit-product.component';
 import { CommonModule } from '@angular/common';
-import { HomepageComponent } from './page/homepage/homepage.component';
 
 
 
@@ -18,8 +17,7 @@ import { HomepageComponent } from './page/homepage/homepage.component';
     CreateProductComponent,
     ListProductsComponent,
     ProductTableComponent,
-    EditProductComponent,
-    HomepageComponent
+    EditProductComponent
   ],
   imports: [
     CommonModule,
