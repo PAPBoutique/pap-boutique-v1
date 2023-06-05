@@ -3,13 +3,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { PageNotFoundComponent } from './shared-components/page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { 
+  {
+    path :'' ,
+    loadChildren : () => import ('./user/user.module').then(m=>m.UserModule) 
+  }
+  ,{ 
     path: 'products',
     loadChildren: () => import('./products/products.module').then(m => m.ProductsModule)
   },
   { 
     path:'' , 
-    redirectTo:"products" , 
+    redirectTo:"user" , 
     pathMatch:'full'
   },
   { 

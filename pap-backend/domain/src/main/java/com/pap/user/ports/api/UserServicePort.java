@@ -1,0 +1,10 @@
+package com.pap.user.ports.api;
+
+import com.pap.user.model.UserDomainObject;
+
+import java.util.List;
+
+public interface UserServicePort {
+    List<UserDomainObject> addUsers(List<UserDomainObject> users) ;
+
+}

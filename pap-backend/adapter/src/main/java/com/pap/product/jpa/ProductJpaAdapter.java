@@ -1,6 +1,6 @@
 package com.pap.product.jpa;
 
-import com.pap.product.exception.ExceptionMessages;
+
 import com.pap.product.exception.ProductNotFoundException;
 import com.pap.product.jpa.entity.ProductEntity;
 import com.pap.product.jpa.mapper.PageableMapper;
@@ -36,7 +36,6 @@ public class ProductJpaAdapter implements ProductJpaPort {
         if(getProductById(id)!=null){
             productRepository.deleteById(id);
         }
-
     }
 
     @Override
