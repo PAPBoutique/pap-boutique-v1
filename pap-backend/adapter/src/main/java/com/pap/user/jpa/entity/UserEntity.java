@@ -22,6 +22,8 @@ public class UserEntity {
 
     private String username ;
     private String email ;
+    private String address ;
+    private Long phoneNum ;
     private Role role;
     private String password ;
 }

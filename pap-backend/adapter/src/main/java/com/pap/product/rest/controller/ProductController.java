@@ -50,7 +50,7 @@ public class ProductController {
     @GetMapping
     public PageableContent<ProductDomainObject> getProductsByPage(
             @RequestParam @Min(value = 0 , message = "Page number must be greater than or equal 0") int page,
-            @RequestParam @Max(value= 6 , message = "Size must be lower than 6") int size,
+            @RequestParam  int size,
             @RequestParam String filterValue){
         return productService.findAllByPages(page,size,filterValue);
     }

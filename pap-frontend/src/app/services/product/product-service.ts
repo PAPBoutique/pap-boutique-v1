@@ -29,7 +29,8 @@ export class ProductService {
   getProductsByPage(page ?: number , size ?:number , filterValue:String = ""):Observable<PageContent<Product>>{
     if(filterValue==null) filterValue="";
     return this.http
-    .get<PageContent<Product>>(baseUrl+"?page="+page+"&size="+size+"&filterValue="+filterValue);  }
+    .get<PageContent<Product>>(baseUrl+"?page="+page+"&size="+size+"&filterValue="+filterValue);
+  }
 
     updateProduct(product: Product): Observable<Product> {
       const url = `${baseUrl}/update/${product.id}`;

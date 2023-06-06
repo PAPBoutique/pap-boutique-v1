@@ -19,7 +19,7 @@ export class ListProductsComponent {
     return this.productService.deleteProduct(id);
   }
 
-  fetchProducts(page: number = 0, size: number = 3, filterValue: String = "") {
+  fetchProducts(page: number = 0, size: number = 5, filterValue: String = "") {
     this.productService.getProductsByPage(page, size, filterValue).subscribe((productsPage: PageContent<Product>) => {
       if (productsPage && productsPage.content) {
         this.products = productsPage.content;

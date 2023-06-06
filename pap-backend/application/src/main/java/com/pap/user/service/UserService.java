@@ -26,4 +26,9 @@ public class UserService implements UserServicePort {
         if (users.getContent()==null)  users.setContent(new ArrayList<>());
         return users;
     }
+
+    @Override
+    public void deleteUser(Long id) {
+        userJpaPort.deleteUser(id);
+    }
 }

@@ -8,4 +8,5 @@ import java.util.List;
 public interface UserServicePort {
     List<UserDomainObject> addUsers(List<UserDomainObject> users) ;
     PageableContent<UserDomainObject> findAllByPage(int page,int size,String filter);
+    void deleteUser(Long id);
 }

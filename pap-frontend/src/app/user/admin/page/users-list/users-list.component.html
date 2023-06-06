@@ -1,0 +1,9 @@
+<div class="container-fluid">
+    <div class="row">
+        <app-sidebar></app-sidebar>
+        <div class="col-9 content">
+            <app-users-table [users]="users" [deleteOne]="deleteUser" [tableSize]="totalUsers"
+                (pageChange)="onTableChange($event)"></app-users-table>
+        </div>
+    </div>
+</div>

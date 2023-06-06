@@ -3,8 +3,8 @@
   <app-create-product [visible]="visibleAdd" (closeDialog) = "updateAddDialog()"></app-create-product>
   <app-edit-product [selectedProduct]="selectedProduct" [visible]="visible" (closeDialog) = "updateEditDialog()"></app-edit-product>
   <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-  <p-table #dt [value]="products" [lazy]="true" (onLazyLoad)="loadProducts($event)" [paginator]="true" [rows]="3"
-    [rowsPerPageOptions]="[3, 4, 5]" [alwaysShowPaginator]="true" dataKey="id" [totalRecords]="tableSize">
+  <p-table #dt [scrollable]="true" [value]="products" [lazy]="true" (onLazyLoad)="loadProducts($event)" [paginator]="true" [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 20]" [alwaysShowPaginator]="true" dataKey="id" [totalRecords]="tableSize">
 
     <ng-template pTemplate="caption">
       <div class="flex">

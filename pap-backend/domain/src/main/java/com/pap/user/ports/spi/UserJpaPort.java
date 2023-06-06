@@ -9,6 +9,6 @@ public interface UserJpaPort {
     List<UserDomainObject> addUsers(List<UserDomainObject> users) ;
     PageableContent<UserDomainObject> findAllByPage(int page,int size);
     PageableContent<UserDomainObject> findAllByFilter(int page,int size,String filter);
-    String deleteUser(Long id);
+    void deleteUser(Long id);
     UserDomainObject getUserById(Long id);
 }

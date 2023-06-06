@@ -14,5 +14,7 @@ public class UserDomainObject {
     private String email ;
     private String password ;
     private Role role ;
+    private String address ;
+    private Long phoneNum ;
 
 }
