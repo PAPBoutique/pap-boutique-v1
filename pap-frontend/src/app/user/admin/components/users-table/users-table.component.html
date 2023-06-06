@@ -3,7 +3,7 @@
     <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
     <p-table #dt [value]="users" [lazy]="true" (onLazyLoad)="loadUsers($event)" [paginator]="true" [rows]="5"
       [rowsPerPageOptions]="[5, 10, 20]" [alwaysShowPaginator]="true" dataKey="id" [totalRecords]="tableSize">
-  
+
       <ng-template pTemplate="caption">
         <div class="flex">
           <span class="p-input-icon-left">
@@ -11,7 +11,6 @@
             <input pInputText #textInput type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
               placeholder="Search..." />
           </span>
-  
           <button pButton pRipple label="New User" icon="pi pi-plus" class="p-button add"></button>
   
         </div>
