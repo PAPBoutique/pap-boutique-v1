@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../models/user/user';
-import { PageContent } from '../shared-components/service/pageContent';
+import { User } from 'src/app/models/user/user';
+import { PageContent } from 'src/app/shared-components/service/pageContent';
 import { Observable } from 'rxjs';
 
 
@@ -22,4 +22,7 @@ export class UserService {
   deleteUser(id:number):Observable<Object>{
     return this.http.delete(baseUrl+"/"+id);
   }
+  createUser(users: User[]): Observable<User> {
+    return this.http.post<User>(baseUrl, users);
+}
 }

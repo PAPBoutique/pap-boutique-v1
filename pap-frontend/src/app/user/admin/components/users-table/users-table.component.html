@@ -1,55 +1,55 @@
 <div class="card">
-    <p-toast></p-toast>
-    <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-    <p-table #dt [value]="users" [lazy]="true" (onLazyLoad)="loadUsers($event)" [paginator]="true" [rows]="5"
-      [rowsPerPageOptions]="[5, 10, 20]" [alwaysShowPaginator]="true" dataKey="id" [totalRecords]="tableSize">
+  <p-toast></p-toast>
+  <app-create-user [visible]="visibleAdd" (closeDialog) = "closeAddDialog()" ></app-create-user>
+  <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+  <p-table #dt [value]="users" [lazy]="true" (onLazyLoad)="loadUsers($event)" [paginator]="true" [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 20]" [alwaysShowPaginator]="true" dataKey="id" [totalRecords]="tableSize">
 
-      <ng-template pTemplate="caption">
-        <div class="flex">
-          <span class="p-input-icon-left">
-            <i class="pi pi-search"></i>
-            <input pInputText #textInput type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
-              placeholder="Search..." />
-          </span>
-          <button pButton pRipple label="New User" icon="pi pi-plus" class="p-button add"></button>
-  
-        </div>
-  
-      </ng-template>
-  
-      <ng-template pTemplate="header">
-        <tr>
-          <th style="display: none;">ID</th>
-          <th width="20%">Username</th>
-          <th width="20%">Email</th>
-          <th width="20%">Address</th>
-          <th width="20%">Role</th>
-          <th width="20%">Phone Number</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-user let-ri="rowIndex">
-        <tr [pEditableRow]="user">
-          <td style="display: none;"> {{user.id}} </td>
-          <td>{{user.username}}</td>
-          <td>{{user.email | currency}}</td>
-          <td>{{user.address}}</td>
-          <td>{{user.role}}</td>
-          <td>{{user.phoneNum}}</td>
-          <td>
-            <div class="flex align-items-center justify-content-center gap-2">
-              <button  pButton icon="pi pi-pencil"
-                class="p-button-text p-button-warning"></button>
-              <button  pButton icon="pi pi-trash"
-                class="p-button-text p-button-danger"></button>
-  
-            </div>
-          </td>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="emptymessage">
-        <tr>
-          <td colspan="7">No Users found.</td>
-        </tr>
-      </ng-template>
-    </p-table>
-  </div>
+    <ng-template pTemplate="caption">
+      <div class="flex">
+        <span class="p-input-icon-left">
+          <i class="pi pi-search"></i>
+          <input pInputText #textInput type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
+            placeholder="Search..." />
+        </span>
+        <button pButton pRipple label="New User" icon="pi pi-plus" class="p-button add" (click)="showAddDialog()"></button>
+      </div>
+    </ng-template>
+
+    <ng-template pTemplate="header">
+      <tr>
+        <th style="display: none;">ID</th>
+        <th width="20%">Username</th>
+        <th width="20%">Email</th>
+        <th width="20%">Address</th>
+        <th width="20%">Role</th>
+        <th width="20%">Phone Number</th>
+        <th width="20%">Actions</th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user let-ri="rowIndex">
+      <tr [pEditableRow]="user">
+        <td style="display: none;"> {{user.id}} </td>
+        <td>{{user.username}}</td>
+        <td>{{user.email | currency}}</td>
+        <td>{{user.address}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.phoneNum}}</td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button  pButton icon="pi pi-pencil" class="p-button-text p-button-warning"></button>
+            <button  pButton icon="pi pi-trash" class="p-button-text p-button-danger"></button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="emptymessage">
+      <tr>
+        <td colspan="7">No Users found.</td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+</div>

@@ -13,5 +13,7 @@ public interface UserMapper {
 
     UserDomainObject toUserDomain (UserEntity userEntity);
     UserEntity toUserEntity(UserDomainObject userDomainObject);
-    List<UserDomainObject> toListUserDomain(List<UserEntity> userEntityList);
+    List<UserDomainObject> usersToUserDomainObjectList(List<UserEntity> users);
+    List<UserEntity> usersDomainObjectToUserEntity(List<UserDomainObject> usersDomainObject);
+
 }

@@ -3,12 +3,14 @@ package com.pap.user.rest.controller;
 import com.pap.product.model.PageableContent;
 import com.pap.user.model.UserDomainObject;
 import com.pap.user.ports.api.UserServicePort;
+import com.pap.user.rest.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.constraints.Max;
+import com.pap.user.rest.mapper.UserRestMapper;
 import javax.validation.constraints.Min;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -16,6 +18,13 @@ import javax.validation.constraints.Min;
 @Validated
 public class UserController {
     private final UserServicePort userServicePort ;
+
+    @PostMapping
+    public List<UserDomainObject> addUsers(@RequestBody List<UserDto> userDTOS)
+    {
+        List<UserDomainObject> userDomainObjects = UserRestMapper.INSTANCE.convertToDomainObject(userDTOS);
+        return userServicePort.addUsers(userDomainObjects);
+    }
 
     @GetMapping
     public PageableContent<UserDomainObject> getUsersByPage(

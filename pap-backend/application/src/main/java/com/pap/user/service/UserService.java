@@ -16,7 +16,7 @@ public class UserService implements UserServicePort {
     private final UserJpaPort userJpaPort ;
     @Override
     public List<UserDomainObject> addUsers(List<UserDomainObject> users) {
-        return null;
+        return userJpaPort.addUsers(users);
     }
 
     @Override

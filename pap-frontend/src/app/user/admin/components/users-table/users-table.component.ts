@@ -52,4 +52,15 @@ export class UsersTableComponent {
       }
     });
   }
+
+  visibleAdd: boolean = false;
+
+  showAddDialog() {
+    this.visibleAdd = true;
+  }
+
+ closeAddDialog(){
+    this.visibleAdd = false ;
+  }
+
 }
