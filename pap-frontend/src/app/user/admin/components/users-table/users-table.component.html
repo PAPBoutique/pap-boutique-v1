@@ -19,12 +19,12 @@
     <ng-template pTemplate="header">
       <tr>
         <th style="display: none;">ID</th>
-        <th width="20%">Username</th>
-        <th width="20%">Email</th>
-        <th width="20%">Address</th>
-        <th width="20%">Role</th>
-        <th width="20%">Phone Number</th>
-        <th width="20%">Actions</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Address</th>
+        <th>Role</th>
+        <th>Phone Number</th>
+        <th>Actions</th>
       </tr>
     </ng-template>
 
@@ -32,14 +32,15 @@
       <tr [pEditableRow]="user">
         <td style="display: none;"> {{user.id}} </td>
         <td>{{user.username}}</td>
-        <td>{{user.email | currency}}</td>
+        <td>{{user.email}}</td>
         <td>{{user.address}}</td>
         <td>{{user.role}}</td>
         <td>{{user.phoneNum}}</td>
         <td>
           <div class="flex align-items-center justify-content-center gap-2">
             <button  pButton icon="pi pi-pencil" class="p-button-text p-button-warning"></button>
-            <button  pButton icon="pi pi-trash" class="p-button-text p-button-danger"></button>
+            <button  pButton icon="pi pi-trash" (click)="confirmDelete(user)" 
+            class="p-button-text p-button-danger"></button>
           </div>
         </td>
       </tr>

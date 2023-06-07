@@ -22,6 +22,7 @@ export class UsersListComponent {
       if (usersPage && usersPage.content) {
         this.users = usersPage.content;
         this.totalUsers = usersPage.totalElements;
+        console.log(this.users);
       }
     });
   }

@@ -22,6 +22,7 @@ export class UsersTableComponent {
     private messageService: MessageService,
     private confirmationService: ConfirmationService
   ) {}
+
   loadUsers(event: LazyLoadEvent ) {
     if (event.rows && event.first?.toString) {
       this.pageChange.emit({ page: event.first / event.rows, size: event.rows, filterValue: event.globalFilter });
