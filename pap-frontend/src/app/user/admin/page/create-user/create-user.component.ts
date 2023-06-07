@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Role } from 'src/app/models/user/roles';
@@ -33,7 +33,7 @@ export class CreateUserComponent {
     username: ['', Validators.required],
     email: ['', Validators.email],
     address: ['', Validators.required],
-    phoneNum: ['', Validators.required],
+    phoneNum: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
     password: ['', Validators.required],
     role: ['', Validators.nullValidator]
   });
@@ -46,11 +46,19 @@ export class CreateUserComponent {
     username: "",
     email: "",
     address: "",
-    phoneNum: 1234567890,
+    phoneNum: 6,
     password: "",
     role: Role.T
   }];
 
+  firstCharValidator(control: AbstractControl) {
+    const firstChar = control.value.charAt(0);
+    if (firstChar !== '6' && firstChar !== '7') {
+      return { firstCharInvalid: true };
+    }
+    return null;
+  }
+  
   createUser() {
     if (this.userForm.invalid) {
       return;

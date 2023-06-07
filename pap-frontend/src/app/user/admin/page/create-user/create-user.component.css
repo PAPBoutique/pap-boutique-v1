@@ -20,3 +20,31 @@
 .input-field {
   width: 100%;
 }
+
+.phone-inputs-container {
+  display: flex;
+  align-items: center;
+}
+
+.phone-prefix-input {
+  padding-left: 30px;
+  background-image: url('/assets/ma.svg');
+  background-repeat: no-repeat;
+  background-position: 5px center;
+  background-size: 20px 20px;
+}
+
+
+.phone-inputs-container input {
+  margin-right: 10px;
+}
+
+
+.error-container {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.error-container small {
+  margin-right: 10px;
+}

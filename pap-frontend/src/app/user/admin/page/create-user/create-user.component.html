@@ -55,14 +55,32 @@
     </div>
     <br>
     <div class="field">
-      <i class="pi pi-phone"></i>&nbsp;
-      <label for="phoneNum" class="block">Phone Number</label>&nbsp;
-      <span class="p-float-label">
-        <input type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="user.phoneNum" />
-      </span>
-      <small class="p-error block" *ngIf="userForm.get('phoneNum')?.invalid && userForm.get('phoneNum')?.dirty">
+     <i class="pi pi-phone">&nbsp; </i> <label for="phoneNum" class="block">Phone Number</label>&nbsp;
+      <div class="phone-inputs-container">
+        <input type="text" value="+212" pInputText [style]="{ width: '80px' }" readonly class="phone-prefix-input">
+        <input type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="user.phoneNum" class="phone-number-input" minlength="9" maxlength="9" />
+      </div>
+      <div class="error-container">
+        <small class="p-error block" *ngIf="userForm.get('phoneNum')?.errors?.['minlength']">
+          Phone Number must be 9 digits
+        </small>
+        <small class="p-error block" *ngIf="userForm.get('phoneNum')?.errors?.['maxlength']">
+          Phone Number must be 9 digits
+        </small>
+      </div>
+      <!--small class="p-error block" *ngIf="userForm.get('phoneNum')?.invalid">
         Phone Number is required</small>
+      <small class="p-error block" *ngIf="userForm.get('phoneNum')?.errors?.['minlength']">
+        Phone Number must be 9 digits</small>
+      <small class="p-error block" *ngIf="userForm.get('phoneNum')?.errors?.['minlength']">
+        Phone Number must be 9 digits</small>
+      <small class="p-error block" *ngIf="userForm.get('phoneNum')?.errors?.['firstCharInvalid']">
+        First character must be '6' or '7'</small-->
+
+       
     </div>
+    
+    
    
     <br>
 
