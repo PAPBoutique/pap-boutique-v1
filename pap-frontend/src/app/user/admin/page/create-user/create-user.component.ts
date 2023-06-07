@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Role } from 'src/app/models/user/roles';
 
 import { User } from 'src/app/models/user/user';
 import { UserService } from 'src/app/services/user/user.service';
@@ -12,6 +13,11 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./create-user.component.css']
 })
 export class CreateUserComponent {
+
+  ngOnInit() {
+    this.getAllRoles();
+  }
+
   constructor(
     private messageService: MessageService,
     private fb: FormBuilder,
@@ -25,12 +31,16 @@ export class CreateUserComponent {
 
   userForm = this.fb.group({
     username: ['', Validators.required],
-    email: ['', Validators.required],
+    email: ['', Validators.email],
     address: ['', Validators.required],
     phoneNum: ['', Validators.required],
-    role: ['', Validators.required],
-    password: ['', Validators.required]
+    password: ['', Validators.required],
+    role: ['', Validators.nullValidator]
   });
+
+  onHide(e: any) {
+    this.closeDialog.emit();
+  }
 
   users: User[] =[ {
     username: "",
@@ -38,12 +48,8 @@ export class CreateUserComponent {
     address: "",
     phoneNum: 1234567890,
     password: "",
-    role: ""
+    role: Role.T
   }];
-
-  onHide(e: any) {
-    this.closeDialog.emit();
-  }
 
   createUser() {
     if (this.userForm.invalid) {
@@ -57,11 +63,24 @@ export class CreateUserComponent {
         setTimeout(() => {
           console.log("after loading");
           window.location.reload();
-        }, 3000);
+        }, 2000);
       },
       error => {
         console.log(error);
         this.showErrorMessage();
+      }
+    );
+  }
+  roles!: Role[];
+
+  getAllRoles() {
+    this.userService.getAllRoles().subscribe(
+      (response: Role[]) => {
+        console.log(response);
+        this.roles = response.map(role => role);
+      },
+      (error) => {
+        console.error('Error fetching roles:', error);
       }
     );
   }

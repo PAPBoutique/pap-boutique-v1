@@ -1,54 +1,69 @@
-
-
-<p-dialog header="Add a new user" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }"
-  [draggable]="false" [resizable]="false" (onHide)="onHide($event)">
+<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '35vw', height:'1100px' }" [draggable]="false" [resizable]="false" (onHide)="onHide($event)">
+  <ng-template pTemplate="header">
+    <h5> <i class="pi pi-user-plus"> </i> Add a new user </h5> 
+  </ng-template>
   <div *ngIf="loading">
     <app-loader></app-loader>
   </div>
 
   <form [formGroup]="userForm" (ngSubmit)="createUser()" novalidate *ngFor="let user of users">
     <div class="field">
-      <label for="username" class="block">Username</label>
-      <input type="text" pInputText placeholder="Username" formControlName="username" [(ngModel)]="user.username" />
+      <i class="pi pi-user"></i> &nbsp; <label for="username" class="block">Username</label>
+      <span class="p-float-label">
+        <input type="text" pInputText placeholder="Username" formControlName="username" [(ngModel)]="user.username" />
+      </span>
       <small class="p-error block" *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.dirty">
         Username is required</small>
     </div>
-
+    <br>
     <div class="field">
+      <i class="pi pi-envelope"></i>&nbsp;
       <label for="email" class="block">Email</label>
-      <input type="email" pInputText placeholder="Email" formControlName="email" [(ngModel)]="user.email" />
+      <span class="p-float-label">
+        <input type="email" pInputText placeholder="Email" formControlName="email" [(ngModel)]="user.email" />
+      </span>
       <small class="p-error block" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.dirty">
         Email is required</small>
     </div>
-
+    <br>
     <div class="field">
-      <label for="address" class="block">Address</label>
-      <input type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="user.address" />
-      <small class="p-error block" *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.dirty">
-        Address is required</small>
-    </div>
-
-    <div class="field">
-      <label for="phoneNum" class="block">Phone Number</label>
-      <input type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="user.phoneNum" />
-      <small class="p-error block" *ngIf="userForm.get('phoneNum')?.invalid && userForm.get('phoneNum')?.dirty">
-        Phone Number is required</small>
-    </div>
-
-    <div class="field">
-      <label for="role" class="block">Role</label>
-      <input type="text" pInputText placeholder="Role" formControlName="role" [(ngModel)]="user.role" />
-      <small class="p-error block" *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.dirty">
-        Role is required</small>
-    </div>
-
-    <div class="field">
-      <label for="password" class="block">Password</label>
-      <input type="password" pInputText placeholder="Password" formControlName="password" [(ngModel)]="user.password" />
+      <i class="pi pi-lock"></i>&nbsp;
+      <label for="password" class="block">Password</label> 
+      <span class="p-float-label">
+        <p-password [(ngModel)]="user.password" [toggleMask]="true" formControlName="password" 
+        [style]="{ width: '100%'}" ></p-password>
+      </span>
       <small class="p-error block" *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.dirty">
         Password is required</small>
     </div>
+    <br>
+    <div class="field">
+      <i class="pi pi-eye"></i>&nbsp;&nbsp;<label for="role" class="block">Role</label>
+      <br>
+      <p-dropdown [style]="{'width':'101%'}" placeholder="Select a Role" [(ngModel)]="user.role" [options]="roles" formControlName="role"></p-dropdown>
+    </div>
+    <br>
 
+    <div class="field">
+      <i class="pi pi-map-marker"></i>&nbsp;
+      <label for="address" class="block">Address</label>
+      <span class="p-float-label">
+        <input type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="user.address" />
+      </span>
+      <small class="p-error block" *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.dirty">
+        Address is required</small>
+    </div>
+    <br>
+    <div class="field">
+      <i class="pi pi-phone"></i>&nbsp;
+      <label for="phoneNum" class="block">Phone Number</label>&nbsp;
+      <span class="p-float-label">
+        <input type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="user.phoneNum" />
+      </span>
+      <small class="p-error block" *ngIf="userForm.get('phoneNum')?.invalid && userForm.get('phoneNum')?.dirty">
+        Phone Number is required</small>
+    </div>
+   
     <br>
 
     <div style="text-align: right;">

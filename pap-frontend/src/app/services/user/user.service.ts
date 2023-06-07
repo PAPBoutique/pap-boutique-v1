@@ -3,9 +3,11 @@ import { Injectable } from '@angular/core';
 import { User } from 'src/app/models/user/user';
 import { PageContent } from 'src/app/shared-components/service/pageContent';
 import { Observable } from 'rxjs';
+import { Role } from 'src/app/models/user/roles';
 
 
 const baseUrl = '/api/v1/users';
+const rolesUrl ='/api/v1/roles'
 @Injectable({
   providedIn: 'root'
 })
@@ -25,4 +27,10 @@ export class UserService {
   createUser(users: User[]): Observable<User> {
     return this.http.post<User>(baseUrl, users);
 }
+
+getAllRoles(): Observable<Role[]> {
+  return this.http.get<Role[]>(rolesUrl);
+}
+
+  
 }

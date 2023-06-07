@@ -1,7 +1,6 @@
 package com.pap.user.rest.controller;
 
 import com.pap.product.model.PageableContent;
-import com.pap.user.model.Role;
 import com.pap.user.model.UserDomainObject;
 import com.pap.user.ports.api.UserServicePort;
 import com.pap.user.rest.dto.UserDto;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.pap.user.rest.mapper.UserRestMapper;
 import javax.validation.constraints.Min;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController

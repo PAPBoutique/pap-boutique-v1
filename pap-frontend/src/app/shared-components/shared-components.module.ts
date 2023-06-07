@@ -11,6 +11,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { FooterComponent } from './footer/footer.component';
+import { DropdownModule } from 'primeng/dropdown';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RippleModule } from 'primeng/ripple';
 import { RouterModule } from '@angular/router';
@@ -21,6 +22,8 @@ import { ConfirmPopupModule } from "primeng/confirmpopup";
 import { CardModule } from 'primeng/card';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoaderComponent } from './loader/loader.component';
+import { PasswordModule } from "primeng/password";
+
 
 
 @NgModule({
@@ -38,11 +41,13 @@ import { LoaderComponent } from './loader/loader.component';
     FormsModule,
     MessagesModule,
     ToastModule,
+    PasswordModule,
     ButtonModule,
     PaginatorModule,
     ConfirmDialogModule,
     FooterComponent,
     NavbarComponent,
+    DropdownModule,
     CardModule,
     ReactiveFormsModule,
     FileUploadModule,
@@ -65,6 +70,8 @@ import { LoaderComponent } from './loader/loader.component';
     ConfirmPopupModule,
     ToastModule,
     CardModule,
+    PasswordModule,
+    DropdownModule,
     DialogModule,
     RouterModule
   ],
