@@ -7,6 +7,7 @@ import com.pap.user.ports.spi.UserJpaPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,11 @@ public class UserService implements UserServicePort {
     @Override
     public List<UserDomainObject> addUsers(List<UserDomainObject> users) {
         return userJpaPort.addUsers(users);
+    }
+
+    @Override
+    public UserDomainObject updateProduct(Long id, UserDomainObject userDomainObject) throws NoSuchAlgorithmException {
+        return userJpaPort.updateProduct(id,userDomainObject );
     }
 
     @Override

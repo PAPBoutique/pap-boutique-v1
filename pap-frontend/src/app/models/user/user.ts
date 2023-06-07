@@ -5,7 +5,7 @@ export type User = {
     username: string; 
     email: string; 
     address: string;
-    phoneNum: number; 
+    phoneNum?: number; 
     role: Role;
     password : string 
 }

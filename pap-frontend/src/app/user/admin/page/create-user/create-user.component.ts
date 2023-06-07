@@ -33,7 +33,7 @@ export class CreateUserComponent {
     username: ['', Validators.required],
     email: ['', Validators.email],
     address: ['', Validators.required],
-    phoneNum: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+    phoneNum: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.firstCharValidator]],
     password: ['', Validators.required],
     role: ['', Validators.nullValidator]
   });
@@ -46,7 +46,6 @@ export class CreateUserComponent {
     username: "",
     email: "",
     address: "",
-    phoneNum: 6,
     password: "",
     role: Role.T
   }];

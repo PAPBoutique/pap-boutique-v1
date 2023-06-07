@@ -1,6 +1,7 @@
 package com.pap.user.rest.controller;
 
 import com.pap.product.model.PageableContent;
+import com.pap.user.exception.UserNotFoundException;
 import com.pap.user.model.UserDomainObject;
 import com.pap.user.ports.api.UserServicePort;
 import com.pap.user.rest.dto.UserDto;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.pap.user.rest.mapper.UserRestMapper;
 import javax.validation.constraints.Min;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @RestController
@@ -26,6 +28,15 @@ public class UserController {
         return userServicePort.addUsers(userDomainObjects);
     }
 
+    @PutMapping("/update/{id}")
+    public UserDomainObject updateProduct(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
+        try {
+            var domainObject = UserRestMapper.INSTANCE.converUserDtoToDomainObject(userDto);
+            return userServicePort.updateProduct(id, domainObject);
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
     @GetMapping
     public PageableContent<UserDomainObject> getUsersByPage(
             @RequestParam @Min(value = 0 , message = "Page number must be greater than or equal 0") int page,

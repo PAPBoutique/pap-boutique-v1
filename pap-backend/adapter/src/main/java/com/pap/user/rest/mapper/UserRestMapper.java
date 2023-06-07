@@ -14,4 +14,6 @@ public interface UserRestMapper {
     List<UserDomainObject> convertToDomainObject(List<UserDto> userDTOs);
 
     UserDomainObject converUserDtoToDomainObject(UserDto userDto);
+
+
 }

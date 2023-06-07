@@ -8,6 +8,7 @@ import { UsersListComponent } from './admin/page/users-list/users-list.component
 import { SharedComponentsModule } from '../shared-components/shared-components.module';
 import { CreateUserComponent } from './admin/page/create-user/create-user.component';
 import { UsersTableComponent } from './admin/components/users-table/users-table.component';
+import { EditUserComponent } from './admin/page/edit-user/edit-user.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { UsersTableComponent } from './admin/components/users-table/users-table.
     SignupComponent,
     UsersListComponent,
     CreateUserComponent,
-    UsersTableComponent
+    UsersTableComponent,
+    EditUserComponent
   ],
   imports: [
     CommonModule,

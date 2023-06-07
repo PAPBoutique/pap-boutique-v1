@@ -18,6 +18,7 @@ import javax.xml.bind.DatatypeConverter;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
@@ -41,6 +42,26 @@ public class UserJpaAdapter implements UserJpaPort {
         }
 
         return UserMapper.INSTANCE.usersToUserDomainObjectList(userEntityList);
+    }
+    @Override
+    public UserDomainObject updateProduct(Long id, UserDomainObject userDomainObject) throws NoSuchAlgorithmException, UserNotFoundException {
+        Optional<UserEntity> existingUser = userRepository.findById(id);
+        if (existingUser.isPresent())
+        {
+            UserEntity updatedUser = existingUser.get();
+            updatedUser.setUsername(userDomainObject.getEmail());
+            updatedUser.setEmail(userDomainObject.getEmail());
+            updatedUser.setPassword(hashPassword(userDomainObject.getPassword()));
+            updatedUser.setAddress(userDomainObject.getAddress());
+            updatedUser.setPhoneNum(userDomainObject.getPhoneNum());
+            updatedUser.setRole(userDomainObject.getRole());
+            UserEntity savedUserEntity = userRepository.save(updatedUser);
+            return UserMapper.INSTANCE.toUserDomain(savedUserEntity);
+        }
+        else
+        {
+            throw new UserNotFoundException("User not found with the id : " + id);
+        }
     }
 
     @Override
