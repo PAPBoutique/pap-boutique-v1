@@ -5,7 +5,7 @@ import { PageNotFoundComponent } from './shared-components/page-not-found/page-n
 const routes: Routes = [
   {
     path :'' ,
-    loadChildren : () => import ('./user/user.module').then(m=>m.UserModule) 
+    loadChildren : () => import ('./user/user.module').then(m=>m.UserModule)
   }
   ,{ 
     path: 'products',
@@ -14,7 +14,7 @@ const routes: Routes = [
   { 
     path:'' , 
     redirectTo:"user" , 
-    pathMatch:'full'
+    pathMatch:'full',
   },
   { 
     path:'**' , 

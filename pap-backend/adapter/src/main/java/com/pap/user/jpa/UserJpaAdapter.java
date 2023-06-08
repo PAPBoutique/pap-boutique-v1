@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.xml.bind.DatatypeConverter;
@@ -24,6 +25,8 @@ import java.util.Optional;
 @Component
 public class UserJpaAdapter implements UserJpaPort {
     private final UserRepository userRepository ;
+
+    private final PasswordEncoder passwordEncoder ;
     @Override
     public List<UserDomainObject> addUsers(List<UserDomainObject> usersDomainObject) {
         List<UserEntity> userEntityList = UserMapper.INSTANCE.usersDomainObjectToUserEntity(usersDomainObject);
@@ -33,12 +36,7 @@ public class UserJpaAdapter implements UserJpaPort {
                     userRepository.findByUsername(userEntity.getEmail()).isPresent()) {
                 throw new RuntimeException("User already exists");
             }
-            try {
-                String hashedPassword = hashPassword(userEntity.getPassword());
-                userEntity.setPassword(hashedPassword);
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException("Error hashing password", e);
-            }
+            userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
             userRepository.save(userEntity);
         }
 

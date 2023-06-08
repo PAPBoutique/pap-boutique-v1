@@ -15,6 +15,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserService implements UserServicePort {
     private final UserJpaPort userJpaPort ;
+
     @Override
     public List<UserDomainObject> addUsers(List<UserDomainObject> users) {
         return userJpaPort.addUsers(users);

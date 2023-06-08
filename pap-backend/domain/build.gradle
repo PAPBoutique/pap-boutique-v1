@@ -21,6 +21,10 @@ dependencies {
     compileOnly group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
 
     api group: 'org.projectlombok', name: 'lombok', version: '1.18.24'
+    api "org.springframework.boot:spring-boot-starter-security"
+    api 'io.jsonwebtoken:jjwt-api:0.11.2'
+    api 'io.jsonwebtoken:jjwt-impl:0.11.2'
+    api 'io.jsonwebtoken:jjwt-jackson:0.11.2'
     annotationProcessor 'org.projectlombok:lombok:1.18.24'
 
 }
