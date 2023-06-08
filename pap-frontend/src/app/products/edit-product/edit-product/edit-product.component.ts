@@ -1,10 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product/product';
 import { MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/services/product/product-service';
-import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-product',
@@ -16,9 +14,7 @@ export class EditProductComponent {
   constructor(
     private messageService: MessageService,
     private fb: FormBuilder,
-    private productService: ProductService,
-    private router: Router,
-    private route: ActivatedRoute
+    private productService: ProductService
   ) { }
   loading: boolean = false;
 

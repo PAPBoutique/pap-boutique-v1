@@ -28,9 +28,14 @@ export class UserService {
     return this.http.post<User>(baseUrl, users);
 }
 
-getAllRoles(): Observable<Role[]> {
+  getAllRoles(): Observable<Role[]> {
   return this.http.get<Role[]>(rolesUrl);
 }
 
+
+putUser(user: User): Observable<User> {
+  const url = `${baseUrl}/update/${user.id}`;
+  return this.http.put<User>(url, user);
+}
   
 }

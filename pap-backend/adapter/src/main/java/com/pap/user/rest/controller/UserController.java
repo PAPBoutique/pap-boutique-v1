@@ -30,12 +30,10 @@ public class UserController {
 
     @PutMapping("/update/{id}")
     public UserDomainObject updateProduct(@PathVariable("id") Long id, @RequestBody UserDto userDto) {
-        try {
             var domainObject = UserRestMapper.INSTANCE.converUserDtoToDomainObject(userDto);
-            return userServicePort.updateProduct(id, domainObject);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+            UserDomainObject updatedUser = userServicePort.updateUser(id, domainObject);
+            updatedUser.setPassword(null);
+            return updatedUser;
     }
     @GetMapping
     public PageableContent<UserDomainObject> getUsersByPage(

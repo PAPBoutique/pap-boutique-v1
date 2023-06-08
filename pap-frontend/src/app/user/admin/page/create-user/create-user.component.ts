@@ -35,7 +35,7 @@ export class CreateUserComponent {
     address: ['', Validators.required],
     phoneNum: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.firstCharValidator]],
     password: ['', Validators.required],
-    role: ['', Validators.nullValidator]
+    role: ['', Validators.required]
   });
 
   onHide(e: any) {

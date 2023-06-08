@@ -29,7 +29,8 @@ public class UserJpaAdapter implements UserJpaPort {
         List<UserEntity> userEntityList = UserMapper.INSTANCE.usersDomainObjectToUserEntity(usersDomainObject);
 
         for (UserEntity userEntity : userEntityList) {
-            if (userRepository.findByUsername(userEntity.getUsername()).isPresent()) {
+            if (userRepository.findByUsername(userEntity.getUsername()).isPresent() ||
+                    userRepository.findByUsername(userEntity.getEmail()).isPresent()) {
                 throw new RuntimeException("User already exists");
             }
             try {
@@ -44,14 +45,13 @@ public class UserJpaAdapter implements UserJpaPort {
         return UserMapper.INSTANCE.usersToUserDomainObjectList(userEntityList);
     }
     @Override
-    public UserDomainObject updateProduct(Long id, UserDomainObject userDomainObject) throws NoSuchAlgorithmException, UserNotFoundException {
+    public UserDomainObject updateUser(Long id, UserDomainObject userDomainObject) throws UserNotFoundException {
         Optional<UserEntity> existingUser = userRepository.findById(id);
         if (existingUser.isPresent())
         {
             UserEntity updatedUser = existingUser.get();
-            updatedUser.setUsername(userDomainObject.getEmail());
+            updatedUser.setUsername(userDomainObject.getUsername());
             updatedUser.setEmail(userDomainObject.getEmail());
-            updatedUser.setPassword(hashPassword(userDomainObject.getPassword()));
             updatedUser.setAddress(userDomainObject.getAddress());
             updatedUser.setPhoneNum(userDomainObject.getPhoneNum());
             updatedUser.setRole(userDomainObject.getRole());

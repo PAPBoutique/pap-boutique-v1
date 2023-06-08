@@ -9,7 +9,7 @@ import java.util.List;
 public interface UserServicePort {
     List<UserDomainObject> addUsers(List<UserDomainObject> users) ;
 
-    UserDomainObject updateProduct(Long id, UserDomainObject userDomainObject) throws NoSuchAlgorithmException;
+    UserDomainObject updateUser(Long id, UserDomainObject userDomainObject);
 
     PageableContent<UserDomainObject> findAllByPage(int page,int size,String filter);
     void deleteUser(Long id);

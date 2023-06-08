@@ -1,1 +1,82 @@
-<p>edit-user works!</p>
+<p-dialog
+  header="Update your user"
+  [(visible)]="visibleEdit"
+  [modal]="true"
+  [style]="{ width: '50vw' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="onHide($event)"
+>
+  <div class="flex align-items-center justify-content-center">
+    <div *ngIf="loading">
+      <app-loader></app-loader>
+    </div>
+    <form (ngSubmit)="updateUser(selectedUser)" [formGroup]="userForm" novalidate>
+      <div class="field">
+        <i class="pi pi-user"></i>&nbsp;<label for="username" class="block">Username</label>
+        <span class="p-float-label">
+          <input type="text" pInputText placeholder="Username" formControlName="username" [(ngModel)]="selectedUser!.username" />
+        </span>
+      </div>
+      <div *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched" class="error-message">
+        Username is required.
+      </div>
+      <br>
+      <div class="field">
+        <i class="pi pi-envelope"></i>&nbsp;
+        <label for="email" class="block">Email</label>
+        <span class="p-float-label">
+          <input type="email" pInputText placeholder="Email" formControlName="email" [(ngModel)]="selectedUser!.email" />
+        </span>
+      </div>
+      <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="error-message">
+        Email is required and must be a valid email address.
+      </div>
+      <br>
+      <div class="field">
+        <i class="pi pi-eye"></i>&nbsp;&nbsp;<label for="role" class="block">Role</label>
+        <br>
+        <p-dropdown formControlName="role" [style]="{'width':'101%'}" placeholder="Select a Role" [(ngModel)]="selectedUser!.role" [options]="roles"></p-dropdown>
+      </div>
+      <div *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.touched" class="error-message">
+        Role is required.
+      </div>
+      <br>
+      <div class="field">
+        <i class="pi pi-map-marker"></i>&nbsp;
+        <label for="address" class="block">Address</label>
+        <span class="p-float-label">
+          <input type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="selectedUser!.address" />
+        </span>
+      </div>
+      <div *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.touched" class="error-message">
+        Address is required.
+      </div>
+      <br>
+      <div class="field">
+        <i class="pi pi-phone">&nbsp; </i><label for="phoneNum" class="block">Phone Number</label>&nbsp;
+        <div class="phone-inputs-container">
+          <input type="text" value="+212" pInputText [style]="{ width: '80px' }" readonly class="phone-prefix-input">
+          <input type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="selectedUser!.phoneNum" minlength="9" maxlength="9" />
+        </div>
+      </div>
+      <div *ngIf="userForm.get('phoneNum')?.dirty && (userForm.get('phoneNum')?.errors?.['firstCharInvalid'] || userForm.get('phoneNum')?.errors?.['firstCharValidator'])" class="error-message">
+        Phone Number start with 6 or 7.
+      </div>
+      
+
+      <div *ngIf="userForm.get('phoneNum')?.invalid && userForm.get('phoneNum')?.touched" class="error-message">
+        Phone Number is required and must be 9 digits long.
+        
+      </div> 
+
+      <br>
+      <div style="text-align: right;">
+        <p-button [disabled]="userForm.invalid" type="submit" label="Edit" styleClass="p-button-raised p-button-warning" icon="pi pi-pencil" iconPos="left"></p-button>
+        <button (click)="closeToast()" type="reset" pButton pRipple label="Clear" icon="pi pi-times" class="p-button-raised p-button-danger" style="margin-left: 12px;"></button>
+      </div>
+    </form>
+   
+  </div>
+  <br><br>
+</p-dialog>

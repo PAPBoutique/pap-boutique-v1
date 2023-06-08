@@ -21,8 +21,8 @@ public class UserService implements UserServicePort {
     }
 
     @Override
-    public UserDomainObject updateProduct(Long id, UserDomainObject userDomainObject) throws NoSuchAlgorithmException {
-        return userJpaPort.updateProduct(id,userDomainObject );
+    public UserDomainObject updateUser(Long id, UserDomainObject userDomainObject){
+        return userJpaPort.updateUser(id,userDomainObject );
     }
 
     @Override

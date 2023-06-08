@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface UserJpaPort {
     List<UserDomainObject> addUsers(List<UserDomainObject> users) ;
-    UserDomainObject updateProduct(Long id, UserDomainObject userDomainObject) throws NoSuchAlgorithmException;
+    UserDomainObject updateUser(Long id, UserDomainObject userDomainObject) ;
 
     PageableContent<UserDomainObject> findAllByPage(int page,int size);
     PageableContent<UserDomainObject> findAllByFilter(int page,int size,String filter);

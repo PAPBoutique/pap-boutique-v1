@@ -41,6 +41,9 @@
       <i class="pi pi-eye"></i>&nbsp;&nbsp;<label for="role" class="block">Role</label>
       <br>
       <p-dropdown [style]="{'width':'101%'}" placeholder="Select a Role" [(ngModel)]="user.role" [options]="roles" formControlName="role"></p-dropdown>
+      <div *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.errors?.['required']" class="error-message">
+        Role is required.
+      </div>
     </div>
     <br>
 
