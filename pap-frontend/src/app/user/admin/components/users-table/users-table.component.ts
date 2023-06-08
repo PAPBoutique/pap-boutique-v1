@@ -82,6 +82,11 @@ export class UsersTableComponent {
     this.visibleEdit = true;
   }
 
+  showEditDialog(user: any) {
+    this.selectedUser = user; 
+    this.visibleEdit = true; 
+  }
+
   closeEditDialog() {
     this.visibleEdit = false;
   }

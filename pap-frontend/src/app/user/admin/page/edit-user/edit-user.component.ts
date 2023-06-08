@@ -20,8 +20,8 @@ export class EditUserComponent {
   });
 
   firstCharValidator(control: AbstractControl) {
-    const phoneNum = control.value;
-    if (phoneNum && !phoneNum.startsWith('6') && !phoneNum.startsWith('7')) {
+    const firstChar = control.value?.toString().charAt(0);
+    if (firstChar !== '6' && firstChar !== '7') {
       return { firstCharInvalid: true };
     }
     return null;
@@ -30,7 +30,7 @@ export class EditUserComponent {
   loading: boolean = false;
   @Input() visibleEdit: boolean = true;
   @Output() closeDialog = new EventEmitter<any>();
-  
+
   onHide(e:any){
     this.closeDialog.emit();
   }
@@ -63,7 +63,7 @@ export class EditUserComponent {
           console.log(this.loading);
           setTimeout(() => {
             window.location.reload();
-          }, 3000);
+          }, 2000);
         },
         (error: any) => {
           console.log(error);

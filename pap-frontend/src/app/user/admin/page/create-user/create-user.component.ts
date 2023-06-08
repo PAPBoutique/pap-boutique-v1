@@ -35,7 +35,7 @@ export class CreateUserComponent {
     address: ['', Validators.required],
     phoneNum: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.firstCharValidator]],
     password: ['', Validators.required],
-    role: ['', Validators.required]
+    role: ['', Validators.nullValidator]
   });
 
   onHide(e: any) {
@@ -51,7 +51,7 @@ export class CreateUserComponent {
   }];
 
   firstCharValidator(control: AbstractControl) {
-    const firstChar = control.value.charAt(0);
+    const firstChar = control.value?.toString().charAt(0);
     if (firstChar !== '6' && firstChar !== '7') {
       return { firstCharInvalid: true };
     }
