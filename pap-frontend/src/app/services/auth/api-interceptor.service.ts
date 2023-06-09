@@ -20,7 +20,9 @@ import { AuthService } from './authService';
           Authorization: `Bearer `+token
         }
       });
-  
+      if(!this.authService.isLoggedIn()){
+        this.authService.clearSession();
+      }
       return next.handle(request);
     }
   }

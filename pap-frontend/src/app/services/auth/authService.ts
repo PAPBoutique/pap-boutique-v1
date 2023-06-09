@@ -26,7 +26,8 @@ export class AuthService {
     }
 
     public getUser() {
-        return window.sessionStorage.getItem(AUTH_USER);
+        let user =window.sessionStorage.getItem(AUTH_USER);
+        if(user) return JSON.parse(user);
     }
 
     public getToken() {
@@ -46,8 +47,12 @@ export class AuthService {
         return window.sessionStorage.getItem(AUTH_ROLE);
     }
 
-    public logout(){
+    public clearSession(){
         window.sessionStorage.clear();
+    }
+
+    public logout(){
+        this.clearSession();
         return true ;
     }
 }
