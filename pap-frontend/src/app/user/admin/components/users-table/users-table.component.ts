@@ -25,8 +25,6 @@ export class UsersTableComponent {
   @ViewChild('dt') dt?: Table;
   @Input() users: User[] = [];
 
-  
-
   @Input() tableSize: number = this.users.length;
   clonedUsers: { [s: string]: User } = {};
   filteredRows: User[] = [];
@@ -75,11 +73,6 @@ export class UsersTableComponent {
 
   closeAddDialog() {
     this.visibleAdd = false;
-  }
-
-  showDialog(user1: User) {
-    this.selectedUser = { ...user1 };
-    this.visibleEdit = true;
   }
 
   showEditDialog(user: any) {

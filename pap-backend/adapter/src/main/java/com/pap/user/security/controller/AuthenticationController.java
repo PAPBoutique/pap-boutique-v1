@@ -3,6 +3,7 @@ package com.pap.user.security.controller;
 import com.pap.user.rest.dto.UserDto;
 import com.pap.user.security.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,4 +19,16 @@ public class AuthenticationController {
     public ResponseEntity<?> loginUser(@RequestBody UserDto user){
         return ResponseEntity.ok(authenticationService.login(user));
     }
+
+    @PostMapping("/signup")
+    public ResponseEntity<?> signupUser(@RequestBody UserDto user) {
+        try {
+            authenticationService.signup(user);
+            return ResponseEntity.ok().body("{\"message\": \"User registered successfully.\"}");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("{\"error\": \"" + e.getMessage() + "\"}");
+        }
+    }
+
+
 }

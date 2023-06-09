@@ -1,9 +1,6 @@
 package com.pap.user.ports.api;
-
 import com.pap.product.model.PageableContent;
 import com.pap.user.model.UserDomainObject;
-
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 public interface UserServicePort {

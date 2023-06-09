@@ -3,11 +3,16 @@ package com.pap.user.security.service;
 import com.pap.user.jpa.entity.UserEntity;
 import com.pap.user.jpa.mapper.UserMapper;
 import com.pap.user.jpa.repository.UserRepository;
+import com.pap.user.model.Role;
+import com.pap.user.model.UserDomainObject;
 import com.pap.user.rest.dto.UserDto;
 import com.pap.user.security.jwt.JwtService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +21,7 @@ public class AuthenticationService {
     private final UserRepository userRepository;
     private final JwtService jwtService ;
     private final AuthenticationManager authenticationManager ;
+    private final PasswordEncoder passwordEncoder;
 
     public AuthenticationResponse login(UserDto request){
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
@@ -29,4 +35,48 @@ public class AuthenticationService {
                 .user(UserMapper.INSTANCE.toUserDomain(user))
                 .build();
     }
+
+    public AuthenticationResponse signup(UserDto userDto) {
+        if (userRepository.findByUsername(userDto.getUsername()).isPresent() || userRepository.findByEmail(userDto.getEmail()).isPresent()) {
+            throw new RuntimeException("Username already exists.");
+        }
+        UserEntity newUser = UserEntity.builder()
+                .username(userDto.getUsername())
+                .email(userDto.getEmail())
+                .password(passwordEncoder.encode(userDto.getPassword()))
+                .address(userDto.getAddress())
+                .phoneNum(userDto.getPhoneNum())
+                .role(Role.CLIENT)
+                .build();
+        userRepository.save(newUser);
+        UserDomainObject userDomain = UserMapper.INSTANCE.toUserDomain(newUser);
+        String jwtToken = jwtService.generateToken(newUser);
+        return AuthenticationResponse.builder()
+                .token(jwtToken)
+                .user(userDomain)
+                .build();
+    }
+
+    @Bean
+    public CommandLineRunner addAdminAccount() {
+        return args -> {
+            if (userRepository.findByEmail("admin").isPresent() || userRepository.findByEmail("admin@example.com").isPresent()) {
+                System.out.println("Admin user already exists. Skipping creation.");
+                return;
+            }
+
+            UserEntity adminUser = UserEntity.builder()
+                    .username("admin")
+                    .email("admin@example.com")
+                    .password(passwordEncoder.encode("admin"))
+                    .address("Admin Address")
+                    .phoneNum(0674343223L)
+                    .role(Role.ADMIN)
+                    .build();
+            userRepository.save(adminUser);
+            System.out.println("Admin user created successfully.");
+        };
+    }
+
+
 }

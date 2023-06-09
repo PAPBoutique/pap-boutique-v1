@@ -44,4 +44,9 @@ export class UserService {
       password: user.password.value
     })
   }
+
+  signup(users: User): Observable<User> {
+    return this.http.post<User>(baseUrl + "/signup", users);
+  }
+
 }

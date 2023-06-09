@@ -30,6 +30,8 @@ export class EditUserComponent {
   loading: boolean = false;
   @Input() visibleEdit: boolean = true;
   @Output() closeDialog = new EventEmitter<any>();
+  @Input() selectedUser!: User;
+  @Input() visible: boolean = false;
 
   onHide(e:any){
     this.closeDialog.emit();
@@ -41,23 +43,16 @@ export class EditUserComponent {
     private userService: UserService
   ) { }
 
-
-
   ngOnInit(): void {
     this.getAllRoles();
   }
-
-
-
-  @Input() selectedUser!: User;
-  @Input() visible: boolean = false;
 
   updateUser(user: User) {
     if (this.userForm.valid) {
       this.userService.putUser(user).subscribe(
         (data: User) => {
           console.log(data);
-          this.selectedUser = user;
+         
           this.showsuccessMessage();
           this.loading = true;
           console.log(this.loading);
@@ -70,9 +65,8 @@ export class EditUserComponent {
           this.showErrorMessage();
         }
       );
-    } else {
-      this.userForm.markAllAsTouched();
-    }
+    } 
+    
   }
 
   showsuccessMessage() {

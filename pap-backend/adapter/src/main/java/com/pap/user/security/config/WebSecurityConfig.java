@@ -51,6 +51,7 @@ public class WebSecurityConfig {
         return http.cors().and().csrf().disable().httpBasic().and()
                 .authorizeHttpRequests()
                 .antMatchers("/api/v1/users/login").permitAll()
+                .antMatchers("/api/v1/users/signup").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().failureHandler(customAuthenticationFailureHandler).and()

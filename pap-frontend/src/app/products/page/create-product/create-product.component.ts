@@ -49,7 +49,7 @@ export class CreateProductComponent {
         setTimeout(() => {
           console.log("after loading");
           window.location.reload();
-        }, 3000);
+        }, 2000);
       },
       error => {
         console.log(error);
