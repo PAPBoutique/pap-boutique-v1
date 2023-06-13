@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/models/product/product';
@@ -14,11 +14,18 @@ export class CreateProductComponent {
   constructor(private messageService: MessageService,
     private fb: FormBuilder,
     private productService: ProductService,
-    private router: Router) { }
+    private router: Router,
+    private renderer : Renderer2) { }
 
   @Input() visible?: boolean;
   @Output() closeDialog = new EventEmitter<any>() ;
   loading: boolean = false;
+  @ViewChild('submitButton' , {read : ElementRef}) submitButton!: ElementRef<any>;
+
+  ngAfterViewInit() {
+    const btn = this.submitButton.nativeElement.firstChild ;
+    this.renderer.setAttribute(btn,'id','cproduct-btn-submit');
+  }
 
   onHide(e:any){
     this.closeDialog.emit();

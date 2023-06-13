@@ -8,14 +8,14 @@
   <form [formGroup]="ProductForm" (ngSubmit)="CreateProduct()" novalidate *ngFor="let product of products">
     <div class="field">
       <label for="name" class="block">Name</label>
-      <input type="text" pInputText placeholder="Name" formControlName="name" [(ngModel)]="product.name" />
+      <input id="cproduct-name" type="text" pInputText placeholder="Name" formControlName="name" [(ngModel)]="product.name" />
       <small class="p-error block" *ngIf="ProductForm.get('name')?.invalid && ProductForm.get('name')?.dirty">
         Name is required</small>
     </div>
 
     <div class="field">
       <label for="Description" class="block">Description</label>
-      <textarea rows="5" cols="30" pInputTextarea placeholder="Description" formControlName="Description"
+      <textarea id="cproduct-description" rows="5" cols="30" pInputTextarea placeholder="Description" formControlName="Description"
         [(ngModel)]="product.description"></textarea>
       <small class="p-error block"
         *ngIf="ProductForm.get('Description')?.invalid && ProductForm.get('Description')?.dirty">
@@ -24,7 +24,7 @@
 
     <div class="field">
       <label for="Quantity" class="block">Quantity</label>
-      <input type="number" pInputText placeholder="Quantity" formControlName="Quantity" [(ngModel)]="product.quantity"
+      <input id="cproduct-quantity" type="number" pInputText placeholder="Quantity" formControlName="Quantity" [(ngModel)]="product.quantity"
         value="" />
       <small class="p-error block" *ngIf="ProductForm.get('Quantity')?.invalid && ProductForm.get('Quantity')?.dirty">
         Quantity is required</small>
@@ -32,7 +32,7 @@
 
     <div class="field">
       <label for="Description" class="block">Price</label>
-      <input type="number" pInputText placeholder="Price" formControlName="Price" [(ngModel)]="product.price"
+      <input id="cproduct-price" type="number" pInputText placeholder="Price" formControlName="Price" [(ngModel)]="product.price"
         value="" />
       <small class="p-error block" *ngIf="ProductForm.get('Price')?.invalid && ProductForm.get('Price')?.dirty">
         Price is required</small>
@@ -41,9 +41,9 @@
     <br>
 
     <div style="text-align: right;">
-      <p-button type="submit" label="Submit" icon="pi pi-check" iconPos="left"
+      <p-button #submitButton type="submit" label="Submit" icon="pi pi-check" iconPos="left"
         [disabled]="ProductForm.invalid"></p-button>
-      <button type="reset" pButton pRipple label="Clear" icon="pi pi-times" class="p-button-raised p-button-danger"
+      <button id="cproduct-btn-clear" type="reset" pButton pRipple label="Clear" icon="pi pi-times" class="p-button-raised p-button-danger"
         style="margin-left: 12px;"></button>
     </div>
   </form>

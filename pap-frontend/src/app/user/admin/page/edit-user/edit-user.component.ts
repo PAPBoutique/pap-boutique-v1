@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { Dropdown } from 'primeng/dropdown';
+import { Password } from 'primeng/password';
 import { Role } from 'src/app/models/user/roles';
 import { User } from 'src/app/models/user/user';
 import { UserService } from 'src/app/services/user/user.service';
@@ -32,6 +34,9 @@ export class EditUserComponent {
   @Output() closeDialog = new EventEmitter<any>();
   @Input() selectedUser!: User;
   @Input() visible: boolean = false;
+  @ViewChild('passwordInput') passwordInput!: Password;
+  @ViewChild('dropdownInput') dropdownInput!: Dropdown;
+  @ViewChild('submitButton' , {read : ElementRef}) submitButton!: ElementRef<any>;
 
   onHide(e:any){
     this.closeDialog.emit();
@@ -40,11 +45,21 @@ export class EditUserComponent {
   constructor(
     private messageService: MessageService,
     private fb: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private renderer : Renderer2
   ) { }
 
   ngOnInit(): void {
     this.getAllRoles();
+  }
+  
+  ngAfterViewInit() {
+    const inputElement = this.passwordInput.el.nativeElement.querySelector('input');
+    const inputDropdown = this.dropdownInput.el.nativeElement.querySelector('input');
+    const btn = this.submitButton.nativeElement.firstChild ;
+    this.renderer.setAttribute(btn,'id','euser-btn-submit');
+    inputElement.id = 'euser-password';
+    inputDropdown.id ='euser-role';
   }
 
   updateUser(user: User) {

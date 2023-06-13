@@ -13,14 +13,14 @@
       <!--h3>Update product</h3-->
       <div class="field">
         <label for="product-name" class="block">Name</label>
-        <input type="text" pInputText placeholder="Name" formControlName="name" [(ngModel)]="selectedProduct!.name" id="product-name" />
+        <input id="eproduct-name" type="text" pInputText placeholder="Name" formControlName="name" [(ngModel)]="selectedProduct!.name" id="product-name" />
         <small class="p-error block" *ngIf="ProductForm.get('name')?.invalid && ProductForm.get('name')?.dirty">
           Name is required</small>
       </div>
 
       <div class="field">
         <label for="product-description" class="block">Description</label>
-        <textarea rows="5" cols="30" pInputTextarea placeholder="Description" formControlName="Description"
+        <textarea id="eproduct-description" rows="5" cols="30" pInputTextarea placeholder="Description" formControlName="Description"
           [(ngModel)]="selectedProduct.description" id="product-description"></textarea>
         <small class="p-error block"
           *ngIf="ProductForm.get('Description')?.invalid && ProductForm.get('Description')?.dirty">
@@ -29,7 +29,7 @@
 
       <div class="field">
         <label for="product-quantity" class="block">Quantity</label>
-        <input type="number" pInputText placeholder="Quantity" formControlName="Quantity"
+        <input id="eproduct-quantity" type="number" pInputText placeholder="Quantity" formControlName="Quantity"
           [(ngModel)]="selectedProduct.quantity" value="" id="product-quantity" />
         <small class="p-error block" *ngIf="ProductForm.get('Quantity')?.invalid && ProductForm.get('Quantity')?.dirty">
           Quantity is required</small>
@@ -37,7 +37,7 @@
 
       <div class="field">
         <label for="product-price" class="block">Price</label>
-        <input type="number" pInputText placeholder="Price" formControlName="Price" [(ngModel)]="selectedProduct.price"
+        <input id="eproduct-price" type="number" pInputText placeholder="Price" formControlName="Price" [(ngModel)]="selectedProduct.price"
           value="" id="product-price" />
         <small class="p-error block" *ngIf="ProductForm.get('Price')?.invalid && ProductForm.get('Price')?.dirty">
           Price is required</small>
@@ -46,10 +46,10 @@
       <br>
 
       <div style="text-align: right;">
-        <p-button type="submit" label="Edit" styleClass="p-button-raised p-button-warning" icon="pi pi-pencil"
+        <p-button #submitButton  type="submit" label="Edit" styleClass="p-button-raised p-button-warning" icon="pi pi-pencil"
           iconPos="left" [disabled]="ProductForm.invalid"></p-button>
 
-        <button (click)="closeToast()" type="reset" pButton pRipple label="Cancel" icon="pi pi-times"
+        <button id="eproduct-btn-reset" (click)="closeToast()" type="reset" pButton pRipple label="Cancel" icon="pi pi-times"
           class="p-button-raised p-button-danger" style="margin-left: 12px;"></button>
       </div>
     </form>
