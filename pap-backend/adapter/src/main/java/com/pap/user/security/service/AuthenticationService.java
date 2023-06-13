@@ -56,6 +56,26 @@ public class AuthenticationService {
                 .user(userDomain)
                 .build();
     }
+    
+    @Bean
+    public CommandLineRunner addAdminAccount() {
+        return args -> {
+            if (userRepository.findByEmail("admin").isPresent() || userRepository.findByEmail("admin@example.com").isPresent()) {
+                System.out.println("Admin user already exists. Skipping creation.");
+                return;
+            }
+
+            UserEntity adminUser = UserEntity.builder()
+                    .username("admin")
+                    .email("admin@example.com")
+                    .password(passwordEncoder.encode("admin"))
+                    .address("Admin Address")
+                    .phoneNum(0674343223L)
+                    .role(Role.ADMIN)
+                    .build();
+            userRepository.save(adminUser);
+        };
+    }
 
     @Bean
     public CommandLineRunner addAdminAccount() {
