@@ -56,6 +56,7 @@ export class SignupComponent {
       email: "",
       address: "",
       password: "",
+      phoneNum : 6,
       role: Role.T
     };
     this.roles = [

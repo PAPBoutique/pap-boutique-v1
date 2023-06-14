@@ -68,7 +68,5 @@ public class UserEntity implements UserDetails {
         if (createdDate == null) {
             createdDate = LocalDate.now();
         }
-
-        phoneNum = (long) (0+671078595);
     }
 }

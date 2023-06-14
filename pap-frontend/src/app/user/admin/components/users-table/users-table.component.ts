@@ -18,6 +18,7 @@ export class UsersTableComponent {
     email: '',
     address: '',
     password: '',
+    phoneNum : 6,
     role: Role.T
   };
   

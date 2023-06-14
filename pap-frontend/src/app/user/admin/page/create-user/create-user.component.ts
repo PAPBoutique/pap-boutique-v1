@@ -62,6 +62,7 @@ export class CreateUserComponent {
     email: "",
     address: "",
     password: "",
+  
     role: Role.T
   }];
 

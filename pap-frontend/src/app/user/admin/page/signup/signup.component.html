@@ -26,13 +26,9 @@
                       <i class="pi pi-user"></i> &nbsp; <label for="username" class="block">Username</label>
 
                       <span class="p-float-label">
-<<<<<<< HEAD
 
                         <input id="Username" type="text" pInputText placeholder="Username" formControlName="username" [(ngModel)]="users.username" />
 
-=======
-                        <input id="Username" type="text" pInputText placeholder="Username" formControlName="username" [(ngModel)]="users.username" />
->>>>>>> e41cbdef618e478ed88ce450781ea17bff66b050
                       </span>
 
                       <small class="p-error block" *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.dirty">
@@ -50,13 +46,9 @@
                       <label for="email" class="block">Email</label>
 
                       <span class="p-float-label">
-<<<<<<< HEAD
 
                         <input id="email" type="email" pInputText placeholder="Email" formControlName="email" [(ngModel)]="users.email" />
 
-=======
-                        <input id="email" type="email" pInputText placeholder="Email" formControlName="email" [(ngModel)]="users.email" />
->>>>>>> e41cbdef618e478ed88ce450781ea17bff66b050
                       </span>
 
                       <small class="p-error block" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.dirty">
@@ -74,13 +66,9 @@
                       <label for="password" class="block">Password</label>
 
                       <span class="p-float-label">
-<<<<<<< HEAD
 
                         <p-password inputId="password" [(ngModel)]="users.password" [toggleMask]="true" formControlName="password"
 
-=======
-                        <p-password #passwordInput [(ngModel)]="users.password" [toggleMask]="true" formControlName="password" 
->>>>>>> e41cbdef618e478ed88ce450781ea17bff66b050
                         [style]="{ width: '100%'}" ></p-password>
 
                       </span>
@@ -100,13 +88,9 @@
                       <label for="address" class="block">Address</label>
 
                       <span class="p-float-label">
-<<<<<<< HEAD
 
                         <input id="address" type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="users.address" />
 
-=======
-                        <input id="address" type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="users.address" />
->>>>>>> e41cbdef618e478ed88ce450781ea17bff66b050
                       </span>
 
                       <small class="p-error block" *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.dirty">
@@ -124,13 +108,7 @@
                       <div class="phone-inputs-container">
 
                         <input type="text" value="+212" pInputText [style]="{ width: '80px' }" readonly class="phone-prefix-input">
-<<<<<<< HEAD
-
                         <input id="Number" type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="users.phoneNum" class="phone-number-input" minlength="9" maxlength="9" />
-
-=======
-                        <input id="Number" type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="users.phoneNum" class="phone-number-input" minlength="9" maxlength="9" />
->>>>>>> e41cbdef618e478ed88ce450781ea17bff66b050
                       </div>
 
                       <div class="error-container">
@@ -162,17 +140,11 @@
                
 
                     <div style="text-align: right;">
-<<<<<<< HEAD
 
                       <button id="btn_submit_signup" pButton type="submit" label="Submit" icon="pi pi-check" iconPos="left" [disabled]="userForm.invalid"></button>
 
                       <!--p-button inp="btn-s" type="submit" label="Submit" icon="pi pi-check" iconPos="left" [disabled]="userForm.invalid"></p-button-->
 
-=======
-                      <p-button #submitButton type="submit" label="Submit" icon="pi pi-check" iconPos="left" [disabled]="userForm.invalid"></p-button>
-                      <button id="btn_reset" type="reset" pButton pRipple label="Clear" icon="pi pi-times"
-                        class="p-button-raised p-button-danger" style="margin-left: 12px;"></button>
->>>>>>> e41cbdef618e478ed88ce450781ea17bff66b050
                     </div>
 
                   </form>
