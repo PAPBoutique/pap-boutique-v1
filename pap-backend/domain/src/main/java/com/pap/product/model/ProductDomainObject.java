@@ -16,6 +16,7 @@ public class ProductDomainObject {
     private Integer quantity;
     private Double price ;
     private LocalDate createdDate ;
+    private String picturePath;
 
 
 }

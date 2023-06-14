@@ -7,7 +7,9 @@ import com.pap.product.ports.spi.ProductJpaPort;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,9 +50,9 @@ public class ProductService implements ProductServicePort {
         }
 
     }
-
-
-
-
-
+    @Override
+    public String savePicture(MultipartFile picture) {
+        return "C:\\Users\\IlyassAIDI\\Desktop\\PFE\\pap-boutique-v1\\pap-frontend\\src\\assets\\picture.jpg";
+    }
 }
+

@@ -1,6 +1,8 @@
 package com.pap.product.rest.controller;
 
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pap.product.exception.ProductNotFoundException;
 import com.pap.product.model.PageableContent;
 import com.pap.product.model.ProductDomainObject;
@@ -15,13 +17,16 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Max;
+
 import javax.validation.constraints.Min;
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -41,7 +46,6 @@ public class ProductController {
         List<ProductDomainObject> domainObject = ProductRestMapper.INSTANCE.convertToDomainObject(productDto);
         return productService.addProduct(domainObject);
     }
-
     @Operation(summary = ProductDocMessages.GET_PRODUCTS)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200" , description = ProductDocMessages.GET_PRODUCTS_SUCCESS , content = @Content),

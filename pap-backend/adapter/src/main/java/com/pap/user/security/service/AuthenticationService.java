@@ -74,7 +74,6 @@ public class AuthenticationService {
                     .role(Role.ADMIN)
                     .build();
             userRepository.save(adminUser);
-            System.out.println("Admin user created successfully.");
         };
     }
 

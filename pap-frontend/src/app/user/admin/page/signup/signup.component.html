@@ -1,92 +1,174 @@
 <p-toast></p-toast>
 
+
+
+
 <div class="container-fluid">
+
     <div class="row justify-content-center">
+
         <div class="col-md-7 col-lg-5">
+
             <div class="login-wrap p-4 p-md-5">
+
                 <div class="icon d-flex align-items-center justify-content-center">
+
                     <span class="fa fa-user-o"></span>
+
                 </div>
+
                 <h3 class="text-center mb-4">Sign Up</h3>
+
                 <form [formGroup]="userForm" (ngSubmit)="signupUser()" novalidate >
+
                     <div class="field">
+
                       <i class="pi pi-user"></i> &nbsp; <label for="username" class="block">Username</label>
+
                       <span class="p-float-label">
-                        <input type="text" pInputText placeholder="Username" formControlName="username" [(ngModel)]="users.username" />
+
+                        <input id="Username" type="text" pInputText placeholder="Username" formControlName="username" [(ngModel)]="users.username" />
+
                       </span>
+
                       <small class="p-error block" *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.dirty">
+
                         Username is required</small>
+
                     </div>
+
                     <br>
+
                     <div class="field">
+
                       <i class="pi pi-envelope"></i>&nbsp;
+
                       <label for="email" class="block">Email</label>
+
                       <span class="p-float-label">
-                        <input type="email" pInputText placeholder="Email" formControlName="email" [(ngModel)]="users.email" />
+
+                        <input id="email" type="email" pInputText placeholder="Email" formControlName="email" [(ngModel)]="users.email" />
+
                       </span>
+
                       <small class="p-error block" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.dirty">
+
                         Email is required</small>
+
                     </div>
+
                     <br>
+
                     <div class="field">
+
                       <i class="pi pi-lock"></i>&nbsp;
-                      <label for="password" class="block">Password</label> 
+
+                      <label for="password" class="block">Password</label>
+
                       <span class="p-float-label">
-                        <p-password [(ngModel)]="users.password" [toggleMask]="true" formControlName="password" 
+
+                        <p-password inputId="password" [(ngModel)]="users.password" [toggleMask]="true" formControlName="password"
+
                         [style]="{ width: '100%'}" ></p-password>
+
                       </span>
+
                       <small class="p-error block" *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.dirty">
+
                         Password is required</small>
+
                     </div>
-                    <br>
-                    <br>
-                
+
+                    <br>                
+
                     <div class="field">
+
                       <i class="pi pi-map-marker"></i>&nbsp;
+
                       <label for="address" class="block">Address</label>
+
                       <span class="p-float-label">
-                        <input type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="users.address" />
+
+                        <input id="address" type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="users.address" />
+
                       </span>
+
                       <small class="p-error block" *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.dirty">
+
                         Address is required</small>
+
                     </div>
+
                     <br>
+
                     <div class="field">
+
                      <i class="pi pi-phone">&nbsp; </i> <label for="phoneNum" class="block">Phone Number</label>&nbsp;
+
                       <div class="phone-inputs-container">
+
                         <input type="text" value="+212" pInputText [style]="{ width: '80px' }" readonly class="phone-prefix-input">
-                        <input type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="users.phoneNum" class="phone-number-input" minlength="9" maxlength="9" />
+
+                        <input id="Number" type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="users.phoneNum" class="phone-number-input" minlength="9" maxlength="9" />
+
                       </div>
+
                       <div class="error-container">
+
                         <div class="error-container">
+
                           <small class="p-error block" *ngIf="userForm.get('phoneNum')?.dirty && (userForm.get('phoneNum')?.errors?.['minlength'] || userForm.get('phoneNum')?.errors?.['maxlength'])">
+
                             Phone Number must be 9 digits
+
                           </small>
+
                           <small class="p-error block" *ngIf="userForm.get('phoneNum')?.dirty && (userForm.get('phoneNum')?.errors?.['firstCharInvalid'] || userForm.get('phoneNum')?.errors?.['firstCharValidator'])">
+
                             First character must be '6' or '7'
+
                           </small>
+
                         </div>
+
                       </div>
+
                     </div>
-                    
+
+                   
+
                     <br>
-                
+
+               
+
                     <div style="text-align: right;">
-                      <p-button type="submit" label="Submit" icon="pi pi-check" iconPos="left" [disabled]="userForm.invalid"></p-button>
-                      <button type="reset" pButton pRipple label="Clear" icon="pi pi-times"
-                        class="p-button-raised p-button-danger" style="margin-left: 12px;"></button>
+
+                      <button id="btn_submit_signup" pButton type="submit" label="Submit" icon="pi pi-check" iconPos="left" [disabled]="userForm.invalid"></button>
+
+                      <!--p-button inp="btn-s" type="submit" label="Submit" icon="pi pi-check" iconPos="left" [disabled]="userForm.invalid"></p-button-->
+
                     </div>
+
                   </form>
+
                   <div class="form-group text-center">
+
                     <div class="pt-4">
+
                         <label class="checkbox-wrap checkbox-primary">You already have an account ?
+
                         </label>
+
                         <a routerLink="/login" class="p-2">Login</a>
+
                     </div>
+
                 </div>
+
             </div>
+
         </div>
+
     </div>
+
 </div>
-
-

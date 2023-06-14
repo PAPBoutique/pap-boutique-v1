@@ -82,5 +82,6 @@ export class UsersTableComponent {
 
   closeEditDialog() {
     this.visibleEdit = false;
+    window.location.reload();
   }
 }

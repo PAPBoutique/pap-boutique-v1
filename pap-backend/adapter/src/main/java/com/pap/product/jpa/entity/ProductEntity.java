@@ -19,7 +19,6 @@ public class ProductEntity{
     private Integer quantity;
     private Double price ;
     private LocalDate createdDate ;
-
     @PrePersist
     public void prePersist() {
         if (createdDate == null) {
