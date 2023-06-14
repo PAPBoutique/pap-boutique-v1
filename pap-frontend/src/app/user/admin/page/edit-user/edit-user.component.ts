@@ -70,7 +70,6 @@ export class EditUserComponent {
          
           this.showsuccessMessage();
           this.loading = true;
-          console.log(this.loading);
           setTimeout(() => {
             window.location.reload();
           }, 2000);

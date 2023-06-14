@@ -38,6 +38,19 @@ export class UsersTableComponent {
     private authService : AuthService
   ) {}
 
+  ngAfterViewInit(){
+    const firstBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-first");
+    const lastBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-last");
+    const prevBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-prev");
+    const nextBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-next");
+    const dropdown = this.dt?.el.nativeElement.querySelector("p-dropdown");
+    firstBtn.id = "user_paginator_first";
+    lastBtn.id = "user_paginator_last";
+    prevBtn.id ="user_paginator_prev";
+    nextBtn.id ="user_paginator_next";
+    dropdown.id = "user_paginator_dropdown";
+  }
+
   loadUsers(event: LazyLoadEvent) {
     if (event.rows && event.first?.toString) {
       this.pageChange.emit({ page: event.first / event.rows, size: event.rows, filterValue: event.globalFilter });

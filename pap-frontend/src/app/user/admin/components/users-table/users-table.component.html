@@ -12,10 +12,10 @@
       <div class="flex">
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
-          <input pInputText #textInput type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
+          <input id="search_user_admin" pInputText #textInput type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
             placeholder="Search..." />
         </span>
-        <button pButton pRipple label="New User" icon="pi pi-plus" class="p-button add" (click)="showAddDialog()"></button>
+        <button id="add_user_btn" pButton pRipple label="New User" icon="pi pi-plus" class="p-button add" (click)="showAddDialog()"></button>
       </div>
     </ng-template>
 
@@ -41,8 +41,8 @@
         <td> +212 {{user.phoneNum}}</td>
         <td>
           <div class="flex align-items-center justify-content-center gap-2">
-            <button pButton icon="pi pi-pencil" class="p-button-text p-button-warning" (click)="showEditDialog(user)"></button>
-            <button pButton icon="pi pi-trash" (click)="confirmDelete(user)" class="p-button-text p-button-danger"></button>
+            <button id="edit_user_btn" pButton icon="pi pi-pencil" class="p-button-text p-button-warning" (click)="showEditDialog(user)"></button>
+            <button id="delete_product_btn" pButton icon="pi pi-trash" (click)="confirmDelete(user)" class="p-button-text p-button-danger"></button>
           </div>
         </td>
       </tr>

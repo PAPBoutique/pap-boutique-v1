@@ -29,7 +29,7 @@ export class SignupComponent {
     const inputElement = this.passwordInput.el.nativeElement.querySelector('input');
     const btn = this.submitButton.nativeElement.firstChild ;
     inputElement.id = 'password';
-    this.renderer.setAttribute(btn,'id','btn_submit_signup');
+    this.renderer.setAttribute(btn,'id','submituser');
   }
   userForm = this.fb.group({
     username: ['', Validators.required],

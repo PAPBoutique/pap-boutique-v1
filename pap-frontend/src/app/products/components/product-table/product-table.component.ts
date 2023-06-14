@@ -33,7 +33,17 @@ export class ProductTableComponent {
     private confirmationService: ConfirmationService
   ) {}
 
-  ngOnInit(){
+  ngAfterViewInit(){
+    const firstBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-first");
+    const lastBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-last");
+    const prevBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-prev");
+    const nextBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-next");
+    const dropdown = this.dt?.el.nativeElement.querySelector("p-dropdown");
+    firstBtn.id = "product_paginator_first";
+    lastBtn.id = "product_paginator_last";
+    prevBtn.id ="product_paginator_prev";
+    nextBtn.id ="product_paginator_next";
+    dropdown.id = "product_paginator_dropdown";
   }
 
   updateAddDialog(){

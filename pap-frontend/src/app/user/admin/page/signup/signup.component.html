@@ -66,9 +66,7 @@
                       <label for="password" class="block">Password</label>
 
                       <span class="p-float-label">
-
-                        <p-password inputId="password" [(ngModel)]="users.password" [toggleMask]="true" formControlName="password"
-
+                        <p-password #passwordInput [(ngModel)]="users.password" [toggleMask]="true" formControlName="password" 
                         [style]="{ width: '100%'}" ></p-password>
 
                       </span>
@@ -88,9 +86,7 @@
                       <label for="address" class="block">Address</label>
 
                       <span class="p-float-label">
-
                         <input id="address" type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="users.address" />
-
                       </span>
 
                       <small class="p-error block" *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.dirty">
@@ -140,11 +136,9 @@
                
 
                     <div style="text-align: right;">
-
-                      <button id="btn_submit_signup" pButton type="submit" label="Submit" icon="pi pi-check" iconPos="left" [disabled]="userForm.invalid"></button>
-
-                      <!--p-button inp="btn-s" type="submit" label="Submit" icon="pi pi-check" iconPos="left" [disabled]="userForm.invalid"></p-button-->
-
+                      <p-button #submitButton type="submit" label="Submit" icon="pi pi-check" iconPos="left" [disabled]="userForm.invalid"></p-button>
+                      <button id="btn_reset" type="reset" pButton pRipple label="Clear" icon="pi pi-times"
+                        class="p-button-raised p-button-danger" style="margin-left: 12px;"></button>
                     </div>
 
                   </form>

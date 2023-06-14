@@ -5,25 +5,25 @@
     <hr>
     <ul class="nav nav-pills flex-column mb-auto">
         <li>
-            <a routerLink="/orders" routerLinkActive="active" class="nav-link text-white">
+            <a id="dashboardLink" routerLink="/orders" routerLinkActive="active" class="nav-link text-white">
                 <i class="pi pi-chart-bar"></i>
                 Dashboard
             </a>
         </li>
         <li>
-            <a routerLink="/orders" routerLinkActive="active" class="nav-link text-white">
+            <a id="ordersLink" routerLink="/orders" routerLinkActive="active" class="nav-link text-white">
                 <i class="pi pi-shopping-cart"></i>
                 Orders
             </a>
         </li>
         <li>
-            <a routerLink="/products/list" routerLinkActive="active" class="nav-link text-white">
+            <a id="productsLink" routerLink="/products/list" routerLinkActive="active" class="nav-link text-white">
                 <i class="pi pi-database"></i>
                 Products
             </a>
         </li>
         <li>
-            <a routerLink="/users" routerLinkActive="active" class="nav-link text-white">
+            <a id="clientsLink" routerLink="/users" routerLinkActive="active" class="nav-link text-white">
                 <i class="pi pi-users"></i>
                  Clients
             </a>
@@ -32,15 +32,15 @@
     <hr>
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-            id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+            id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
             <strong >Admin</strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a id="profileLink" class="dropdown-item" href="#">Profile</a></li>
             <li>
                 <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" (click)="logout()">Sign out</a></li>
+            <li><a id="signoutLink" class="dropdown-item" (click)="logout()">Sign out</a></li>
         </ul>
     </div>
 </div>
