@@ -16,7 +16,6 @@ import { UserService } from 'src/app/services/user/user.service';
 export class SignupComponent {
 
   @ViewChild('passwordInput') passwordInput!: Password;
-  @ViewChild('submitButton' , {read : ElementRef}) submitButton!: ElementRef<any>;
 
   constructor(
     private messageService: MessageService,
@@ -27,9 +26,7 @@ export class SignupComponent {
   ) { }
   ngAfterViewInit() {
     const inputElement = this.passwordInput.el.nativeElement.querySelector('input');
-    const btn = this.submitButton.nativeElement.firstChild ;
     inputElement.id = 'password';
-    this.renderer.setAttribute(btn,'id','submituser');
   }
   userForm = this.fb.group({
     username: ['', Validators.required],

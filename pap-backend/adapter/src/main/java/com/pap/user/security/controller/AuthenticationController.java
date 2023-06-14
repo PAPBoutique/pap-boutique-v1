@@ -3,7 +3,7 @@ package com.pap.user.security.controller;
 import com.pap.user.rest.dto.UserDto;
 import com.pap.user.security.service.AuthenticationService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
