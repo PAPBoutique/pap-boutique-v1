@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/product/product';
 import { MessageService } from 'primeng/api';
@@ -14,7 +14,8 @@ export class EditProductComponent {
   constructor(
     private messageService: MessageService,
     private fb: FormBuilder,
-    private productService: ProductService
+    private productService: ProductService,
+    private renderer : Renderer2
   ) { }
   loading: boolean = false;
 
@@ -31,7 +32,12 @@ export class EditProductComponent {
   @Input() selectedProduct!: Product;
   @Input() visible : boolean =false ;
   @Output() closeDialog = new EventEmitter<any>() ;
+  @ViewChild('submitButton' , {read : ElementRef}) submitButton!: ElementRef<any>;
 
+  ngAfterViewInit() {
+    const btn = this.submitButton.nativeElement.firstChild ;
+    this.renderer.setAttribute(btn,'id','eproduct-btn-submit');
+  }
   onHide(e:any){
     this.closeDialog.emit();
   }

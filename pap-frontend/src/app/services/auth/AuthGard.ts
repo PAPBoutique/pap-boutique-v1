@@ -21,7 +21,6 @@ export class AuthGuard {
   checkUserLogin(route: ActivatedRouteSnapshot, url: any): boolean {
     if (this.authService.isLoggedIn()) {
       const userRole = this.authService.getRole();
-      console.log(typeof this.authService.getUser());
       if(route.routeConfig?.path=="signup" || route.routeConfig?.path =='login'){
         this.router.navigate(['/products']);
         return false ;
@@ -34,6 +33,7 @@ export class AuthGuard {
     } 
     
     else {
+      this.authService.clearSession();
       if(route.routeConfig?.path=="signup" || route.routeConfig?.path =='login'){
         return true ;
       }

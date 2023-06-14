@@ -15,7 +15,7 @@
       <div class="field">
         <i class="pi pi-user"></i>&nbsp;<label for="username" class="block">Username</label>
         <span class="p-float-label">
-          <input type="text" pInputText placeholder="Username" formControlName="username" [(ngModel)]="selectedUser!.username" />
+          <input id="euser-username" type="text" pInputText placeholder="Username" formControlName="username" [(ngModel)]="selectedUser!.username" />
         </span>
       </div>
       <div *ngIf="userForm.get('username')?.invalid && userForm.get('username')?.touched" class="error-message">
@@ -26,7 +26,7 @@
         <i class="pi pi-envelope"></i>&nbsp;
         <label for="email" class="block">Email</label>
         <span class="p-float-label">
-          <input type="email" pInputText placeholder="Email" formControlName="email" [(ngModel)]="selectedUser!.email" />
+          <input id="euser-email" type="email" pInputText placeholder="Email" formControlName="email" [(ngModel)]="selectedUser!.email" />
         </span>
       </div>
       <div *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched" class="error-message">
@@ -46,7 +46,7 @@
         <i class="pi pi-map-marker"></i>&nbsp;
         <label for="address" class="block">Address</label>
         <span class="p-float-label">
-          <input type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="selectedUser!.address" />
+          <input id="euser-address" type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="selectedUser!.address" />
         </span>
       </div>
       <div *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.touched" class="error-message">
@@ -57,7 +57,7 @@
         <i class="pi pi-phone">&nbsp; </i><label for="phoneNum" class="block">Phone Number</label>&nbsp;
         <div class="phone-inputs-container">
           <input type="text" value="+212" pInputText [style]="{ width: '80px' }" readonly class="phone-prefix-input">
-          <input type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="selectedUser!.phoneNum" minlength="9" maxlength="9" />
+          <input id="euser-phone" type="text" pInputText placeholder="Phone Number" formControlName="phoneNum" [(ngModel)]="selectedUser!.phoneNum" minlength="9" maxlength="9" />
         </div>
       </div>
       <div *ngIf="userForm.get('phoneNum')?.dirty && (userForm.get('phoneNum')?.errors?.['firstCharInvalid'] || userForm.get('phoneNum')?.errors?.['firstCharValidator'])" class="error-message">
@@ -72,8 +72,8 @@
 
       <br>
       <div style="text-align: right;">
-        <p-button [disabled]="userForm.invalid" type="submit" label="Edit" styleClass="p-button-raised p-button-warning" icon="pi pi-pencil" iconPos="left"></p-button>
-        <button (click)="closeToast()" type="reset" pButton pRipple label="Clear" icon="pi pi-times" class="p-button-raised p-button-danger" style="margin-left: 12px;"></button>
+        <p-button #submitButton [disabled]="userForm.invalid" type="submit" label="Edit" styleClass="p-button-raised p-button-warning" icon="pi pi-pencil" iconPos="left"></p-button>
+        <button id="euser-btn-reset" (click)="closeToast()" type="reset" pButton pRipple label="Clear" icon="pi pi-times" class="p-button-raised p-button-danger" style="margin-left: 12px;"></button>
       </div>
     </form>
    

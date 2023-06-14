@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Button } from 'primeng/button';
+import { Password } from 'primeng/password';
 import { Role } from 'src/app/models/user/roles';
 import { User } from 'src/app/models/user/user';
 import { UserService } from 'src/app/services/user/user.service';
@@ -12,15 +14,23 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  
-  
+
+  @ViewChild('passwordInput') passwordInput!: Password;
+  @ViewChild('submitButton' , {read : ElementRef}) submitButton!: ElementRef<any>;
+
   constructor(
     private messageService: MessageService,
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private renderer : Renderer2
   ) { }
-
+  ngAfterViewInit() {
+    const inputElement = this.passwordInput.el.nativeElement.querySelector('input');
+    const btn = this.submitButton.nativeElement.firstChild ;
+    inputElement.id = 'password';
+    this.renderer.setAttribute(btn,'id','btn_submit_signup');
+  }
   userForm = this.fb.group({
     username: ['', Validators.required],
     email: ['', Validators.email],
@@ -41,22 +51,22 @@ export class SignupComponent {
 
 
   ngOnInit(): void {
-   this.users = {
-    username: "",
-    email: "",
-    address: "",
-    password: "",
-    role: Role.T
-  };
-  this.roles = [
-    { name: 'CLIENT', value: Role.T },
-  ];
-  console.log(this.roles)
+    this.users = {
+      username: "",
+      email: "",
+      address: "",
+      password: "",
+      role: Role.T
+    };
+    this.roles = [
+      { name: 'CLIENT', value: Role.T },
+    ];
+    console.log(this.roles)
   }
 
   roles: { name: string; value: Role; }[] = [];
 
-  users!: User 
+  users!: User
 
   signupUser() {
     if (this.userForm.valid) {

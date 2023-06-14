@@ -4,6 +4,7 @@ import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
 import { Role } from 'src/app/models/user/roles';
 import { User } from 'src/app/models/user/user';
+import { AuthService } from 'src/app/services/auth/authService';
 
 @Component({
   selector: 'app-users-table',
@@ -32,7 +33,8 @@ export class UsersTableComponent {
 
   constructor(
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private authService : AuthService
   ) {}
 
   loadUsers(event: LazyLoadEvent) {
@@ -42,6 +44,10 @@ export class UsersTableComponent {
   }
 
   confirmDelete(user: User) {
+    if(this.authService.getUser().username == user.username) {
+      this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'You cant delete this user because he is logged in' });
+      return ;
+    }
     this.confirmationService.confirm({
       message: 'Are you sure that you want to delete this user?',
       header: 'Confirmation',

@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Dropdown } from 'primeng/dropdown';
+import { Password } from 'primeng/password';
 import { Role } from 'src/app/models/user/roles';
 
 import { User } from 'src/app/models/user/user';
@@ -22,12 +24,25 @@ export class CreateUserComponent {
     private messageService: MessageService,
     private fb: FormBuilder,
     private userService: UserService,
-    private router: Router
+    private router: Router,
+    private renderer : Renderer2
   ) {}
 
   @Input() visible?: boolean;
   @Output() closeDialog = new EventEmitter<any>();
+  @ViewChild('passwordInput') passwordInput!: Password;
+  @ViewChild('dropdownInput') dropdownInput!: Dropdown;
+  @ViewChild('submitButton' , {read : ElementRef}) submitButton!: ElementRef<any>;
   loading: boolean = false;
+
+  ngAfterViewInit() {
+    const inputElement = this.passwordInput.el.nativeElement.querySelector('input');
+    const inputDropdown = this.dropdownInput.el.nativeElement.querySelector('input');
+    const btn = this.submitButton.nativeElement.firstChild ;
+    this.renderer.setAttribute(btn,'id','cuser-btn-submit');
+    inputElement.id = 'cuser-password';
+    inputDropdown.id ='cuser-role'
+  }
 
   userForm = this.fb.group({
     username: ['', Validators.required],

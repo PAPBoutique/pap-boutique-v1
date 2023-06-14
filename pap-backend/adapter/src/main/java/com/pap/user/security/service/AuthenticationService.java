@@ -56,7 +56,7 @@ public class AuthenticationService {
                 .user(userDomain)
                 .build();
     }
-
+    
     @Bean
     public CommandLineRunner addAdminAccount() {
         return args -> {
@@ -76,6 +76,7 @@ public class AuthenticationService {
             userRepository.save(adminUser);
         };
     }
+
 
 
 }
