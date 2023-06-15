@@ -1,6 +1,7 @@
 package com.pap.product.jpa;
 
 
+import com.pap.order.jpa.exception.OrderNotFoundException;
 import com.pap.product.exception.ProductNotFoundException;
 import com.pap.product.jpa.entity.ProductEntity;
 import com.pap.product.jpa.mapper.PageableMapper;
@@ -50,6 +51,19 @@ public class ProductJpaAdapter implements ProductJpaPort {
         Pageable pageable = PageRequest.of(page, size);
         Page<ProductEntity> productPage = productRepository.findAllByNameContainingIgnoreCase(name,pageable);
         return PageableMapper.INSTANCE.toPageableContent(productPage);
+    }
+
+    @Override
+    public void decreaseQuantity(Long id, Long quantity) {
+        ProductEntity productEntity = productRepository.findById(id).orElseThrow(()->new ProductNotFoundException("Order not found"));
+        var oldQuantity = productEntity.getQuantity() ;
+        productEntity.setQuantity((int) (oldQuantity-quantity));
+    }
+
+    @Override
+    public boolean availableInStock(Long id, Long quantity) {
+        ProductDomainObject product = getProductById(id);
+        return product.getQuantity()>=quantity;
     }
 
 

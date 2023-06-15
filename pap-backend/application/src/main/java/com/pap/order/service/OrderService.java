@@ -24,6 +24,9 @@ public class OrderService implements OrderServicePort {
             if(productJpaPort.getProductById(orderDomainObject.getProductId())== null){
                 throw new ProductNotFoundException("This product does not exist");
             }
+            if(!productJpaPort.availableInStock(orderDomainObject.getProductId(), orderDomainObject.getQuantity())){
+                throw  new ProductNotFoundException("This quantity not available ");
+            }
             orderDomainObject.setPrice(priceCalculation(orderDomainObject));
         });
         return orderJpaPort.addOrders(orders);
@@ -48,5 +51,12 @@ public class OrderService implements OrderServicePort {
     public Double priceCalculation(OrderDomainObject orderDomainObject) {
         ProductDomainObject product = productJpaPort.getProductById(orderDomainObject.getProductId());
         return product.getPrice() * orderDomainObject.getQuantity();
+    }
+
+    @Override
+    public void checkOrder(Long id) {
+        OrderDomainObject order = orderJpaPort.getOrderById(id);
+        productJpaPort.decreaseQuantity(order.getProductId(),order.getQuantity());
+        orderJpaPort.checkOrder(id);
     }
 }

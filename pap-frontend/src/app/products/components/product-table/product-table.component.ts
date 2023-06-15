@@ -66,7 +66,12 @@ export class ProductTableComponent {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.deleteOne(product.id).subscribe(() => this.dt?.clear());
+        this.deleteOne(product.id).subscribe(() => {
+          let index = this.products.findIndex(p=>p.id===product.id);
+          this.products.splice(index,1);
+          this.dt?.clear();
+          console.log(this.products);
+        });
         this.messageService.add({
           severity: 'info',
           summary: 'Confirmed',

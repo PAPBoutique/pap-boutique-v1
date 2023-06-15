@@ -11,4 +11,5 @@ public interface OrderJpaPort {
     PageableContent<OrderDomainObject> findAllByName(int page, int size, String filter);
     PageableContent<OrderDomainObject> findAllByPage(int page, int size);
     OrderDomainObject getOrderById(Long id);
+    void checkOrder(Long id);
 }

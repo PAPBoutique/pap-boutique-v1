@@ -11,5 +11,6 @@ public interface OrderServicePort {
     OrderDomainObject updateOrder(Long id,OrderDomainObject orderDomainObject);
     PageableContent<OrderDomainObject> getOrders(int page,int size,String filter);
     Double priceCalculation(OrderDomainObject orderDomainObject);
+    void checkOrder(Long id);
 
 }

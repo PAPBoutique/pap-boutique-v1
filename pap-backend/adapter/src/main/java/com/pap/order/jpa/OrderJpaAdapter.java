@@ -67,4 +67,11 @@ public class OrderJpaAdapter implements OrderJpaPort {
         OrderEntity order =  orderRepository.findById(id).orElseThrow(()->new OrderNotFoundException("Order not found"));
         return OrderMapper.INSTANCE.toOrderDomainObject(order);
     }
+
+    @Override
+    public void checkOrder(Long id) {
+        OrderEntity order = orderRepository.findById(id).orElseThrow(()->new OrderNotFoundException("Order not found"));
+        order.setChecked(true);
+        orderRepository.save(order);
+    }
 }

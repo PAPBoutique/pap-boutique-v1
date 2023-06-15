@@ -31,6 +31,12 @@ public class OrderController {
 
     }
 
+    @PutMapping("/check/{id}")
+    public String checkOrder(@PathVariable Long id){
+        orderServicePort.checkOrder(id);
+        return "Order checked !!";
+    }
+
     @GetMapping
     public PageableContent<OrderDomainObject> getOrders(
             @RequestParam @Min(value = 0 , message = "Page number must be greater than or equal 0") int page,

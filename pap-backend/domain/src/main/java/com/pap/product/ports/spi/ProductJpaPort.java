@@ -14,4 +14,6 @@ public interface ProductJpaPort {
     void deleteProduct(Long id);
     PageableContent<ProductDomainObject> findAllByPage(int page, int size);
     PageableContent<ProductDomainObject> findAllByName(int page,int size,String name);
+    void decreaseQuantity(Long id,Long quantity);
+    boolean availableInStock(Long id,Long quantity);
 }
