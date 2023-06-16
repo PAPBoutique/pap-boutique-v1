@@ -2,10 +2,14 @@ package com.pap.product.jpa;
 
 
 import com.pap.product.exception.ProductNotFoundException;
+import com.pap.product.jpa.entity.ImageDataEntity;
 import com.pap.product.jpa.entity.ProductEntity;
+import com.pap.product.jpa.mapper.ImageMapper;
 import com.pap.product.jpa.mapper.PageableMapper;
 import com.pap.product.jpa.mapper.ProductMapper;
+import com.pap.product.jpa.repository.ImageRepository;
 import com.pap.product.jpa.repository.ProductRepository;
+import com.pap.product.model.ImageDataDomainObject;
 import com.pap.product.model.PageableContent;
 import com.pap.product.model.ProductDomainObject;
 import com.pap.product.ports.spi.ProductJpaPort;
@@ -14,15 +18,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 @AllArgsConstructor
 @Component
 public class ProductJpaAdapter implements ProductJpaPort {
     private final ProductRepository productRepository;
+    private final ImageRepository imageRepository;
 
     @Override
     public List<ProductDomainObject> addProduct(List<ProductDomainObject> productDomainObject) {
@@ -30,6 +39,82 @@ public class ProductJpaAdapter implements ProductJpaPort {
         List<ProductEntity> savedProductEntity = productRepository.saveAll(productEntity);
         return ProductMapper.INSTANCE.productsToProductDomainObject(savedProductEntity);
     }
+
+    @Override
+    public ProductDomainObject addSingleProduct(ProductDomainObject productDomainObject) {
+        ProductEntity productEntity = ProductMapper.INSTANCE.productDomainToProduct(productDomainObject);
+        ProductEntity savedProduct = productRepository.save(productEntity);
+        return ProductMapper.INSTANCE.productToProductDomain(savedProduct);
+    }
+
+    @Override
+    public Set<ImageDataDomainObject> uploadImage(MultipartFile[] multipartFiles) throws IOException {
+        Set<ImageDataEntity> imageDataSet = new HashSet<>();
+        for (MultipartFile file : multipartFiles)
+        {
+            ImageDataEntity imageData = new ImageDataEntity(
+                    file.getOriginalFilename(),
+                    file.getContentType(),
+                    file.getBytes()
+            );
+            imageDataSet.add(imageData);
+        }
+        Set<ImageDataDomainObject> imageDataDomainObjects = ImageMapper.INSTANCE.imageDataEntityToImageDataDomain(imageDataSet);
+        return imageDataDomainObjects;
+    }
+
+
+   /* @Override
+    public Set<ImageDataDomainObject> uploadImage(MultipartFile[] multipartFiles) throws IOException {
+        Set<ImageDataDomainObject> savedImageDataDomainSet = new HashSet<>();
+
+        if (multipartFiles.length > 0) {
+            MultipartFile file = multipartFiles[0];
+            ImageDataDomainObject imageDataDomainObject = new ImageDataDomainObject(
+                    file.getOriginalFilename(),
+                    file.getContentType(),
+                    file.getBytes()
+            );
+
+            ImageDataEntity imageDataEntity = ImageMapper.INSTANCE.convertImageDataDomainToEntity(imageDataDomainObject);
+            //ImageDataEntity savedImageDataEntity = imageRepository.save(imageDataEntity);
+
+            ImageDataDomainObject savedImageDataDomainObject = new ImageDataDomainObject(
+                    imageDataEntity.getId(),
+                    imageDataEntity.getName(),
+                    imageDataEntity.getType(),
+                    imageDataEntity.getPicByte()
+            );
+
+            savedImageDataDomainSet.add(savedImageDataDomainObject);
+        }
+
+        return savedImageDataDomainSet;
+    }
+*/
+
+
+
+    /*@Override
+    public Set<ImageDataDomainObject> uploadImage(MultipartFile[] multipartFiles) throws IOException {
+        Set<ImageDataDomainObject> imageDataDomainSet = new HashSet<>();
+        for (MultipartFile file : multipartFiles) {
+            ImageDataDomainObject imageDataDomainObject = new ImageDataDomainObject(
+                    file.getOriginalFilename(),
+                    file.getContentType(),
+                        file.getBytes()
+                );
+                imageDataDomainSet.add(imageDataDomainObject);
+            }
+        Set<ImageDataDomainObject> savedImageDataDomainSet = new HashSet<>();
+        for (ImageDataDomainObject imageDataDomainObject : imageDataDomainSet) {
+            ImageDataEntity imageDataEntity = ImageMapper.INSTANCE.convertImageDataDomainToEntity(imageDataDomainObject);
+            imageDataEntity = saveImageDataEntity(imageDataEntity);
+            savedImageDataDomainSet.add(ImageMapper.INSTANCE.imageDataToImageDataDomain(imageDataEntity));
+        }
+
+        return savedImageDataDomainSet;
+    }*/
 
     @Override
     public void deleteProduct(Long id) {

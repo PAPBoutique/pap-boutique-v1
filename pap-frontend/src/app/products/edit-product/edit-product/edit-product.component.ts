@@ -3,6 +3,8 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/product/product';
 import { MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/services/product/product-service';
+import { FileHandle } from 'src/app/models/product/file-handle.model';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-edit-product',
@@ -12,6 +14,7 @@ import { ProductService } from 'src/app/services/product/product-service';
 export class EditProductComponent {
 
   constructor(
+    private sanitizer: DomSanitizer,
     private messageService: MessageService,
     private fb: FormBuilder,
     private productService: ProductService,
@@ -40,6 +43,23 @@ export class EditProductComponent {
   }
   onHide(e:any){
     this.closeDialog.emit();
+  }
+  onFileSelected(event: any) {
+    if (event.files && event.files.length) {
+      const files: File[] = event.files;
+      console.log(files);
+  
+      for (let i = 0; i < files.length; i++) {
+        const file: File = files[i];
+        const fileHandle: FileHandle = {
+          file: file,
+          url: this.sanitizer.bypassSecurityTrustUrl(
+            window.URL.createObjectURL(file)
+          ),
+        };
+        this.product.productImages.push(fileHandle);
+      }
+    }
   }
 
   updateProduct(product: Product) {

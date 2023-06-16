@@ -8,12 +8,19 @@ import { PageContent } from 'src/app/shared-components/service/pageContent';
 
 
 const baseUrl = '/api/v1/products';
+const url = "/api/v1/products/productsWithPicture"
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
   constructor(private http: HttpClient) { }
+
+
+  public addProductWithPicture(product : FormData)
+  {
+    return this.http.post<Product>(url, product)
+  }
 
   createProduct(products: Product[]): Observable<Product> {
     return this.http.post<Product>(baseUrl, products);

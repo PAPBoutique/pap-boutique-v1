@@ -1,14 +1,17 @@
 package com.pap.product.rest.controller;
 
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
 import com.pap.product.exception.ProductNotFoundException;
+import com.pap.product.jpa.mapper.ProductMapper;
+import com.pap.product.model.ImageDataDomainObject;
 import com.pap.product.model.PageableContent;
 import com.pap.product.model.ProductDomainObject;
 import com.pap.product.ports.api.ProductServicePort;
 import com.pap.product.rest.constants.ProductDocMessages;
+import com.pap.product.rest.dto.ImageDataDTO;
 import com.pap.product.rest.dto.ProductDTO;
+import com.pap.product.rest.mapper.ImageRestMapper;
 import com.pap.product.rest.mapper.ProductRestMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -17,7 +20,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,8 +29,9 @@ import org.springframework.web.server.ResponseStatusException;
 import javax.validation.Valid;
 
 import javax.validation.constraints.Min;
-import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -35,6 +39,48 @@ import java.util.List;
 @Validated
 public class ProductController {
     private final ProductServicePort productService ;
+
+    @PostMapping(value = "/productsWithPicture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ProductDomainObject addNewProduct(
+            @RequestPart("product") ProductDTO productDto,
+            @RequestPart("imageFile") MultipartFile[] files) {
+        try {
+            Set<ImageDataDomainObject> images = productService.uploadImage(files);
+            Set<ImageDataDTO> imageDTOs = ImageRestMapper.INSTANCE.INSTANCE.setImageDataDtoToImageDataDomain(images);
+            productDto.setProductImages(imageDTOs);
+
+            ProductDomainObject domainObject = ProductRestMapper.INSTANCE.convertProductDtoToDomainObject(productDto);
+            ProductDomainObject addedProduct = productService.addSingleProduct(domainObject);
+
+            addedProduct.setProductImages(images);
+
+            return addedProduct;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    /*@PostMapping( value = "/productsWithPicture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ProductDomainObject addNewProduct(
+            @RequestPart("product") ProductDTO productDto,
+            @RequestPart("imageFile") MultipartFile[] files) {
+        try {
+            Set<ImageDataDomainObject> images = productService.uploadImage(files);
+            productDto.setProductImages(ProductRestMapper.INSTANCE.imageDataDtoToImageDataDomain(images));
+
+            ProductDomainObject domainObject = ProductRestMapper.INSTANCE.convertProductDtoToDomainObject(productDto);
+            ProductDomainObject addedProduct = productService.addSingleProduct(domainObject);
+           // addedProduct.setProductImages(ProductMapper.INSTANCE.imageDataDomainToImageData(images));
+            addedProduct.setProductImages(images);
+
+            return addedProduct;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }*/
+    //////////////////////////////////////////////
     @Operation(summary = ProductDocMessages.ADD_PRODUCTS)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = ProductDocMessages.ADD_PRODUCTS_SUCCESS)

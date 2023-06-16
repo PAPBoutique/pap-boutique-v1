@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { Product } from '../../../models/product/product';
 import { ConfirmEventType, ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
@@ -17,7 +17,9 @@ export class ProductTableComponent {
     name: '',
     description : '',
     quantity : 0,
-    price : 0
+    price : 0,
+    productImages: []
+
   };
 
   @Input() deleteOne!: (id: any) => Observable<Object>;
@@ -30,10 +32,25 @@ export class ProductTableComponent {
 
   constructor(
     private messageService: MessageService,
-    private confirmationService: ConfirmationService
+    private confirmationService: ConfirmationService,
+    private elementRef: ElementRef, private renderer: Renderer2
   ) {}
 
   ngOnInit(){
+  }
+
+  ngAfterViewInit() {
+    if (this.dt && this.dt.el) {
+      const table = this.dt.el.nativeElement.querySelector('table');
+      if (table) {
+        table.setAttribute('id', 'table_product');
+      }
+    }
+    const dropdownElement = this.elementRef.nativeElement.querySelector('p-dropdown');
+    if (dropdownElement) {
+      this.renderer.setAttribute(dropdownElement, 'id', 'dropdown_product');
+    }
+
   }
 
   updateAddDialog(){

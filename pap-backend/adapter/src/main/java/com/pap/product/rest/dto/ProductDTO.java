@@ -4,10 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 
 @Data
@@ -27,4 +27,5 @@ public class ProductDTO {
     @NotNull(message = "Price cannot be null" )
     @Min(value = 0 , message = "Product's price must be greater than 0")
     private Double price ;
+    private Set<ImageDataDTO> productImages;
 }

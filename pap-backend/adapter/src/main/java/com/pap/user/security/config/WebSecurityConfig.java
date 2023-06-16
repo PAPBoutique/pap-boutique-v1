@@ -74,6 +74,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests()
                 .antMatchers("/api/v1/users/login").permitAll()
                 .antMatchers("/api/v1/users/signup").permitAll()
+                .antMatchers("/api/v1/**").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated()
                 .and()

@@ -12,10 +12,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
-
-import static org.springframework.data.jpa.domain.AbstractAuditable_.createdDate;
 
 @Entity
 @Data
@@ -26,7 +23,6 @@ public class UserEntity implements UserDetails {
     @Id
     @GeneratedValue
     private Long id;
-
     @Column(unique = true)
     private String username ;
     @Column(unique = true)

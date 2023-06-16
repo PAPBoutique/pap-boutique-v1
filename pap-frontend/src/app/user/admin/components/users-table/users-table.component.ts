@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { ConfirmEventType, ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
@@ -35,9 +35,22 @@ export class UsersTableComponent {
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private authService : AuthService
+    private authService : AuthService,
+    private elementRef: ElementRef, private renderer: Renderer2
   ) {}
 
+  ngAfterViewInit() {
+    if (this.dt && this.dt.el) {
+      const table = this.dt.el.nativeElement.querySelector('table');
+      if (table) {
+        table.setAttribute('id', 'table_user');
+      }
+    }
+    const dropdownElement = this.elementRef.nativeElement.querySelector('p-dropdown');
+    if (dropdownElement) {
+      this.renderer.setAttribute(dropdownElement, 'id', 'dropdown_user');
+    }
+  }
   loadUsers(event: LazyLoadEvent) {
     if (event.rows && event.first?.toString) {
       this.pageChange.emit({ page: event.first / event.rows, size: event.rows, filterValue: event.globalFilter });
