@@ -1,6 +1,7 @@
 package com.pap.product.jpa;
 
 
+import com.pap.order.jpa.exception.OrderNotFoundException;
 import com.pap.product.exception.ProductNotFoundException;
 import com.pap.product.jpa.entity.ImageDataEntity;
 import com.pap.product.jpa.entity.ProductEntity;
@@ -31,7 +32,6 @@ import java.util.Set;
 @Component
 public class ProductJpaAdapter implements ProductJpaPort {
     private final ProductRepository productRepository;
-    private final ImageRepository imageRepository;
 
     @Override
     public List<ProductDomainObject> addProduct(List<ProductDomainObject> productDomainObject) {
@@ -64,58 +64,6 @@ public class ProductJpaAdapter implements ProductJpaPort {
     }
 
 
-   /* @Override
-    public Set<ImageDataDomainObject> uploadImage(MultipartFile[] multipartFiles) throws IOException {
-        Set<ImageDataDomainObject> savedImageDataDomainSet = new HashSet<>();
-
-        if (multipartFiles.length > 0) {
-            MultipartFile file = multipartFiles[0];
-            ImageDataDomainObject imageDataDomainObject = new ImageDataDomainObject(
-                    file.getOriginalFilename(),
-                    file.getContentType(),
-                    file.getBytes()
-            );
-
-            ImageDataEntity imageDataEntity = ImageMapper.INSTANCE.convertImageDataDomainToEntity(imageDataDomainObject);
-            //ImageDataEntity savedImageDataEntity = imageRepository.save(imageDataEntity);
-
-            ImageDataDomainObject savedImageDataDomainObject = new ImageDataDomainObject(
-                    imageDataEntity.getId(),
-                    imageDataEntity.getName(),
-                    imageDataEntity.getType(),
-                    imageDataEntity.getPicByte()
-            );
-
-            savedImageDataDomainSet.add(savedImageDataDomainObject);
-        }
-
-        return savedImageDataDomainSet;
-    }
-*/
-
-
-
-    /*@Override
-    public Set<ImageDataDomainObject> uploadImage(MultipartFile[] multipartFiles) throws IOException {
-        Set<ImageDataDomainObject> imageDataDomainSet = new HashSet<>();
-        for (MultipartFile file : multipartFiles) {
-            ImageDataDomainObject imageDataDomainObject = new ImageDataDomainObject(
-                    file.getOriginalFilename(),
-                    file.getContentType(),
-                        file.getBytes()
-                );
-                imageDataDomainSet.add(imageDataDomainObject);
-            }
-        Set<ImageDataDomainObject> savedImageDataDomainSet = new HashSet<>();
-        for (ImageDataDomainObject imageDataDomainObject : imageDataDomainSet) {
-            ImageDataEntity imageDataEntity = ImageMapper.INSTANCE.convertImageDataDomainToEntity(imageDataDomainObject);
-            imageDataEntity = saveImageDataEntity(imageDataEntity);
-            savedImageDataDomainSet.add(ImageMapper.INSTANCE.imageDataToImageDataDomain(imageDataEntity));
-        }
-
-        return savedImageDataDomainSet;
-    }*/
-
     @Override
     public void deleteProduct(Long id) {
         if(getProductById(id)!=null){
@@ -135,6 +83,19 @@ public class ProductJpaAdapter implements ProductJpaPort {
         Pageable pageable = PageRequest.of(page, size);
         Page<ProductEntity> productPage = productRepository.findAllByNameContainingIgnoreCase(name,pageable);
         return PageableMapper.INSTANCE.toPageableContent(productPage);
+    }
+
+    @Override
+    public void decreaseQuantity(Long id, Long quantity) {
+        ProductEntity productEntity = productRepository.findById(id).orElseThrow(()->new ProductNotFoundException("Order not found"));
+        var oldQuantity = productEntity.getQuantity() ;
+        productEntity.setQuantity((int) (oldQuantity-quantity));
+    }
+
+    @Override
+    public boolean availableInStock(Long id, Long quantity) {
+        ProductDomainObject product = getProductById(id);
+        return product.getQuantity()>=quantity;
     }
 
 

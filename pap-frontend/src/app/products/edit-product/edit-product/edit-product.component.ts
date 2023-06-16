@@ -35,12 +35,8 @@ export class EditProductComponent {
   @Input() selectedProduct!: Product;
   @Input() visible : boolean =false ;
   @Output() closeDialog = new EventEmitter<any>() ;
-  @ViewChild('submitButton' , {read : ElementRef}) submitButton!: ElementRef<any>;
 
-  ngAfterViewInit() {
-    const btn = this.submitButton.nativeElement.firstChild ;
-    this.renderer.setAttribute(btn,'id','eproduct-btn-submit');
-  }
+
   onHide(e:any){
     this.closeDialog.emit();
   }

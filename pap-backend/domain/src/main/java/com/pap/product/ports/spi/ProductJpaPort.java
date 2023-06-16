@@ -21,4 +21,6 @@ public interface ProductJpaPort {
     PageableContent<ProductDomainObject> findAllByName(int page,int size,String name);
 
     Set<ImageDataDomainObject> uploadImage(MultipartFile[] multipartFiles) throws IOException;
+    void decreaseQuantity(Long id,Long quantity);
+    boolean availableInStock(Long id,Long quantity);
 }

@@ -63,9 +63,7 @@
                       <label for="password" class="block">Password</label>
 
                       <span class="p-float-label">
-
-                        <p-password inputId="password" [(ngModel)]="users.password" [toggleMask]="true" formControlName="password"
-
+                        <p-password #passwordInput [(ngModel)]="users.password" [toggleMask]="true" formControlName="password" 
                         [style]="{ width: '100%'}" ></p-password>
 
                       </span>
@@ -85,9 +83,7 @@
                       <label for="address" class="block">Address</label>
 
                       <span class="p-float-label">
-
                         <input id="address" type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="users.address" />
-
                       </span>
 
                       <small class="p-error block" *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.dirty">

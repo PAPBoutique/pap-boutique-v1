@@ -36,22 +36,19 @@ export class ProductTableComponent {
     private elementRef: ElementRef, private renderer: Renderer2
   ) {}
 
-  ngOnInit(){
+  ngAfterViewInit(){
+    const firstBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-first");
+    const lastBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-last");
+    const prevBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-prev");
+    const nextBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-next");
+    const dropdown = this.dt?.el.nativeElement.querySelector("p-dropdown");
+    firstBtn.id = "product_paginator_first";
+    lastBtn.id = "product_paginator_last";
+    prevBtn.id ="product_paginator_prev";
+    nextBtn.id ="product_paginator_next";
+    dropdown.id = "product_paginator_dropdown";
   }
 
-  ngAfterViewInit() {
-    if (this.dt && this.dt.el) {
-      const table = this.dt.el.nativeElement.querySelector('table');
-      if (table) {
-        table.setAttribute('id', 'table_product');
-      }
-    }
-    const dropdownElement = this.elementRef.nativeElement.querySelector('p-dropdown');
-    if (dropdownElement) {
-      this.renderer.setAttribute(dropdownElement, 'id', 'dropdown_product');
-    }
-
-  }
 
   updateAddDialog(){
     this.visibleAdd = false ;
@@ -73,7 +70,12 @@ export class ProductTableComponent {
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.deleteOne(product.id).subscribe(() => this.dt?.clear());
+        this.deleteOne(product.id).subscribe(() => {
+          let index = this.products.findIndex(p=>p.id===product.id);
+          this.products.splice(index,1);
+          this.dt?.clear();
+          console.log(this.products);
+        });
         this.messageService.add({
           severity: 'info',
           summary: 'Confirmed',

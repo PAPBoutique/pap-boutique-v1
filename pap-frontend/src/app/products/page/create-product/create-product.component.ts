@@ -43,7 +43,6 @@ export class CreateProductComponent {
   @Input() visible?: boolean;
   @Output() closeDialog = new EventEmitter<any>() ;
   loading: boolean = false;
-  @ViewChild('submitButton' , {read : ElementRef}) submitButton!: ElementRef<any>;
 
   onFileSelected(event: any) {
     if (event.files && event.files.length) {
@@ -102,11 +101,6 @@ export class CreateProductComponent {
     }
 
     return uploadImageData;
-  }
-
-  ngAfterViewInit() {
-    const btn = this.submitButton.nativeElement.firstChild ;
-    this.renderer.setAttribute(btn,'id','cproduct-btn-submit');
   }
 
   onHide(e:any){

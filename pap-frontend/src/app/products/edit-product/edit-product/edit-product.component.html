@@ -52,7 +52,7 @@
       </div>
     
       <div style="text-align: right;">
-        <p-button #submitButton  type="submit" label="Edit" styleClass="p-button-raised p-button-warning" icon="pi pi-pencil"
+        <p-button id="eproduct-btn-submit"  type="submit" label="Edit" styleClass="p-button-raised p-button-warning" icon="pi pi-pencil"
           iconPos="left" [disabled]="ProductForm.invalid"></p-button>
 
         <button id="eproduct-btn-reset" (click)="closeToast()" type="reset" pButton pRipple label="Cancel" icon="pi pi-times"

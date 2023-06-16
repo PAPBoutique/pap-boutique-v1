@@ -72,7 +72,7 @@
 
       <br>
       <div style="text-align: right;">
-        <p-button #submitButton [disabled]="userForm.invalid" type="submit" label="Edit" styleClass="p-button-raised p-button-warning" icon="pi pi-pencil" iconPos="left"></p-button>
+        <p-button id="euser-btn-submit" [disabled]="userForm.invalid" type="submit" label="Edit" styleClass="p-button-raised p-button-warning" icon="pi pi-pencil" iconPos="left"></p-button>
         <button id="euser-btn-reset" (click)="closeToast()" type="reset" pButton pRipple label="Clear" icon="pi pi-times" class="p-button-raised p-button-danger" style="margin-left: 12px;"></button>
       </div>
     </form>

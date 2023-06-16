@@ -36,7 +36,6 @@ export class EditUserComponent {
   @Input() visible: boolean = false;
   @ViewChild('passwordInput') passwordInput!: Password;
   @ViewChild('dropdownInput') dropdownInput!: Dropdown;
-  @ViewChild('submitButton' , {read : ElementRef}) submitButton!: ElementRef<any>;
 
   onHide(e:any){
     this.closeDialog.emit();
@@ -56,8 +55,6 @@ export class EditUserComponent {
   ngAfterViewInit() {
     const inputElement = this.passwordInput.el.nativeElement.querySelector('input');
     const inputDropdown = this.dropdownInput.el.nativeElement.querySelector('input');
-    const btn = this.submitButton.nativeElement.firstChild ;
-    this.renderer.setAttribute(btn,'id','euser-btn-submit');
     inputElement.id = 'euser-password';
     inputDropdown.id ='euser-role';
   }
@@ -70,7 +67,6 @@ export class EditUserComponent {
          
           this.showsuccessMessage();
           this.loading = true;
-          console.log(this.loading);
           setTimeout(() => {
             window.location.reload();
           }, 2000);

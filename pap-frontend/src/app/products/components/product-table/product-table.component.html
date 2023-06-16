@@ -10,11 +10,11 @@
       <div class="flex">
         <span class="p-input-icon-left">
           <i class="pi pi-search"></i>
-          <input pInputText #textInput type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
+          <input id="search_product_admin" pInputText #textInput type="text" (input)="dt.filterGlobal(textInput.value, 'contains')"
             placeholder="Search..." />
         </span>
 
-        <button (click)="showAddDialog()" pButton pRipple label="New" icon="pi pi-plus" class="p-button add"></button>
+        <button id="add_product_btn" (click)="showAddDialog()" pButton pRipple label="New" icon="pi pi-plus" class="p-button add"></button>
 
       </div>
 
@@ -37,9 +37,9 @@
         <td>{{product.quantity}}</td>
         <td>
           <div class="flex align-items-center justify-content-center gap-2">
-            <button (click)="showDialog(product)" pButton icon="pi pi-pencil"
+            <button id="edit_product_btn" (click)="showDialog(product)" pButton icon="pi pi-pencil"
               class="p-button-text p-button-warning"></button>
-            <button (click)="confirmDelete(product)" pButton icon="pi pi-trash"
+            <button id="delete_product_btn" (click)="confirmDelete(product)" pButton icon="pi pi-trash"
               class="p-button-text p-button-danger"></button>
 
           </div>

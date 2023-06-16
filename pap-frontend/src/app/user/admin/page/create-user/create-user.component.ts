@@ -32,14 +32,11 @@ export class CreateUserComponent {
   @Output() closeDialog = new EventEmitter<any>();
   @ViewChild('passwordInput') passwordInput!: Password;
   @ViewChild('dropdownInput') dropdownInput!: Dropdown;
-  @ViewChild('submitButton' , {read : ElementRef}) submitButton!: ElementRef<any>;
   loading: boolean = false;
 
   ngAfterViewInit() {
     const inputElement = this.passwordInput.el.nativeElement.querySelector('input');
     const inputDropdown = this.dropdownInput.el.nativeElement.querySelector('input');
-    const btn = this.submitButton.nativeElement.firstChild ;
-    this.renderer.setAttribute(btn,'id','cuser-btn-submit');
     inputElement.id = 'cuser-password';
     inputDropdown.id ='cuser-role'
   }
