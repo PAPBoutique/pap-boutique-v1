@@ -2,6 +2,7 @@ package com.pap.order.ports.spi;
 
 import com.pap.order.model.OrderDomainObject;
 import com.pap.product.model.PageableContent;
+import com.pap.product.model.ProductDomainObject;
 
 import java.util.List;
 

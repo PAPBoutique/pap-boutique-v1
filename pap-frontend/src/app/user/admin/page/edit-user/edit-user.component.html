@@ -6,6 +6,7 @@
   [draggable]="false"
   [resizable]="false"
   (onHide)="onHide($event)"
+  #editDialog
 >
   <div class="flex align-items-center justify-content-center">
     <div *ngIf="loading">
@@ -36,7 +37,7 @@
       <div class="field">
         <i class="pi pi-eye"></i>&nbsp;&nbsp;<label for="role" class="block">Role</label>
         <br>
-        <p-dropdown formControlName="role" [style]="{'width':'101%'}" placeholder="Select a Role" [(ngModel)]="selectedUser!.role" [options]="roles"></p-dropdown>
+        <p-dropdown id="editUserDrop" formControlName="role" [style]="{'width':'101%'}" placeholder="Select a Role" [(ngModel)]="selectedUser!.role" [options]="roles"></p-dropdown>
       </div>
       <div *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.touched" class="error-message">
         Role is required.

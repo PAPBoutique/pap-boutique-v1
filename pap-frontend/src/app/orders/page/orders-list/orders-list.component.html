@@ -1,0 +1,9 @@
+<div class="container-fluid">
+    <div class="row">
+        <app-sidebar></app-sidebar>
+        <div class="col-9 content">
+            <app-orders-table [orders]="orders" [tableSize]="totalOrders"
+                (pageChange)="onTableChange($event)" [checkSelected]="checkOrders"></app-orders-table>
+        </div>
+    </div>
+</div>

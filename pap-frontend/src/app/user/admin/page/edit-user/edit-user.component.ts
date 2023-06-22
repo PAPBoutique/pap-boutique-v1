@@ -1,6 +1,7 @@
 import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import { Dialog } from 'primeng/dialog';
 import { Dropdown } from 'primeng/dropdown';
 import { Password } from 'primeng/password';
 import { Role } from 'src/app/models/user/roles';
@@ -47,6 +48,7 @@ export class EditUserComponent {
     private userService: UserService,
     private renderer : Renderer2
   ) { }
+  @ViewChild('editDialog') editDialog! : Dialog;
 
   ngOnInit(): void {
     this.getAllRoles();
@@ -57,6 +59,10 @@ export class EditUserComponent {
     const inputDropdown = this.dropdownInput.el.nativeElement.querySelector('input');
     inputElement.id = 'euser-password';
     inputDropdown.id ='euser-role';
+    this.editDialog.onShow.subscribe(() => {
+      const closeBtn = this.editDialog.el.nativeElement.querySelector(".p-dialog-header-close");
+      closeBtn.id="closeEditU";
+    });
   }
 
   updateUser(user: User) {

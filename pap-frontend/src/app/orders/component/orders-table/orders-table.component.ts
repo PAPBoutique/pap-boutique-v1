@@ -1,43 +1,39 @@
-import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChild } from '@angular/core';
-import { Product } from '../../../models/product/product';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ConfirmEventType, ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
-import { ConfirmDialog } from 'primeng/confirmdialog';
-import { Dialog } from 'primeng/dialog';
-import { CreateProductComponent } from '../../page/create-product/create-product.component';
+import { Order } from 'src/app/models/order/order';
 
 @Component({
-  selector: 'app-product-table',
-  templateUrl: './product-table.component.html',
-  styleUrls: ['./product-table.component.css']
+  selector: 'app-orders-table',
+  templateUrl: './orders-table.component.html',
+  styleUrls: ['./orders-table.component.css']
 })
-export class ProductTableComponent {
-
+export class OrdersTableComponent {
   visible: boolean = false;
   visibleAdd: boolean = false;
-  @Input() selectedProduct: Product = {
-    name: '',
-    description : '',
-    quantity : 0,
+  @Input() checkSelected!: (selectedOrders: any) => void;
+  @Input() selectedOrder: Order = {
+    product : '' ,
+    quantity : 0 ,
+    client :'',
+    creationDate : '',
     price : 0,
-    productImages: []
-
+    status : '',
+    checked:false
   };
 
-  @Input() deleteOne!: (id: any) => Observable<Object>;
   @Output() pageChange = new EventEmitter<{ page: number; size: number; filterValue: string }>();
   @ViewChild('dt') dt?: Table;
-  @Input() products: Product[] = [];
-  @Input() tableSize: number = this.products.length;
-  clonedProducts: { [s: string]: Product } = {};
-  filteredRows: Product[] = [];
-  @ViewChild('confirmDialog') confirmDialog?: ConfirmDialog;
+  @Input() orders: Order[] = [];
+  @Input() tableSize: number = this.orders.length;
+  clonedOrders: { [s: string]: Order } = {};
+  filteredRows: Order[] = [];
+  selectedOrders ?: Order ;
 
   constructor(
     private messageService: MessageService,
-    private confirmationService: ConfirmationService,
-    private elementRef: ElementRef, private renderer: Renderer2
+    private confirmationService: ConfirmationService
   ) {}
 
   ngAfterViewInit(){
@@ -46,14 +42,12 @@ export class ProductTableComponent {
     const prevBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-prev");
     const nextBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-next");
     const dropdown = this.dt?.el.nativeElement.querySelector("p-dropdown");
-    firstBtn.id = "product_paginator_first";
-    lastBtn.id = "product_paginator_last";
-    prevBtn.id ="product_paginator_prev";
-    nextBtn.id ="product_paginator_next";
-    dropdown.id = "product_paginator_dropdown";
-    
+    firstBtn.id = "order_paginator_first";
+    lastBtn.id = "order_paginator_last";
+    prevBtn.id ="order_paginator_prev";
+    nextBtn.id ="order_paginator_next";
+    dropdown.id = "order_paginator_dropdown";
   }
-
 
   updateAddDialog(){
     this.visibleAdd = false ;
@@ -63,28 +57,36 @@ export class ProductTableComponent {
   }
 
 
-  loadProducts(event: LazyLoadEvent) {
+  loadOrders(event: LazyLoadEvent) {
     if (event.rows && event.first?.toString) {
       this.pageChange.emit({ page: event.first / event.rows, size: event.rows, filterValue: event.globalFilter });
     }
   }
 
-  confirmDelete(product: Product) {
+  showDialog(order: Order) {
+    this.selectedOrder = order;
+    this.visible = true;
+  }
+
+
+
+  checkOrder(){
+    if(this.isSelectionEmpty()){
+      this.messageService.add({ severity: 'error', summary: 'Rejected', detail: 'No order selected' });
+      return ;
+    }
     this.confirmationService.confirm({
-      message: 'Are you sure that you want to delete this product?',
+      message: 'Are you sure that you want to check this orders?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
-        this.deleteOne(product.id).subscribe(() => {
-          let index = this.products.findIndex(p=>p.id===product.id);
-          this.products.splice(index,1);
-          this.dt?.clear();
-          console.log(this.products);
-        });
+        this.checkSelected(this.selectedOrders);
+        window.location.reload();
+        this.selectedOrders = this.selectedOrder ;
         this.messageService.add({
           severity: 'info',
           summary: 'Confirmed',
-          detail: 'You have deleted the product'
+          detail: 'Orders selected checked'
         });
       },
       reject: (type: any) => {
@@ -100,14 +102,11 @@ export class ProductTableComponent {
     });
   }
 
-  showDialog(product: Product) {
-    this.selectedProduct = product;
-    this.visible = true;
+  isChecked(order : Order) : boolean {
+    return order.checked ;
   }
 
-  showAddDialog() {
-    this.visibleAdd = true;
-
+  isSelectionEmpty(){
+    return this.selectedOrders==null;
   }
-
 }

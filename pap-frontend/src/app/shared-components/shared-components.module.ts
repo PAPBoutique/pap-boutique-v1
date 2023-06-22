@@ -23,6 +23,7 @@ import { CardModule } from 'primeng/card';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoaderComponent } from './loader/loader.component';
 import { PasswordModule } from "primeng/password";
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 
@@ -32,7 +33,8 @@ import { PasswordModule } from "primeng/password";
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    LoaderComponent
+    LoaderComponent,
+    ConfirmDialogComponent
   ],
   exports: [
     PageNotFoundComponent,
@@ -56,7 +58,8 @@ import { PasswordModule } from "primeng/password";
     RippleModule,
     SidebarComponent,
     DialogModule,
-    LoaderComponent
+    LoaderComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     CommonModule,
@@ -73,7 +76,8 @@ import { PasswordModule } from "primeng/password";
     PasswordModule,
     DropdownModule,
     DialogModule,
-    RouterModule
+    RouterModule,
+    ConfirmDialogModule
   ],
   providers:[MessageService,ConfirmationService]
 })

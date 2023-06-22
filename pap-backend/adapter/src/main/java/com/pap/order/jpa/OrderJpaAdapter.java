@@ -9,6 +9,7 @@ import com.pap.order.model.OrderDomainObject;
 import com.pap.order.ports.spi.OrderJpaPort;
 import com.pap.product.jpa.mapper.ProductMapper;
 import com.pap.product.model.PageableContent;
+import com.pap.product.model.ProductDomainObject;
 import com.pap.user.jpa.exception.UserNotFoundException;
 import com.pap.user.jpa.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,7 @@ import java.util.List;
 public class OrderJpaAdapter implements OrderJpaPort {
     private final OrderRepository orderRepository ;
     private final UserRepository userRepository;
+
     @Override
     public List<OrderDomainObject> addOrders(List<OrderDomainObject> orders) {
         orders.forEach(orderDomainObject -> {
@@ -74,4 +76,6 @@ public class OrderJpaAdapter implements OrderJpaPort {
         order.setChecked(true);
         orderRepository.save(order);
     }
+
+
 }
