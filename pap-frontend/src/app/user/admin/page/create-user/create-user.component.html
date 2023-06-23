@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="visible" [modal]="true" [style]="{ width: '35vw', height:'1100px' }" [draggable]="false" [resizable]="false" (onHide)="onHide($event)">
+<p-dialog #addDialog [(visible)]="visible" [modal]="true" [style]="{ width: '35vw', height:'1100px' }" [draggable]="false" [resizable]="false" (onHide)="onHide($event)">
   <ng-template pTemplate="header">
     <h5> <i class="pi pi-user-plus"> </i> Add a new user </h5> 
   </ng-template>
@@ -40,7 +40,7 @@
     <div class="field">
       <i class="pi pi-eye"></i>&nbsp;&nbsp;<label for="role" class="block">Role</label>
       <br>
-      <p-dropdown #dropdownInput [style]="{'width':'101%'}" placeholder="Select a Role" [(ngModel)]="user.role" [options]="roles" formControlName="role"></p-dropdown>
+      <p-dropdown #dropdownInput  id="addUserDrop" [style]="{'width':'101%'}" placeholder="Select a Role" [(ngModel)]="user.role" [options]="roles" formControlName="role"></p-dropdown>
       <div *ngIf="userForm.get('role')?.invalid && userForm.get('role')?.errors?.['required']" class="error-message">
         Role is required.
       </div>

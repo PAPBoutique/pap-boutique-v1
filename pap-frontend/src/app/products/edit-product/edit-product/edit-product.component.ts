@@ -5,6 +5,8 @@ import { MessageService } from 'primeng/api';
 import { ProductService } from 'src/app/services/product/product-service';
 import { FileHandle } from 'src/app/models/product/file-handle.model';
 import { DomSanitizer } from '@angular/platform-browser';
+import { Dialog } from 'primeng/dialog';
+
 
 @Component({
   selector: 'app-edit-product',
@@ -21,6 +23,8 @@ export class EditProductComponent {
     private renderer : Renderer2
   ) { }
   loading: boolean = false;
+  @ViewChild('editDialog') editDialog! : Dialog;
+
 
   ProductForm = this.fb.group({
     name: ['', Validators.required],
@@ -36,6 +40,12 @@ export class EditProductComponent {
   @Input() visible : boolean =false ;
   @Output() closeDialog = new EventEmitter<any>() ;
 
+  ngAfterViewInit(){
+    this.editDialog.onShow.subscribe(() => {
+      const closeBtn = this.editDialog.el.nativeElement.querySelector(".p-dialog-header-close");
+      closeBtn.id="closeEditP";
+    });
+  }
 
   ngOnInit(): void {
     console.log("salam hh")

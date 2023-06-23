@@ -1,0 +1,14 @@
+<p-confirmDialog #confirmDialog [style]="{width: '50vw'}">
+    <ng-template pTemplate="header">
+        <h3>Confirmation</h3>
+        <div class="p-dialog-header-icons ng-tns-c96-3">
+            <button type="button" id={{btnClose}} class="ng-tns-c96-3 p-dialog-header-icon p-dialog-header-close p-link ng-star-inserted" ng-reflect-ng-class="[object Object]">
+                <span class="pi pi-times ng-tns-c96-3"></span>
+            </button>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button type="button" pButton icon="pi pi-times" label="No" (click)="confirmDialog.reject()" id={{btnNo}}></button>
+        <button type="button" pButton icon="pi pi-check" label="Yes" (click)="confirmDialog.accept()" id={{btnYes}}></button>
+    </ng-template>
+</p-confirmDialog>

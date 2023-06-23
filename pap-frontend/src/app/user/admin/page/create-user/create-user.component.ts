@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, Output, Renderer2, ViewChil
 import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
+import { Dialog } from 'primeng/dialog';
 import { Dropdown } from 'primeng/dropdown';
 import { Password } from 'primeng/password';
 import { Role } from 'src/app/models/user/roles';
@@ -32,13 +33,18 @@ export class CreateUserComponent {
   @Output() closeDialog = new EventEmitter<any>();
   @ViewChild('passwordInput') passwordInput!: Password;
   @ViewChild('dropdownInput') dropdownInput!: Dropdown;
+  @ViewChild('addDialog') addDialog! : Dialog;
   loading: boolean = false;
 
   ngAfterViewInit() {
     const inputElement = this.passwordInput.el.nativeElement.querySelector('input');
     const inputDropdown = this.dropdownInput.el.nativeElement.querySelector('input');
     inputElement.id = 'cuser-password';
-    inputDropdown.id ='cuser-role'
+    inputDropdown.id ='cuser-role';
+    this.addDialog.onShow.subscribe(() => {
+      const closeBtn = this.addDialog.el.nativeElement.querySelector(".p-dialog-header-close");
+      closeBtn.id="closeAddU";
+    });
   }
 
   userForm = this.fb.group({

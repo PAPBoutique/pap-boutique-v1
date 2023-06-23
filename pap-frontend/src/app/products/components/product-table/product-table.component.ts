@@ -3,7 +3,10 @@ import { Product } from '../../../models/product/product';
 import { ConfirmEventType, ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
+import { ConfirmDialog } from 'primeng/confirmdialog';
+import { Dialog } from 'primeng/dialog';
+import { CreateProductComponent } from '../../page/create-product/create-product.component';
 
 @Component({
   selector: 'app-product-table',
@@ -33,6 +36,7 @@ export class ProductTableComponent {
   @Input() tableSize: number = this.products.length;
   clonedProducts: { [s: string]: Product } = {};
   filteredRows: Product[] = [];
+  @ViewChild('confirmDialog') confirmDialog?: ConfirmDialog;
 
   constructor(
     private messageService: MessageService,
@@ -51,6 +55,7 @@ export class ProductTableComponent {
     prevBtn.id ="product_paginator_prev";
     nextBtn.id ="product_paginator_next";
     dropdown.id = "product_paginator_dropdown";
+    
   }
 
 
@@ -108,6 +113,7 @@ export class ProductTableComponent {
 
   showAddDialog() {
     this.visibleAdd = true;
+
   }
 
 

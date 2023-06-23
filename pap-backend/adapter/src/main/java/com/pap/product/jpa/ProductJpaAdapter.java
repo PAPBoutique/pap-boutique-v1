@@ -1,14 +1,12 @@
 package com.pap.product.jpa;
 
 
-import com.pap.order.jpa.exception.OrderNotFoundException;
 import com.pap.product.exception.ProductNotFoundException;
 import com.pap.product.jpa.entity.ImageDataEntity;
 import com.pap.product.jpa.entity.ProductEntity;
 import com.pap.product.jpa.mapper.ImageMapper;
 import com.pap.product.jpa.mapper.PageableMapper;
 import com.pap.product.jpa.mapper.ProductMapper;
-import com.pap.product.jpa.repository.ImageRepository;
 import com.pap.product.jpa.repository.ProductRepository;
 import com.pap.product.model.ImageDataDomainObject;
 import com.pap.product.model.PageableContent;

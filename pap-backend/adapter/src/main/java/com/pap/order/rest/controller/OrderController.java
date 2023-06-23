@@ -5,6 +5,7 @@ import com.pap.order.ports.api.OrderServicePort;
 import com.pap.order.rest.dto.OrderDTO;
 import com.pap.order.rest.mapper.OrderRestMapper;
 import com.pap.product.model.PageableContent;
+import com.pap.product.model.ProductDomainObject;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +32,7 @@ public class OrderController {
 
     }
 
-    @PutMapping("/check/{id}")
+    @PostMapping("/check/{id}")
     public String checkOrder(@PathVariable Long id){
         orderServicePort.checkOrder(id);
         return "Order checked !!";
@@ -41,8 +42,13 @@ public class OrderController {
     public PageableContent<OrderDomainObject> getOrders(
             @RequestParam @Min(value = 0 , message = "Page number must be greater than or equal 0") int page,
             @RequestParam int size,
-            @RequestParam String filter
+            @RequestParam String filterValue
     ) {
-        return orderServicePort.getOrders(page, size, filter);
+        return orderServicePort.getOrders(page, size, filterValue);
+    }
+
+    @GetMapping("/product/{id}")
+    public ProductDomainObject getOrderProduct(@PathVariable long id){
+        return orderServicePort.getProduct(id);
     }
 }

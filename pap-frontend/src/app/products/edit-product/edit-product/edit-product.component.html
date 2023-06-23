@@ -1,6 +1,6 @@
 <!--app-navbar></app-navbar-->
 
-<p-dialog header="Update your product" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }"
+<p-dialog #editDialog header="Update your product" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }"
   [draggable]="false" [resizable]="false" (onHide)="onHide($event)">
   <div class="flex align-items-center justify-content-center">
     <div *ngIf="loading">
@@ -44,12 +44,12 @@
       </div>
 
       <br>
-      <div class="field">
+      <!--div class="field">
         <label for="images" class="block">
           <i class="pi pi-image"></i> Pictures:
         </label>
    
-      </div>
+      </div-->
     
       <div style="text-align: right;">
         <p-button id="eproduct-btn-submit"  type="submit" label="Edit" styleClass="p-button-raised p-button-warning" icon="pi pi-pencil"

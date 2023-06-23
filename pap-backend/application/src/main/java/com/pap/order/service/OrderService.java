@@ -28,6 +28,7 @@ public class OrderService implements OrderServicePort {
                 throw  new ProductNotFoundException("This quantity not available ");
             }
             orderDomainObject.setPrice(priceCalculation(orderDomainObject));
+            productJpaPort.decreaseQuantity(orderDomainObject.getProductId(), orderDomainObject.getQuantity());
         });
         return orderJpaPort.addOrders(orders);
     }
@@ -55,8 +56,11 @@ public class OrderService implements OrderServicePort {
 
     @Override
     public void checkOrder(Long id) {
-        OrderDomainObject order = orderJpaPort.getOrderById(id);
-        productJpaPort.decreaseQuantity(order.getProductId(),order.getQuantity());
         orderJpaPort.checkOrder(id);
+    }
+
+    @Override
+    public ProductDomainObject getProduct(Long orderId) {
+        return productJpaPort.getProductById(orderJpaPort.getOrderById(orderId).getProductId());
     }
 }

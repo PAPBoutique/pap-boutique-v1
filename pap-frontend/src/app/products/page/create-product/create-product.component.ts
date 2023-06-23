@@ -7,6 +7,7 @@ import { ProductService } from 'src/app/services/product/product-service';
 import { DomSanitizer } from '@angular/platform-browser';
 import { FileHandle } from 'src/app/models/product/file-handle.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Dialog } from 'primeng/dialog';
 
 @Component({
   selector: 'app-create-product',
@@ -42,6 +43,7 @@ export class CreateProductComponent {
 
   @Input() visible?: boolean;
   @Output() closeDialog = new EventEmitter<any>() ;
+  @ViewChild('addDialog') addDialog! : Dialog;
   loading: boolean = false;
 
   onFileSelected(event: any) {
@@ -61,6 +63,15 @@ export class CreateProductComponent {
       }
     }
   }
+  ngAfterViewInit(){
+    this.addDialog.onShow.subscribe(() => {
+      const closeBtn = this.addDialog.el.nativeElement.querySelector(".p-dialog-header-close");
+      closeBtn.id="closeAddP";
+    });
+  }
+
+
+
   
   addProduct(productForm: FormGroupDirective) {
     const formData = this.prepareFormDataForProduct(this.product);

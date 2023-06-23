@@ -26,7 +26,7 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoaderComponent } from './loader/loader.component';
 import { PasswordModule } from "primeng/password";
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-
+import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 
 
 
@@ -36,7 +36,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     FooterComponent,
     NavbarComponent,
     SidebarComponent,
-    LoaderComponent
+    LoaderComponent,
+    ConfirmDialogComponent
   ],
   exports: [
     PageNotFoundComponent,
@@ -61,7 +62,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     RippleModule,
     SidebarComponent,
     DialogModule,
-    LoaderComponent
+    LoaderComponent,
+    ConfirmDialogComponent
   ],
   imports: [
     OverlayPanelModule,
@@ -79,7 +81,8 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     PasswordModule,
     DropdownModule,
     DialogModule,
-    RouterModule
+    RouterModule,
+    ConfirmDialogModule
   ],
   providers:[MessageService,ConfirmationService]
 })
