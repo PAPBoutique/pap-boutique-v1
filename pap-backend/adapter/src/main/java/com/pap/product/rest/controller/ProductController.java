@@ -60,27 +60,6 @@ public class ProductController {
             return null;
         }
     }
-
-    /*@PostMapping( value = "/productsWithPicture", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public ProductDomainObject addNewProduct(
-            @RequestPart("product") ProductDTO productDto,
-            @RequestPart("imageFile") MultipartFile[] files) {
-        try {
-            Set<ImageDataDomainObject> images = productService.uploadImage(files);
-            productDto.setProductImages(ProductRestMapper.INSTANCE.imageDataDtoToImageDataDomain(images));
-
-            ProductDomainObject domainObject = ProductRestMapper.INSTANCE.convertProductDtoToDomainObject(productDto);
-            ProductDomainObject addedProduct = productService.addSingleProduct(domainObject);
-           // addedProduct.setProductImages(ProductMapper.INSTANCE.imageDataDomainToImageData(images));
-            addedProduct.setProductImages(images);
-
-            return addedProduct;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }*/
-    //////////////////////////////////////////////
     @Operation(summary = ProductDocMessages.ADD_PRODUCTS)
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",description = ProductDocMessages.ADD_PRODUCTS_SUCCESS)
@@ -144,10 +123,5 @@ public class ProductController {
             @Parameter(name = ProductDocMessages.DELETE_PRODUCTS_PARAM) Long id){
         productService.deleteProduct(id);
     }
-
-
-
-
-
 
 }

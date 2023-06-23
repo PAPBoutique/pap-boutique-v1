@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+
+////////////
 import { ToastModule } from 'primeng/toast';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -23,6 +25,8 @@ import { CardModule } from 'primeng/card';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoaderComponent } from './loader/loader.component';
 import { PasswordModule } from "primeng/password";
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+
 
 
 
@@ -36,6 +40,7 @@ import { PasswordModule } from "primeng/password";
   ],
   exports: [
     PageNotFoundComponent,
+    OverlayPanelModule,
     TableModule,
     InputTextModule,
     FormsModule,
@@ -59,6 +64,7 @@ import { PasswordModule } from "primeng/password";
     LoaderComponent
   ],
   imports: [
+    OverlayPanelModule,
     CommonModule,
     ReactiveFormsModule,
     FileUploadModule,

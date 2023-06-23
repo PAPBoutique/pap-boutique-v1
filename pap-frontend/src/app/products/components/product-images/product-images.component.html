@@ -1,0 +1,13 @@
+<p-dialog header="Images" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }"
+  [draggable]="false" [resizable]="false" (onHide)="onHide($event)">
+  <ng-container *ngIf="selectedImages && selectedImages.length > 0">
+    <div class="image-container">
+      <div class="image" *ngFor="let image of selectedImages">
+        <img class="thumbnail" [src]="getSafeImageUrl(image.url.changingThisBreaksApplicationSecurity)" alt="Product Image">
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="!selectedImages || selectedImages.length === 0">
+    <p>No images available.</p>
+  </ng-container>
+</p-dialog>

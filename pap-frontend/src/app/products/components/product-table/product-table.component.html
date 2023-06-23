@@ -1,11 +1,14 @@
 <div class="card">
   <p-toast></p-toast>
-  <app-create-product [visible]="visibleAdd" (closeDialog) = "updateAddDialog()"></app-create-product>
-  <app-edit-product [selectedProduct]="selectedProduct" [visible]="visible" (closeDialog) = "updateEditDialog()"></app-edit-product>
+  <app-create-product [visible]="visibleAdd" (closeDialog)="updateAddDialog()"></app-create-product>
+  <app-product-images [visible]="visibleImages"  (closeDialog)="updateImagesDialog()"  [selectedImages]="selectedImages">  </app-product-images>
+  <app-edit-product [selectedProduct]="selectedProduct" [visible]="visible" (closeDialog)="updateEditDialog()"></app-edit-product>
   <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-  <p-table id="table_produc" #dt [scrollable]="true" [value]="products" [lazy]="true" (onLazyLoad)="loadProducts($event)" [paginator]="true" [rows]="5"
-    [rowsPerPageOptions]="[5, 10, 20]" [alwaysShowPaginator]="true" dataKey="id" [totalRecords]="tableSize">
-
+  
+  <p-table id="table_produc" #dt [scrollable]="true" [value]="products" [lazy]="true" (onLazyLoad)="loadProducts($event)"
+    [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 20]" [alwaysShowPaginator]="true" dataKey="id"
+    [totalRecords]="tableSize">
+    
     <ng-template pTemplate="caption">
       <div class="flex">
         <span class="p-input-icon-left">
@@ -17,35 +20,38 @@
         <button id="add_product_btn" (click)="showAddDialog()" pButton pRipple label="New" icon="pi pi-plus" class="p-button add"></button>
 
       </div>
-
     </ng-template>
 
     <ng-template pTemplate="header">
       <tr>
         <th style="display: none;">ID</th>
         <th width="25%">Name</th>
-        <th width="25%">Price</th>
-        <th width="25%">Quantity</th>
-        <th width="25%">Actions</th>
+        <th width="20%">Price</th>
+        <th width="20%">Quantity</th>
+        <th width="20%">Images</th>
+        <th width="20%">Actions</th>
       </tr>
     </ng-template>
+    
     <ng-template pTemplate="body" let-product let-ri="rowIndex">
       <tr [pEditableRow]="product">
         <td style="display: none;"> {{product.id}} </td>
         <td>{{product.name}}</td>
         <td>{{product.price | currency}}</td>
         <td>{{product.quantity}}</td>
+        <td> <button (click)="showImagesDialog(product)" icon="pi pi-images" pButton> </button>  </td>
+        
         <td>
           <div class="flex align-items-center justify-content-center gap-2">
             <button id="edit_product_btn" (click)="showDialog(product)" pButton icon="pi pi-pencil"
               class="p-button-text p-button-warning"></button>
             <button id="delete_product_btn" (click)="confirmDelete(product)" pButton icon="pi pi-trash"
               class="p-button-text p-button-danger"></button>
-
           </div>
         </td>
       </tr>
     </ng-template>
+    
     <ng-template pTemplate="emptymessage">
       <tr>
         <td colspan="7">No products found.</td>

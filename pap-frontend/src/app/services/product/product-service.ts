@@ -8,6 +8,7 @@ import { PageContent } from 'src/app/shared-components/service/pageContent';
 
 
 const baseUrl = '/api/v1/products';
+
 const url = "/api/v1/products/productsWithPicture"
 @Injectable({
   providedIn: 'root'

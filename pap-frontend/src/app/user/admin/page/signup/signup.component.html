@@ -1,5 +1,4 @@
 <p-toast></p-toast>
-
 <div class="container-fluid">
 
     <div class="row justify-content-center">
@@ -20,7 +19,7 @@
 
                     <div class="field">
 
-                      <i class="pi pi-user"></i> &nbsp; <label for="username" class="block">Username</label>
+                      <i class="pi pi-user"></i> &nbsp; <label for="username" class="block">Username * </label>
 
                       <span class="p-float-label">
 
@@ -40,7 +39,7 @@
 
                       <i class="pi pi-envelope"></i>&nbsp;
 
-                      <label for="email" class="block">Email</label>
+                      <label for="email" class="block">Email *</label>
 
                       <span class="p-float-label">
 
@@ -60,7 +59,7 @@
 
                       <i class="pi pi-lock"></i>&nbsp;
 
-                      <label for="password" class="block">Password</label>
+                      <label for="password" class="block">Password * </label>
 
                       <span class="p-float-label">
                         <p-password #passwordInput [(ngModel)]="users.password" [toggleMask]="true" formControlName="password" 
@@ -80,7 +79,7 @@
 
                       <i class="pi pi-map-marker"></i>&nbsp;
 
-                      <label for="address" class="block">Address</label>
+                      <label for="address" class="block">Address *</label>
 
                       <span class="p-float-label">
                         <input id="address" type="text" pInputText placeholder="Address" formControlName="address" [(ngModel)]="users.address" />
@@ -96,7 +95,7 @@
 
                     <div class="field">
 
-                     <i class="pi pi-phone">&nbsp; </i> <label for="phoneNum" class="block">Phone Number</label>&nbsp;
+                     <i class="pi pi-phone">&nbsp; </i> <label for="phoneNum" class="block">Phone Number *</label>&nbsp;
 
                       <div class="phone-inputs-container">
 

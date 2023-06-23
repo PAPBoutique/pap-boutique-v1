@@ -37,9 +37,14 @@ export class EditProductComponent {
   @Output() closeDialog = new EventEmitter<any>() ;
 
 
+  ngOnInit(): void {
+    console.log("salam hh")
+    
+  }
   onHide(e:any){
     this.closeDialog.emit();
   }
+  
   onFileSelected(event: any) {
     if (event.files && event.files.length) {
       const files: File[] = event.files;

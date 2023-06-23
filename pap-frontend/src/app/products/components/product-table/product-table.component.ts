@@ -3,6 +3,7 @@ import { Product } from '../../../models/product/product';
 import { ConfirmEventType, ConfirmationService, LazyLoadEvent, MessageService } from 'primeng/api';
 import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product-table',
@@ -13,6 +14,7 @@ export class ProductTableComponent {
 
   visible: boolean = false;
   visibleAdd: boolean = false;
+  visibleImages : boolean = false;
   @Input() selectedProduct: Product = {
     name: '',
     description : '',
@@ -21,6 +23,8 @@ export class ProductTableComponent {
     productImages: []
 
   };
+
+  @Input() selectedImages: any[] = [];
 
   @Input() deleteOne!: (id: any) => Observable<Object>;
   @Output() pageChange = new EventEmitter<{ page: number; size: number; filterValue: string }>();
@@ -33,8 +37,8 @@ export class ProductTableComponent {
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
-    private elementRef: ElementRef, private renderer: Renderer2
   ) {}
+
 
   ngAfterViewInit(){
     const firstBtn = this.dt?.el.nativeElement.querySelector(".p-paginator-first");
@@ -50,14 +54,7 @@ export class ProductTableComponent {
   }
 
 
-  updateAddDialog(){
-    this.visibleAdd = false ;
-  }
-  updateEditDialog(){
-    this.visible = false ;
-  }
-
-
+ 
   loadProducts(event: LazyLoadEvent) {
     if (event.rows && event.first?.toString) {
       this.pageChange.emit({ page: event.first / event.rows, size: event.rows, filterValue: event.globalFilter });
@@ -95,13 +92,34 @@ export class ProductTableComponent {
     });
   }
 
+
+  showImagesDialog(product: Product) {
+    this.selectedImages = product.productImages;
+    this.visibleImages = true;
+    console.log(this.selectedImages)
+  }
+  
+  
   showDialog(product: Product) {
     this.selectedProduct = product;
     this.visible = true;
+
   }
 
   showAddDialog() {
     this.visibleAdd = true;
+  }
+
+
+  updateAddDialog(){
+    this.visibleAdd = false ;
+  }
+  updateEditDialog(){
+    this.visible = false ;
+  }
+  updateImagesDialog()
+  {
+    this.visibleImages = false;
   }
 
 }
