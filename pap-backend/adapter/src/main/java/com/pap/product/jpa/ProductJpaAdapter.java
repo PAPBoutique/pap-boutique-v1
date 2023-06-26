@@ -129,4 +129,10 @@ public class ProductJpaAdapter implements ProductJpaPort {
     public Long getTotalProducts() {
         return productRepository.count();
     }
+
+    @Override
+    public List<ProductDomainObject> getAllProducts() {
+        List<ProductEntity> productEntity = productRepository.findAll();
+        return ProductMapper.INSTANCE.productsToProductDomainObject(productEntity);
+    }
 }

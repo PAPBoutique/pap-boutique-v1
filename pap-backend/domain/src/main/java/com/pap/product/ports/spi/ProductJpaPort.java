@@ -25,4 +25,7 @@ public interface ProductJpaPort {
     Set<ImageDataDomainObject> uploadImage(MultipartFile[] multipartFiles) throws IOException;
     void decreaseQuantity(Long id,Long quantity);
     boolean availableInStock(Long id,Long quantity);
+
+    List<ProductDomainObject> getAllProducts();
+
 }

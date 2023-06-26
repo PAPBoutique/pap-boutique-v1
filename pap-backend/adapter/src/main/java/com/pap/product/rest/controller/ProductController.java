@@ -130,4 +130,10 @@ public class ProductController {
         return productService.getTotalProducts();
     }
 
+    @GetMapping("/allProducts")
+    public List<ProductDomainObject> getAllProducts()
+    {
+     return productService.getAllProducts();
+    }
+
 }

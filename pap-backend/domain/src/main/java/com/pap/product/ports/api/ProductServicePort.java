@@ -22,5 +22,7 @@ public interface ProductServicePort {
     PageableContent<ProductDomainObject> findAllByPages(int page, int size,String filterValue);
     Set<ImageDataDomainObject> uploadImage(MultipartFile[] multipartFiles) throws IOException;
 
+    List<ProductDomainObject> getAllProducts();
+
 
 }

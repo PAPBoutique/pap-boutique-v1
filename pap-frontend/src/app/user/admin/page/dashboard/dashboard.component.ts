@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { count } from 'rxjs';
 import { OrdersService } from 'src/app/services/orders/orders.service';
 import { ProductService } from 'src/app/services/product/product-service';
 import { UserService } from 'src/app/services/user/user.service';

@@ -10,6 +10,7 @@ import { CreateUserComponent } from './admin/page/create-user/create-user.compon
 import { UsersTableComponent } from './admin/components/users-table/users-table.component';
 import { EditUserComponent } from './admin/page/edit-user/edit-user.component';
 import { DashboardComponent } from './admin/page/dashboard/dashboard.component';
+import { HomepageComponent } from './ui/homepage/homepage.component';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { DashboardComponent } from './admin/page/dashboard/dashboard.component';
     CreateUserComponent,
     UsersTableComponent,
     EditUserComponent,
+    HomepageComponent,
     DashboardComponent
   ],
   imports: [
