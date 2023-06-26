@@ -63,4 +63,21 @@ public class OrderService implements OrderServicePort {
     public ProductDomainObject getProduct(Long orderId) {
         return productJpaPort.getProductById(orderJpaPort.getOrderById(orderId).getProductId());
     }
+
+    @Override
+    public Long getTotalOrders() {
+        return orderJpaPort.getTotalOrders();
+    }
+
+    @Override
+    public Double getTotalPrice(){
+        return orderJpaPort.getTotalPrice();
+    }
+
+
+    @Override
+   public List<Object[]> countOrderByCheckedAndMonth()
+    {
+        return orderJpaPort.countOrderByCheckedAndMonth();
+    }
 }

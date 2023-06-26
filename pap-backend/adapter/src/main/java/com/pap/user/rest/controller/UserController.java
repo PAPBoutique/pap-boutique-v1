@@ -1,6 +1,7 @@
 package com.pap.user.rest.controller;
 
 import com.pap.product.model.PageableContent;
+import com.pap.user.jpa.repository.UserRepository;
 import com.pap.user.model.UserDomainObject;
 import com.pap.user.ports.api.UserServicePort;
 import com.pap.user.rest.dto.UserDto;
@@ -41,9 +42,21 @@ public class UserController {
             @RequestParam String filterValue){
         return userServicePort.findAllByPage(page,size,filterValue);
     }
+
+    @GetMapping("/count")
+    public Long getTotalUsers()
+    {
+        return userServicePort.getUsersCount();
+    }
     @DeleteMapping("/{id}")
     public void deleteProduct(
             @PathVariable Long id){
         userServicePort.deleteUser(id);
+    }
+
+    @GetMapping("/countPerMonth")
+    public List<Object[]> getCountUsersPerMonth()
+    {
+        return userServicePort.getCountUsersPerMonth();
     }
 }

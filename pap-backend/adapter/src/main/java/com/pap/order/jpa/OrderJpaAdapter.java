@@ -18,6 +18,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -76,6 +78,23 @@ public class OrderJpaAdapter implements OrderJpaPort {
         order.setChecked(true);
         orderRepository.save(order);
     }
+
+    @Override
+    public Long getTotalOrders() {
+        return orderRepository.count();
+    }
+
+    @Override
+    public Double getTotalPrice()
+    {
+        return orderRepository.getTotalPrice();
+    }
+
+    @Override
+    public List<Object[]> countOrderByCheckedAndMonth(){
+        return orderRepository.countOrderByCheckedAndMonth();
+    }
+
 
 
 }

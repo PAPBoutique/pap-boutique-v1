@@ -8,6 +8,10 @@ public interface UserServicePort {
 
     UserDomainObject updateUser(Long id, UserDomainObject userDomainObject);
 
+    Long getUsersCount();
+
     PageableContent<UserDomainObject> findAllByPage(int page,int size,String filter);
     void deleteUser(Long id);
+
+    List<Object[]> getCountUsersPerMonth();
 }

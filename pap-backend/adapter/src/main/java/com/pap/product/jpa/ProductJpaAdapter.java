@@ -124,4 +124,9 @@ public class ProductJpaAdapter implements ProductJpaPort {
             throw new ProductNotFoundException("Product not found with id " + id);
         }
     }
+
+    @Override
+    public Long getTotalProducts() {
+        return productRepository.count();
+    }
 }

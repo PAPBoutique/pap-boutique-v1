@@ -14,5 +14,10 @@ public interface OrderServicePort {
     Double priceCalculation(OrderDomainObject orderDomainObject);
     void checkOrder(Long id);
     ProductDomainObject getProduct(Long id);
+    Long getTotalOrders();
+
+    List<Object[]> countOrderByCheckedAndMonth();
+
+    Double getTotalPrice();
 
 }

@@ -2,12 +2,19 @@
   [draggable]="false" [resizable]="false" (onHide)="onHide($event)">
   <ng-container *ngIf="selectedImages && selectedImages.length > 0">
     <div class="image-container">
-      <div class="image" *ngFor="let image of selectedImages">
+      <div class="image" *ngFor="let image of selectedImages; let i = index">
         <img class="thumbnail" [src]="getSafeImageUrl(image.url.changingThisBreaksApplicationSecurity)" alt="Product Image">
+        <br>
+        <span>Picture - 00{{ i + 1 }}</span> <br>
       </div>
     </div>
+
   </ng-container>
   <ng-container *ngIf="!selectedImages || selectedImages.length === 0">
     <p>No images available.</p>
   </ng-container>
+
 </p-dialog>
+
+
+

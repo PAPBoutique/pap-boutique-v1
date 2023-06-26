@@ -14,6 +14,8 @@ public interface ProductServicePort {
 
     ProductDomainObject addSingleProduct(ProductDomainObject productDomainObject);
 
+    Long getTotalProducts();
+
     void deleteProduct(Long id);
     ProductDomainObject updateProduct(Long id, ProductDomainObject productDomainObjectList);
     ProductDomainObject getProductById(Long id);

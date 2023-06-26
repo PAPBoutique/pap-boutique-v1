@@ -13,4 +13,10 @@ public interface OrderJpaPort {
     PageableContent<OrderDomainObject> findAllByPage(int page, int size);
     OrderDomainObject getOrderById(Long id);
     void checkOrder(Long id);
+    Long getTotalOrders();
+    List<Object[]> countOrderByCheckedAndMonth();
+
+    Double getTotalPrice();
+
+
 }

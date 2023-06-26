@@ -23,6 +23,10 @@ export class ProductService {
     return this.http.post<Product>(url, product)
   }
 
+  public getTotalProducts(): Observable<number> {
+    return this.http.get<number>(baseUrl + '/count');
+  }
+
   createProduct(products: Product[]): Observable<Product> {
     return this.http.post<Product>(baseUrl, products);
 }

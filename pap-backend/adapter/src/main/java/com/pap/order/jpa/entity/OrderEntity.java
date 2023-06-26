@@ -1,6 +1,5 @@
 package com.pap.order.jpa.entity;
 
-import com.pap.product.jpa.entity.ProductEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,6 +27,10 @@ public class OrderEntity {
     private Double price ;
 
     private String client ;
+
+    @Transient
+    private Integer month;
+
     private Boolean checked ;
     @PrePersist
     public void prePersist() {

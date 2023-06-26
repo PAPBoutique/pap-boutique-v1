@@ -25,8 +25,13 @@ import { CardModule } from 'primeng/card';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { LoaderComponent } from './loader/loader.component';
 import { PasswordModule } from "primeng/password";
+import { ImageModule } from 'primeng/image';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
+import { ChartModule } from 'primeng/chart';
+import { PanelModule } from 'primeng/panel';
+
+
 
 
 
@@ -41,7 +46,9 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
   ],
   exports: [
     PageNotFoundComponent,
+    ChartModule,
     OverlayPanelModule,
+    PanelModule,
     TableModule,
     InputTextModule,
     FormsModule,
@@ -63,10 +70,12 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     SidebarComponent,
     DialogModule,
     LoaderComponent,
+    ImageModule,
     ConfirmDialogComponent
   ],
   imports: [
     OverlayPanelModule,
+    ChartModule,
     CommonModule,
     ReactiveFormsModule,
     FileUploadModule,
@@ -78,9 +87,11 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
     ConfirmPopupModule,
     ToastModule,
     CardModule,
+    ImageModule,
     PasswordModule,
     DropdownModule,
     DialogModule,
+    PanelModule,
     RouterModule,
     ConfirmDialogModule
   ],

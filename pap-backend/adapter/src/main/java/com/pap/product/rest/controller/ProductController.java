@@ -124,4 +124,10 @@ public class ProductController {
         productService.deleteProduct(id);
     }
 
+    @GetMapping("/count")
+    public Long getTotalProducts()
+    {
+        return productService.getTotalProducts();
+    }
+
 }

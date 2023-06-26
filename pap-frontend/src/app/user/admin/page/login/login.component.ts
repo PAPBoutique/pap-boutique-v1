@@ -41,7 +41,7 @@ export class LoginComponent {
           console.log("after loading");
           window.location.reload();
         }, 3000);
-        this.router.navigate(['/products']);
+        this.router.navigate(['/dashboard']);
       },
       (error) => {
         console.log("login error");

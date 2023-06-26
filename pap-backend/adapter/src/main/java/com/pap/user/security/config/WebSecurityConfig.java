@@ -73,7 +73,7 @@ public class WebSecurityConfig {
                 .antMatchers("/api/v1/users/signup").permitAll()
                 .antMatchers("/api/v1/**").permitAll()
                 .antMatchers("/api/v1/orders/**").permitAll()
-
+                .antMatchers("/api/v1/users/count").permitAll()
                 .antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated()
                 .and()

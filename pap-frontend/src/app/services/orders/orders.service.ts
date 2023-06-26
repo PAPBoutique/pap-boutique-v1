@@ -15,6 +15,19 @@ export class OrdersService {
 
   constructor(private http: HttpClient) { }
 
+  getCountByMonth(): Observable<any[]> {
+    return this.http.get<any[]>(baseUrl + "/countByMonth");
+  }
+
+  getTotalOrders(): Observable<number> {
+    return this.http.get<number>(baseUrl + '/countOrders');
+  }
+
+  getTotalRevenue() : Observable<number>
+  {
+    return this.http.get<number>(baseUrl + '/revenue' )
+  }
+
   getOrdersByPage(page?: number, size?: number, filterValue: String = ""): Observable<PageContent<Order>> {
     if (filterValue == null) filterValue = "";
     return this.http

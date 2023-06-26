@@ -11,7 +11,7 @@
         <i class="pi pi-info-circle"></i> Name
       </label>
       <input id="cproduct-name" type="text" pInputText placeholder="Name" formControlName="name" [(ngModel)]="product.name" />
-      <small class="p-error block" *ngIf="ProductForm.get('name')?.invalid && ProductForm.get('name')?.dirty">
+      <small class="p-error block" *ngIf="ProductForm.get('name')?.invalid && ProductForm.get('name')?.touched">
         <i class="pi pi-exclamation-triangle"></i> Name is required
       </small>
     </div>
@@ -23,7 +23,7 @@
       <textarea id="cproduct-description" rows="5" cols="30" pInputTextarea placeholder="Description" formControlName="Description"
         [(ngModel)]="product.description"></textarea>
       <small class="p-error block"
-        *ngIf="ProductForm.get('Description')?.invalid && ProductForm.get('Description')?.dirty">
+        *ngIf="ProductForm.get('Description')?.invalid && ProductForm.get('Description')?.touched">
         <i class="pi pi-exclamation-triangle"></i> Description is required
       </small>
     </div>
@@ -35,7 +35,7 @@
       </label>
       <input id="cproduct-quantity" type="number" pInputText placeholder="Quantity" formControlName="Quantity" [(ngModel)]="product.quantity"
         value="" />
-      <small class="p-error block" *ngIf="ProductForm.get('Quantity')?.invalid && ProductForm.get('Quantity')?.dirty">
+      <small class="p-error block" *ngIf="ProductForm.get('Quantity')?.invalid && ProductForm.get('Quantity')?.touched">
         <i class="pi pi-exclamation-triangle"></i> Quantity is required
       </small>
     </div>
@@ -47,7 +47,7 @@
       </label>
       <input id="cproduct-price" type="number" pInputText placeholder="Price" formControlName="Price" [(ngModel)]="product.price"
         value="" />
-      <small class="p-error block" *ngIf="ProductForm.get('Price')?.invalid && ProductForm.get('Price')?.dirty">
+      <small class="p-error block" *ngIf="ProductForm.get('Price')?.invalid && ProductForm.get('Price')?.touched">
         <i class="pi pi-exclamation-triangle"></i> Price is required
       </small>
     </div>

@@ -1,5 +1,6 @@
 package com.pap.order.rest.controller;
 
+import com.pap.order.jpa.repository.OrderRepository;
 import com.pap.order.model.OrderDomainObject;
 import com.pap.order.ports.api.OrderServicePort;
 import com.pap.order.rest.dto.OrderDTO;
@@ -50,5 +51,22 @@ public class OrderController {
     @GetMapping("/product/{id}")
     public ProductDomainObject getOrderProduct(@PathVariable long id){
         return orderServicePort.getProduct(id);
+    }
+
+    @GetMapping("/countOrders")
+    public  Long getTotalOrders()
+    {
+        return orderServicePort.getTotalOrders();
+    }
+
+    @GetMapping("/countByMonth")
+    public List<Object[]> countOrderByCheckedAndMonth() {
+        return orderServicePort.countOrderByCheckedAndMonth();
+    }
+
+    @GetMapping("/revenue")
+    public Double getRevenue()
+    {
+        return orderServicePort.getTotalPrice();
     }
 }

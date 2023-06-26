@@ -27,6 +27,11 @@ public class UserService implements UserServicePort {
     }
 
     @Override
+    public Long getUsersCount() {
+        return userJpaPort.getUsersCount();
+    }
+
+    @Override
     public PageableContent<UserDomainObject> findAllByPage(int page, int size, String filter) {
         if(filter.isBlank())  return userJpaPort.findAllByPage(page,size);
         PageableContent<UserDomainObject> users = userJpaPort.findAllByFilter(page, size, filter);
@@ -37,5 +42,10 @@ public class UserService implements UserServicePort {
     @Override
     public void deleteUser(Long id) {
         userJpaPort.deleteUser(id);
+    }
+
+    @Override
+    public List<Object[]> getCountUsersPerMonth() {
+        return userJpaPort.getCountUsersPerMonth();
     }
 }

@@ -9,6 +9,7 @@ import { SharedComponentsModule } from '../shared-components/shared-components.m
 import { CreateUserComponent } from './admin/page/create-user/create-user.component';
 import { UsersTableComponent } from './admin/components/users-table/users-table.component';
 import { EditUserComponent } from './admin/page/edit-user/edit-user.component';
+import { DashboardComponent } from './admin/page/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { EditUserComponent } from './admin/page/edit-user/edit-user.component';
     UsersListComponent,
     CreateUserComponent,
     UsersTableComponent,
-    EditUserComponent
+    EditUserComponent,
+    DashboardComponent
   ],
   imports: [
     CommonModule,

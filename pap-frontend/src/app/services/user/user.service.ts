@@ -15,6 +15,15 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
+  getTotalUsers(): Observable<number> {
+    return this.http.get<number>(baseUrl + '/count');
+  }
+
+  getTotalUsersPerMonth() : Observable<any>
+  {
+    return this.http.get<any[]>(baseUrl + "/countPerMonth")
+  }
+
   getUsersByPage(page?: number, size?: number, filterValue: String = ""): Observable<PageContent<User>> {
     if (filterValue == null) filterValue = "";
     return this.http

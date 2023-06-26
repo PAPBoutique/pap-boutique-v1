@@ -32,6 +32,11 @@ public class ProductService implements ProductServicePort {
     }
 
     @Override
+    public Long getTotalProducts() {
+        return productJpaPort.getTotalProducts();
+    }
+
+    @Override
     public Set<ImageDataDomainObject> uploadImage(MultipartFile[] multipartFiles) throws IOException {
        return productJpaPort.uploadImage( multipartFiles);
     }

@@ -16,6 +16,8 @@ public interface ProductJpaPort {
     ProductDomainObject updateProduct(Long id, ProductDomainObject productDomainObjectList);
     ProductDomainObject getProductById(Long id);
 
+    Long getTotalProducts();
+
     void deleteProduct(Long id);
     PageableContent<ProductDomainObject> findAllByPage(int page, int size);
     PageableContent<ProductDomainObject> findAllByName(int page,int size,String name);

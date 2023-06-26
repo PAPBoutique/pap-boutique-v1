@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -17,4 +18,7 @@ public interface UserRepository extends JpaRepository<UserEntity,Long> {
 
     Optional<UserEntity> findByUsername(String username);
     Optional<UserEntity> findByEmail(String email);
+
+    @Query("SELECT EXTRACT(MONTH FROM u.createdDate) AS month, COUNT(u) AS count FROM UserEntity u GROUP BY EXTRACT(MONTH FROM u.createdDate)")
+    List<Object[]> getUsersCountPerMonth();
 }

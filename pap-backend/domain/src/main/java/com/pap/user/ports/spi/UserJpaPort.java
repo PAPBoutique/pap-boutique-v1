@@ -10,6 +10,10 @@ public interface UserJpaPort {
     List<UserDomainObject> addUsers(List<UserDomainObject> users) ;
     UserDomainObject updateUser(Long id, UserDomainObject userDomainObject) ;
 
+    Long getUsersCount();
+
+    List<Object[]> getCountUsersPerMonth();
+
     PageableContent<UserDomainObject> findAllByPage(int page,int size);
     PageableContent<UserDomainObject> findAllByFilter(int page,int size,String filter);
     void deleteUser(Long id);

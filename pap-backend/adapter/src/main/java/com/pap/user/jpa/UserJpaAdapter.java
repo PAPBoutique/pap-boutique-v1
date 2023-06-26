@@ -63,6 +63,16 @@ public class UserJpaAdapter implements UserJpaPort {
     }
 
     @Override
+    public Long getUsersCount() {
+        return userRepository.count();
+    }
+
+    @Override
+    public List<Object[]> getCountUsersPerMonth() {
+        return userRepository.getUsersCountPerMonth();
+    }
+
+    @Override
     public PageableContent<UserDomainObject> findAllByPage(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         Page<UserEntity> userPage = userRepository.findAll(pageable);
