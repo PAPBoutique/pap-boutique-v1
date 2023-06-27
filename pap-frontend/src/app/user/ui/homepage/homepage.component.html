@@ -1,56 +1,42 @@
-
-    <title>PAP-BOUTIQUE Store</title>
-
-  
-  <body>
-  
+<div class="container">
   <app-navbar></app-navbar>
-    <section class="hero">
-      <div class="container">
+  <section class="hero">
+    <div class="row" >
+      <div class=" abc col-md-12 text-center">
         <h1>Welcome to PAP-BOUTIQUE Store</h1>
         <p>Discover amazing products at great prices.</p>
-        <a href="#" class="btn btn-primary">Shop Now</a>
+        <a routerLink="/home" class="btn btn-primary">Shop Now</a>
       </div>
-    </section>
-  
-    <!-- Featured Products -->
-    <section class="featured-products">
-      <div class="container">
-        <h2>Featured Products</h2>
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card">
-              <img src="product1.jpg" class="card-img-top" alt="Product 1">
-              <div class="card-body">
-                <h5 class="card-title">Product 1</h5>
-                <p class="card-text">description.</p>
-                <a href="#" class="btn btn-primary">
-                  <i class="pi pi-shopping-cart"></i> Add to Cart
-                </a>              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card">
-              <img src="product2.jpg" class="card-img-top" alt="Product 2">
-              <div class="card-body">
-                <h5 class="card-title">Product 2</h5>
-                <p class="card-text">description.</p>
-                <a href="#" class="btn btn-primary">
-                  <i class="pi pi-shopping-cart"></i> Add to Cart
-                </a>              </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card">
-              <img src="product3.jpg" class="card-img-top" alt="Product 3">
-              <div class="card-body">
-                <h5 class="card-title">Product 3</h5>
-                <p class="card-text">description.</p>
-                <a href="#" class="btn btn-primary">
-                  <i class="pi pi-shopping-cart"></i> Add to Cart
-                </a>              </div>
+    </div>
+  </section>
+
+  <section class="featured-products">
+    <div class="container">
+      <h2 class="text-center">Featured Products</h2>
+      <div class="row">
+        <div class="col-md-4" *ngFor="let product of products">
+          <div class="card">
+            <ng-container *ngIf="product.productImages && product.productImages.length > 0">
+              <img [src]="product.productImages[0].url" class="card-img-top" alt="Product">
+            </ng-container>
+            <div class="card-body">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text">{{ product.description }}</p>
+              <p class="card-text">Price: {{ product.price | currency }}</p>
+              <p class="card-text">Quantity: {{ product.quantity }}</p>
+              <a href="#" class="btn btn-primary">
+                <i class="pi pi-shopping-cart"></i> Add to Cart
+              </a>
             </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="container text-center">
+    <!-- Footer content -->
+  </div>
+</footer>

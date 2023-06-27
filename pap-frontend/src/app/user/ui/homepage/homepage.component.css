@@ -1,21 +1,26 @@
 .hero {
-    background-color: #f8f9fa;
-    padding: 100px 0;
-    text-align: center;
-  }
-  
-  .featured-products {
-    padding: 50px 0;
-  }
-  
-  .featured-products h2 {
-    text-align: center;
-    margin-bottom: 30px;
-  }
-  
-  /* Footer */
-  footer {
-    background-color: #f8f9fa;
-    padding: 20px 0;
-    text-align: center;
-  }
+  background-color: #f8f9fa;
+  padding: 100px 0;
+  text-align: center;
+}
+
+.featured-products {
+  padding: 50px 0;
+}
+
+.featured-products h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.card-img-top {
+  max-width: 70%;
+  height: 220px;
+  object-fit: contain;
+}
+
+footer {
+  background-color: #f8f9fa;
+  padding: 20px 0;
+  text-align: center;
+}

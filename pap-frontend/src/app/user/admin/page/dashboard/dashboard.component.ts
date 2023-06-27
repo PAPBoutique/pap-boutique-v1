@@ -161,7 +161,7 @@ export class DashboardComponent {
       labels: labels,
       datasets: [
         {
-          label: 'Users Created',
+          label: 'New Users',
           data: userCounts,
           fill: false,
           borderColor: documentStyle.getPropertyValue('--blue-500'),

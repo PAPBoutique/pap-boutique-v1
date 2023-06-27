@@ -9,7 +9,7 @@ import { HomepageComponent } from './ui/homepage/homepage.component';
 
 const routes: Routes = [
   {path:'login' , component : LoginComponent , canActivate:[AuthGuard]},
-  {path:'' , redirectTo:'login' , pathMatch:'full'},
+  {path:'' , redirectTo:'home' , pathMatch:'full'},
   {path:'users', component : UsersListComponent , canActivate:[AuthGuard] , data :{ role : 'ADMIN'}},
   {path:'signup' , component : SignupComponent , canActivate:[AuthGuard]},
   {path : 'dashboard', component : DashboardComponent, canActivate:[AuthGuard] , data :{ role : 'ADMIN'}},

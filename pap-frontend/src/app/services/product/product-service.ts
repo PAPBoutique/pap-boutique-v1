@@ -49,4 +49,9 @@ export class ProductService {
       const url = `${baseUrl}/${id}`;
       return this.http.get<Product>(url);
     }
+
+    getAllProducts(): Observable<Product[]> {
+      return this.http.get<Product[]>(baseUrl + "/allProducts");
+    }
+        
 }

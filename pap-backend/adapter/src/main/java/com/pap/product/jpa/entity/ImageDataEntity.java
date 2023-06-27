@@ -26,6 +26,5 @@ public class ImageDataEntity {
         this.type = type;
         this.picByte = picByte;
     }
-
-    // Getters and setters
+    
 }
