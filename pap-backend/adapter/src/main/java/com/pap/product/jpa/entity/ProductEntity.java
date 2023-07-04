@@ -1,9 +1,12 @@
 package com.pap.product.jpa.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.pap.cart.jpa.entity.CartEntity;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -29,6 +32,12 @@ public class ProductEntity{
             }
     )
     private Set<ImageDataEntity> productImages;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
+    private List<CartEntity> cart;
+
+
     @PrePersist
     public void prePersist() {
         if (createdDate == null) {

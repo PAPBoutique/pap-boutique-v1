@@ -1,0 +1,47 @@
+<app-navbar></app-navbar> 
+<div class="container">
+    <div class="single-product">
+      <div class="row">
+        <div class="col-6">
+          <div class="product-image">
+            <div class="product-image-main">
+              <img [src]="product.productImages[0].url"  alt="" id="product-main-image">
+            </div>
+            <div class="product-image-slider">
+                <img *ngFor="let image of product.productImages" [src]="image.url" alt="" class="image-list" (click)="changeImage(image.url)">
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="product">
+            <div class="product-title">
+              <h2>{{ product.name }}</h2>
+            </div>
+            <div class="product-rating">
+              <span><i class="bx bxs-star"></i></span>
+              <span><i class="bx bxs-star"></i></span>
+              <span><i class="bx bxs-star"></i></span>
+              <span><i class="bx bxs-star"></i></span>
+              <span><i class="bx bxs-star"></i></span>
+              <span class="review">(47 Reviews)</span>
+            </div>
+            <div class="product-price">
+              <span class="offer-price">{{ product.price | currency }}</span>
+              <!--span class="sale-price">$129.00</span-->
+            </div>
+            <div class="product-details">
+              <b>Description</b>
+              <p>{{ product.description }}</p>
+            </div>
+            <span class="divider"></span>
+            <div class="product-btn-group">
+                <p-button class="button buy-now" icon="bx bxs-zap" label="Buy Now"></p-button>
+                <p-button class="button add-cart" icon="bx bxs-cart" label="Add to Cart"></p-button>
+                <p-button class="button heart" icon="bx bxs-heart" label="Add to Wishlist"></p-button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>

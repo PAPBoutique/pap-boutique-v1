@@ -4,7 +4,6 @@
 
   <app-create-user [visible]="visibleAdd" (closeDialog)="closeAddDialog()"></app-create-user>
   <app-edit-user [visibleEdit]="visibleEdit" [selectedUser]="selectedUser" (closeDialog)="closeEditDialog()"></app-edit-user>
-  <p-confirmDialog [style]="{ width: '50vw' }"></p-confirmDialog>
   <app-confirm-dialog btnYes="btn_yes_confirm_user" btnNo="btn_no_confirm_user" btnClose="cancelU"></app-confirm-dialog>
 
   <p-table #dt [value]="users" [lazy]="true" (onLazyLoad)="loadUsers($event)" [paginator]="true" [rows]="5"

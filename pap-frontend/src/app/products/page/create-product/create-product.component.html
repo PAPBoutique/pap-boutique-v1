@@ -1,81 +1,162 @@
-
-
 <p-dialog #addDialog header="Add a new product" [(visible)]="visible" [modal]="true" [style]="{ width: '50vw' }"
+
   [draggable]="false" [resizable]="false" (onHide)="onHide($event)">
+
   <div *ngIf="loading">
+
     <app-loader></app-loader>
+
   </div>
+
   <form [formGroup]="ProductForm" #productForm="ngForm"  (ngSubmit)="addProduct(productForm)" novalidate>
+
     <div class="field">
+
       <label for="name" class="block">
+
         <i class="pi pi-info-circle"></i> Name
+
       </label>
+
       <input id="cproduct-name" type="text" pInputText placeholder="Name" formControlName="name" [(ngModel)]="product.name" />
+
       <small class="p-error block" *ngIf="ProductForm.get('name')?.invalid && ProductForm.get('name')?.touched">
+
         <i class="pi pi-exclamation-triangle"></i> Name is required
+
       </small>
+
     </div>
+
 <br>
+
     <div class="field">
+
       <label for="Description" class="block">
+
         <i class="pi pi-comment"></i> Description
+
       </label>
+
       <textarea id="cproduct-description" rows="5" cols="30" pInputTextarea placeholder="Description" formControlName="Description"
+
         [(ngModel)]="product.description"></textarea>
+
       <small class="p-error block"
+
         *ngIf="ProductForm.get('Description')?.invalid && ProductForm.get('Description')?.touched">
+
         <i class="pi pi-exclamation-triangle"></i> Description is required
+
       </small>
+
     </div>
+
     <br>
 
+
+
+
     <div class="field">
+
       <label for="Quantity" class="block">
+
         <i class="pi pi-sort-numeric-up"></i> Quantity
+
       </label>
+
       <input id="cproduct-quantity" type="number" pInputText placeholder="Quantity" formControlName="Quantity" [(ngModel)]="product.quantity"
+
         value="" />
+
       <small class="p-error block" *ngIf="ProductForm.get('Quantity')?.invalid && ProductForm.get('Quantity')?.touched">
+
         <i class="pi pi-exclamation-triangle"></i> Quantity is required
+
       </small>
+
     </div>
+
     <br>
 
+
+
+
     <div class="field">
+
       <label for="Description" class="block">
+
         <i class="pi pi-dollar"></i> Price
+
       </label>
+
       <input id="cproduct-price" type="number" pInputText placeholder="Price" formControlName="Price" [(ngModel)]="product.price"
+
         value="" />
+
       <small class="p-error block" *ngIf="ProductForm.get('Price')?.invalid && ProductForm.get('Price')?.touched">
+
         <i class="pi pi-exclamation-triangle"></i> Price is required
+
       </small>
+
     </div>
+
     <br>
 
+
+
+
     <div class="field">
+
       <label for="images" class="block">
+
         <i class="pi pi-image"></i> Pictures:
+
       </label>
+
       <p-fileUpload
+
+        id="myUploadButton"
+
         accept="image/*"
+
         name="imageFile"
+
         (onSelect)="onFileSelected($event)"
+
         [multiple]="true"
+
         [showUploadButton]="false"
+
         [showCancelButton]="false"
-      
+
+     
+
         required
+
       ></p-fileUpload>
+
     </div>
-  
+
+ 
+
     <br>
-  
+
+ 
+
     <div style="text-align: right;">
+
       <p-button id="cproduct-btn-submit" type="submit" label="Submit" icon="pi pi-check" iconPos="left"
+
         [disabled]="ProductForm.invalid"></p-button>
+
       <button id="cproduct-btn-clear" type="reset" pButton pRipple label="Clear" icon="pi pi-times" class="p-button-raised p-button-danger"
+
         style="margin-left: 12px;"></button>
+
     </div>
+
   </form>
+
 </p-dialog>
