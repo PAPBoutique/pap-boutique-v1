@@ -35,7 +35,7 @@
     <ng-template pTemplate="body" let-product let-ri="rowIndex">
       <tr [pEditableRow]="product">
         <td style="display: none;"> {{product.id}} </td>
-        <td>{{product.name}}</td>
+        <td><a routerLink="/product/{{ product.id }}">{{ product.name }}</a></td>
         <td>{{product.price | currency}}</td>
         <td>{{product.quantity}}</td>
         <td> <button (click)="showImagesDialog(product)" icon="pi pi-images" pButton> </button>  </td>

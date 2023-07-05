@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
 import { map } from 'rxjs';
 import { Product } from 'src/app/models/product/product';
 import { ImageProcessingService } from 'src/app/services/images/image-processing.service';
@@ -20,7 +21,8 @@ export class HomepageComponent {
   }
  
   constructor(private productService : ProductService, private imageProcessingService : ImageProcessingService, 
-              private sanitizer : DomSanitizer) {}
+              private sanitizer : DomSanitizer,
+              private router : Router) {}
 
   getAllProducts() {
     this.productService.getAllProducts()
@@ -43,5 +45,10 @@ export class HomepageComponent {
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 
+  goToProductPage(productId?: number) {
+    if (productId !== undefined) {
+      this.router.navigate(['/product', String(productId)]);
+    }
+  }
   
 }
