@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, ElementRef} from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { map } from 'rxjs';
@@ -22,7 +22,8 @@ export class HomepageComponent {
  
   constructor(private productService : ProductService, private imageProcessingService : ImageProcessingService, 
               private sanitizer : DomSanitizer,
-              private router : Router) {}
+              private router : Router,
+              private elementRef: ElementRef) {}
 
   getAllProducts() {
     this.productService.getAllProducts()
@@ -47,8 +48,16 @@ export class HomepageComponent {
 
   goToProductPage(productId?: number) {
     if (productId !== undefined) {
-      this.router.navigate(['/product', String(productId)]);
+      const url = `/product/${productId}`;
+      this.router.navigateByUrl(url).then(() => {
+        window.scrollTo(0, 0); 
+      });
     }
+  }
+
+  scrollToFeaturedProducts() {
+    const sectionElement = this.elementRef.nativeElement.querySelector('#featuredProductsSection');
+    sectionElement.scrollIntoView({ behavior: 'smooth' });
   }
   
 }

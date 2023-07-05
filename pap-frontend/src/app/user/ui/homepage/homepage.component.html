@@ -5,38 +5,36 @@
       <div class="abc col-md-12 text-center">
         <h1>Welcome to PAP-BOUTIQUE Store</h1>
         <p>Discover amazing products at great prices.</p>
-        <a routerLink="/home" class="btn btn-primary">Shop Now</a>
+        <button class="btn btn-primary" (click)="scrollToFeaturedProducts()" >Shop Now</button>
       </div>
     </div>
   </section>
 
-  <section class="featured-products">
+  <section class="featured-products" id="featuredProductsSection">
     <div class="container">
-      <h2 class="text-center">Featured Products</h2>
+      <h2 class="text-center" id="scroll">Featured Products</h2>
       <div class="row">
-        <div class="col-md-4" *ngFor="let product of products" >
-          <div class="card card-hover"  (click)="goToProductPage(product.id)" >
+        <div class="col-md-4" *ngFor="let product of products">
+          <div class="card card-hover" (click)="goToProductPage(product.id)">
             <ng-container *ngIf="product.productImages && product.productImages.length > 0">
               <img [src]="product.productImages[0].url" class="card-img-top" alt="Product">
             </ng-container>
             <div class="card-body">
               <h5 class="card-title">{{ product.name }}</h5>
               <!--p class="card-text">{{ product.description }}</p-->
-             <h5><p class="card-text">Price: {{ product.price | currency }}</p></h5> 
+              <h5><p class="card-text">Price: {{ product.price | currency }}</p></h5>
               <!--p class="card-text">Quantity: {{ product.quantity }}</p-->
               <a href="#" class="btn btn-primary">
                 <i class="pi pi-shopping-cart"></i> Add to Cart
               </a>
             </div>
             <br>
-
           </div>
           <br>
         </div>
       </div>
     </div>
     <br>
-
   </section>
 </div>
 
