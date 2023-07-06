@@ -7,6 +7,7 @@ import { AuthGuard } from '../services/auth/AuthGard';
 import { DashboardComponent } from './admin/page/dashboard/dashboard.component';
 import { HomepageComponent } from './ui/homepage/homepage.component';
 import { ProductPageComponent } from './ui/product-page/product-page.component';
+import { CartPageComponent } from './ui/cart-page/cart-page.component';
 
 const routes: Routes = [
   {path:'login' , component : LoginComponent , canActivate:[AuthGuard]},
@@ -15,11 +16,12 @@ const routes: Routes = [
   {path:'signup' , component : SignupComponent , canActivate:[AuthGuard]},
   {path : 'dashboard', component : DashboardComponent, canActivate:[AuthGuard] , data :{ role : 'ADMIN'}},
   {path: 'home', component : HomepageComponent},
-  {path : 'product/:id' , component : ProductPageComponent}
+  {path : 'product/:id' , component : ProductPageComponent},
+  {path: 'cart', component : CartPageComponent}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class UserRoutingModule { }
+export class UserRoutingModule {}

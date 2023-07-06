@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, SecurityContext } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 import { Product } from 'src/app/models/product/product';
 import { ImageProcessingService } from 'src/app/services/images/image-processing.service';
@@ -17,19 +17,20 @@ export class ProductPageComponent {
   constructor(private productService : ProductService,     
     private route: ActivatedRoute,
     private imageProcessingService: ImageProcessingService,
-    private sanitizer : DomSanitizer
+    private sanitizer : DomSanitizer,
+    private router: Router
     ) {}
 
-  ngOnInit(): void {
+
+   ngOnInit() {
     this.route.params.subscribe(params => {
       const productId = +params['id'];
       this.fetchProduct(productId);
     });
   }
-  product!: Product ;
    
+  product!: Product ;
   mainImage!: string;
-
   imageList: string[] = [];
 
   fetchProduct(id: number): void {

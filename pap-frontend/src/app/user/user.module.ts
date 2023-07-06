@@ -12,6 +12,7 @@ import { EditUserComponent } from './admin/page/edit-user/edit-user.component';
 import { DashboardComponent } from './admin/page/dashboard/dashboard.component';
 import { HomepageComponent } from './ui/homepage/homepage.component';
 import { ProductPageComponent } from './ui/product-page/product-page.component';
+import { CartPageComponent } from './ui/cart-page/cart-page.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ProductPageComponent } from './ui/product-page/product-page.component';
     EditUserComponent,
     HomepageComponent,
     DashboardComponent,
-    ProductPageComponent
+    ProductPageComponent,
+    CartPageComponent
   ],
   imports: [
     CommonModule,

@@ -6,7 +6,6 @@ import { Dialog } from 'primeng/dialog';
 import { Dropdown } from 'primeng/dropdown';
 import { Password } from 'primeng/password';
 import { Role } from 'src/app/models/user/roles';
-
 import { User } from 'src/app/models/user/user';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -22,11 +21,12 @@ export class CreateUserComponent {
   }
 
   constructor(
+
     private messageService: MessageService,
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router,
-    private renderer : Renderer2
+
   ) {}
 
   @Input() visible?: boolean;
@@ -39,33 +39,35 @@ export class CreateUserComponent {
   ngAfterViewInit() {
     const inputElement = this.passwordInput.el.nativeElement.querySelector('input');
     const inputDropdown = this.dropdownInput.el.nativeElement.querySelector('input');
+
     inputElement.id = 'cuser-password';
     inputDropdown.id ='cuser-role';
+
     this.addDialog.onShow.subscribe(() => {
       const closeBtn = this.addDialog.el.nativeElement.querySelector(".p-dialog-header-close");
       closeBtn.id="closeAddU";
+      inputDropdown.id="addUserDrop"
     });
-  }
 
+  }
   userForm = this.fb.group({
     username: ['', Validators.required],
-    email: ['', Validators.email],
+    email: ['', [Validators.email, Validators.required]],
     address: ['', Validators.required],
     phoneNum: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.firstCharValidator]],
     password: ['', Validators.required],
-    role: ['', Validators.nullValidator]
+    role: ['', Validators.required]
   });
 
   onHide(e: any) {
     this.closeDialog.emit();
   }
-   
+
   users: User[] =[ {
     username: "",
     email: "",
     address: "",
     password: "",
-  
     role: Role.T
   }];
 
@@ -76,7 +78,6 @@ export class CreateUserComponent {
     }
     return null;
   }
-  
   createUser() {
     if (this.userForm.invalid) {
       return;
@@ -98,7 +99,6 @@ export class CreateUserComponent {
     );
   }
   roles!: Role[];
-
   getAllRoles() {
     this.userService.getAllRoles().subscribe(
       (response: Role[]) => {
@@ -122,4 +122,5 @@ export class CreateUserComponent {
   closeToast() {
     this.router.navigate(['/users/list']);
   }
+
 }

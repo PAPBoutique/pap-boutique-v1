@@ -33,11 +33,6 @@ public class ProductEntity{
     )
     private Set<ImageDataEntity> productImages;
 
-    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-    private List<CartEntity> cart;
-
-
     @PrePersist
     public void prePersist() {
         if (createdDate == null) {

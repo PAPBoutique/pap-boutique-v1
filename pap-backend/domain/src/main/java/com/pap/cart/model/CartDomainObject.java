@@ -8,15 +8,21 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class CartDomainObject {
-    private Long id;
-    private LocalDate createdDate;
+    private Long cartId;
+    private LocalDateTime createdDate;
     private ProductDomainObject product;
     private UserDomainObject user;
     private int quantity;
+
+    public CartDomainObject(ProductDomainObject product, UserDomainObject user) {
+        this.product = product;
+        this.user = user;
+    }
 
 }

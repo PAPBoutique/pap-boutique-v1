@@ -7,8 +7,8 @@
             <div class="product-image-main">
               <img [src]="product.productImages[0].url"  alt="" id="product-main-image">
             </div>
-            <div class="product-image-slider">
-                <img *ngFor="let image of product.productImages" [src]="image.url" alt="" class="image-list" (click)="changeImage(image.url)">
+            <div class="product-image-slider" >
+                <img  *ngFor="let image of product.productImages" [src]="image.url" alt="" class="image-list" (click)="changeImage(image.url)">
             </div>
           </div>
         </div>
@@ -45,3 +45,4 @@
     </div>
   </div>
   <app-footer></app-footer>
+

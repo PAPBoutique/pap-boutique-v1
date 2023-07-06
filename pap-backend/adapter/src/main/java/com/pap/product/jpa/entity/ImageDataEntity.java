@@ -18,7 +18,7 @@ public class ImageDataEntity {
     private String name;
     private String type;
     @Lob
-    @Column(length = 2140000000)
+    //@Column(length = 2140000000)
     private byte[] picByte;
 
     public ImageDataEntity(String name, String type, byte[] picByte) {

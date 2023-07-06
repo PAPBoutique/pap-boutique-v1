@@ -10,6 +10,7 @@ import org.apache.catalina.User;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -19,23 +20,19 @@ import java.time.LocalDate;
 public class CartEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Column(name = "created_date")
-    private LocalDate createdDate;
-
-    @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    private Long cartId;
+    @OneToOne
     private ProductEntity product;
-    @JsonIgnore
-    @OneToOne(targetEntity = UserEntity.class, fetch = FetchType.EAGER)
-    @JoinColumn(nullable = false, name = "user_id")
+    @OneToOne
     private UserEntity user;
-    private int quantity;
+    private LocalDateTime createdDate;
 
-    public CartEntity(ProductEntity product, int quantity, UserEntity user){
-        this.user = user;
-        this.product = product;
-        this.quantity = quantity;
-        this.createdDate = LocalDate.now();
+    @PrePersist
+    public void prePersist() {
+        if (createdDate == null) {
+            createdDate = LocalDateTime.now();
+
+        }
     }
+
 }

@@ -22,6 +22,8 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
     private final JwtService jwtService ;
     private final UserDetailsService userDetailsService ;
+    public static String CURRENT_USER = "";
+
 
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,@NonNull FilterChain filterChain) throws ServletException, IOException {
@@ -34,6 +36,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
         }
         jwt = authHeader.substring(7);
         username = jwtService.extractUsername(jwt);
+        CURRENT_USER = username;
         if(username != null && SecurityContextHolder.getContext().getAuthentication()==null){
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             if(jwtService.isTokenValid(jwt,userDetails)){

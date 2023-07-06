@@ -55,6 +55,8 @@ export class HomepageComponent {
     }
   }
 
+ 
+
   scrollToFeaturedProducts() {
     const sectionElement = this.elementRef.nativeElement.querySelector('#featuredProductsSection');
     sectionElement.scrollIntoView({ behavior: 'smooth' });
