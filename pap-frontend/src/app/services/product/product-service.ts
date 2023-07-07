@@ -8,8 +8,8 @@ import { PageContent } from 'src/app/shared-components/service/pageContent';
 
 
 const baseUrl = '/api/v1/products';
-
 const url = "/api/v1/products/productsWithPicture"
+const cartAPI = "/api/v1/cart"
 @Injectable({
   providedIn: 'root'
 })
@@ -52,6 +52,11 @@ export class ProductService {
 
     getAllProducts(): Observable<Product[]> {
       return this.http.get<Product[]>(baseUrl + "/allProducts");
+    }
+
+    public addToCart(productId?: number)
+    {
+      return this.http.get(cartAPI + "/addToCart/" + productId )
     }
         
 }

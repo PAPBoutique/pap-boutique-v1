@@ -42,6 +42,7 @@ import { PanelModule } from 'primeng/panel';
     NavbarComponent,
     SidebarComponent,
     LoaderComponent,
+    
     ConfirmDialogComponent
   ],
   exports: [
@@ -71,7 +72,7 @@ import { PanelModule } from 'primeng/panel';
     DialogModule,
     LoaderComponent,
     ImageModule,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
   ],
   imports: [
     OverlayPanelModule,

@@ -26,6 +26,7 @@ public class CartEntity {
     @OneToOne
     private UserEntity user;
     private LocalDateTime createdDate;
+    private int quantity;
 
     @PrePersist
     public void prePersist() {

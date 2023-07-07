@@ -17,7 +17,7 @@ const routes: Routes = [
   {path : 'dashboard', component : DashboardComponent, canActivate:[AuthGuard] , data :{ role : 'ADMIN'}},
   {path: 'home', component : HomepageComponent},
   {path : 'product/:id' , component : ProductPageComponent},
-  {path: 'cart', component : CartPageComponent}
+  {path: 'cart', component : CartPageComponent,  canActivate:[AuthGuard] , data :{ role : 'CLIENT'}}
 ];
 
 @NgModule({

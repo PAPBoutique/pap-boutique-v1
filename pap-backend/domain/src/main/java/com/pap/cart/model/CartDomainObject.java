@@ -18,11 +18,13 @@ public class CartDomainObject {
     private LocalDateTime createdDate;
     private ProductDomainObject product;
     private UserDomainObject user;
-    private int quantity;
+    private  int quantity;
 
-    public CartDomainObject(ProductDomainObject product, UserDomainObject user) {
+
+    public CartDomainObject(ProductDomainObject product, UserDomainObject user, int quantity) {
         this.product = product;
         this.user = user;
+        this.quantity = quantity;
     }
 
 }

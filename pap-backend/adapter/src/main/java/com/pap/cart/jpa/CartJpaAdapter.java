@@ -44,21 +44,27 @@ public class CartJpaAdapter implements CartJpaPort{
 
         if (product != null && user != null) {
             List<CartEntity> cartList = cartRepository.findByUser(user);
-            List<CartEntity> filteredList = cartList.stream()
+            CartEntity existingCartItem = cartList.stream()
                     .filter(x -> x.getProduct().getId() == productId)
-                    .collect(Collectors.toList());
+                    .findFirst()
+                    .orElse(null);
 
-            if (filteredList.size() > 0) {
-                return null;
+            if (existingCartItem != null) {
+                existingCartItem.setQuantity(existingCartItem.getQuantity() + 1);
+                CartEntity savedCartEntity = cartRepository.save(existingCartItem);
+                CartDomainObject savedCartDomainObject = CartMapper.INSTANCE.toCartDomain(savedCartEntity);
+                return savedCartDomainObject;
+            } else {
+                ProductDomainObject productDomainObject = ProductMapper.INSTANCE.productToProductDomain(product);
+                UserDomainObject userDomainObject = UserMapper.INSTANCE.toUserDomain(user);
+                CartDomainObject cartDomainObject = new CartDomainObject(productDomainObject, userDomainObject, 1);
+                CartEntity cartEntity = CartMapper.INSTANCE.toCartEntity(cartDomainObject);
+                CartEntity savedCartEntity = cartRepository.save(cartEntity);
+                CartDomainObject savedCartDomainObject = CartMapper.INSTANCE.toCartDomain(savedCartEntity);
+                return savedCartDomainObject;
             }
-            ProductDomainObject productDomainObject = ProductMapper.INSTANCE.productToProductDomain(product);
-            UserDomainObject userDomainObject = UserMapper.INSTANCE.toUserDomain(user);
-            CartDomainObject cartDomainObject = new CartDomainObject(productDomainObject, userDomainObject);
-            CartEntity cartEntity = CartMapper.INSTANCE.toCartEntity(cartDomainObject);
-            CartEntity savedCartEntity = cartRepository.save(cartEntity);
-            CartDomainObject savedCartDomainObject = CartMapper.INSTANCE.toCartDomain(savedCartEntity);
-            return savedCartDomainObject;
         }
+
         return null;
     }
     @Override

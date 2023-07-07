@@ -29,7 +29,6 @@ export class ImageProcessingService {
   
         productImagesToFileHandle.push(finalFileHandle);
       }
-      console.log(productImagesToFileHandle);
 
     }
   

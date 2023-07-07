@@ -1,11 +1,14 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, ElementRef} from '@angular/core';
+import { Component, ElementRef, Input} from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { map } from 'rxjs';
 import { Product } from 'src/app/models/product/product';
+import { AuthService } from 'src/app/services/auth/authService';
 import { ImageProcessingService } from 'src/app/services/images/image-processing.service';
 import { ProductService } from 'src/app/services/product/product-service';
+
 
 @Component({
   selector: 'app-homepage',
@@ -13,17 +16,22 @@ import { ProductService } from 'src/app/services/product/product-service';
   styleUrls: ['./homepage.component.css']
 })
 export class HomepageComponent {
+  isLoggedIn!: boolean;
 
   products : Product[] = []
   ngOnInit(): void {
     this.getAllProducts();
+    console.log(this.isLoggedIn)
     
   }
  
   constructor(private productService : ProductService, private imageProcessingService : ImageProcessingService, 
               private sanitizer : DomSanitizer,
               private router : Router,
-              private elementRef: ElementRef) {}
+              private elementRef: ElementRef,
+              private messageService: MessageService,
+              private authService: AuthService
+              ) {}
 
   getAllProducts() {
     this.productService.getAllProducts()
@@ -33,12 +41,35 @@ export class HomepageComponent {
       .subscribe(
         (resp: Product[]) => {
           this.products = resp;
-          console.log('Products Data : ', this.products);
         },
         (error: HttpErrorResponse) => {
           console.log(error);
         }
       );
+  }
+  addToCart(productId?: number)
+  {
+    this.productService.addToCart(productId).subscribe(
+      (response) =>
+      {this.isLoggedIn = this.authService.isLoggedIn();
+        if (this.isLoggedIn) {
+          this.showSuccessMessage();
+          setTimeout(() => {
+            this.messageService.clear();
+          }, 3000); 
+        } else {
+          this.showAddingToCartError();
+          setTimeout(() => {
+            this.messageService.clear();
+          }, 3000); 
+        }
+      },
+      (error) =>
+      {
+        console.log(error)
+      }
+    )
+      console.log(productId)
   }
 
 
@@ -55,11 +86,20 @@ export class HomepageComponent {
     }
   }
 
- 
-
   scrollToFeaturedProducts() {
     const sectionElement = this.elementRef.nativeElement.querySelector('#featuredProductsSection');
     sectionElement.scrollIntoView({ behavior: 'smooth' });
   }
   
+  showSuccessMessage() {
+    this.messageService.add({ severity: 'success', summary: 'Product Added!', detail: 'Your product has been added to your cart.' });
+  }
+  
+  showAddingToCartError() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error occurred',
+      detail: 'Please log in before attempting to add items to your cart.'
+    });
+  }
 }
