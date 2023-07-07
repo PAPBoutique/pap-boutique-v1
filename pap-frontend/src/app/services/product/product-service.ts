@@ -58,5 +58,19 @@ export class ProductService {
     {
       return this.http.get(cartAPI + "/addToCart/" + productId )
     }
+    public getCartDetails()
+    {
+      return this.http.get(cartAPI + "/getCartDetails")
+    }
+
+
+    public getCartDetails1() {
+      return this.http.get("http://localhost:9090/getCartDetails");
+    }
         
+
+    deleteCartItem(cartId: number): Observable<void> {
+      const url = `${cartAPI}/deleteCartItem/${cartId}`;
+      return this.http.delete<void>(url);
+    }
 }

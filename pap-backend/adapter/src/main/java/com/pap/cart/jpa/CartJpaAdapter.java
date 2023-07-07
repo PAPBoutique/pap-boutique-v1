@@ -19,6 +19,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +32,10 @@ public class CartJpaAdapter implements CartJpaPort{
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
-    @Transactional
+
+
+
+      @Transactional
     @Override
     public CartDomainObject addToCart(Long productId) {
         ProductEntity product = productRepository.findById(productId).orElse(null);
@@ -55,7 +59,7 @@ public class CartJpaAdapter implements CartJpaPort{
                 CartDomainObject savedCartDomainObject = CartMapper.INSTANCE.toCartDomain(savedCartEntity);
                 return savedCartDomainObject;
             } else {
-                ProductDomainObject productDomainObject = ProductMapper.INSTANCE.productToProductDomain(product);
+               ProductDomainObject productDomainObject = ProductMapper.INSTANCE.productToProductDomain(product);
                 UserDomainObject userDomainObject = UserMapper.INSTANCE.toUserDomain(user);
                 CartDomainObject cartDomainObject = new CartDomainObject(productDomainObject, userDomainObject, 1);
                 CartEntity cartEntity = CartMapper.INSTANCE.toCartEntity(cartDomainObject);
@@ -67,10 +71,27 @@ public class CartJpaAdapter implements CartJpaPort{
 
         return null;
     }
+    @Transactional
     @Override
-    public void deleteCartItem(Long cartId) {
-        cartRepository.deleteById(cartId);
+    public void deleteCartItem(Long productId) {
+        String username = JwtAuthFilter.CURRENT_USER;
+        UserEntity user = null;
 
+        if (username != null) {
+            user = userRepository.findByUsername(username).orElse(null);
+        }
+
+        if (user != null) {
+            List<CartEntity> cartList = cartRepository.findByUser(user);
+            CartEntity cartItemToDelete = cartList.stream()
+                    .filter(x -> x.getProduct().getId() == productId)
+                    .findFirst()
+                    .orElse(null);
+
+            if (cartItemToDelete != null) {
+                cartRepository.delete(cartItemToDelete);
+            }
+        }
     }
 
     @Transactional

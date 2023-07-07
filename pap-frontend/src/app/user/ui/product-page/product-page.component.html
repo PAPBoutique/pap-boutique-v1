@@ -1,4 +1,5 @@
 <app-navbar></app-navbar> 
+<p-toast></p-toast>
 <div class="container">
     <div class="single-product">
       <div class="row">
@@ -36,7 +37,7 @@
             <span class="divider"></span>
             <div class="product-btn-group">
                 <p-button class="button buy-now" icon="bx bxs-zap" label="Buy Now"></p-button>
-                <p-button class="button add-cart" icon="bx bxs-cart" label="Add to Cart"></p-button>
+                <p-button class="button add-cart" (click)="addToCart(); $event.stopPropagation()" icon="bx bxs-cart" label="Add to Cart"></p-button>
                 <p-button class="button heart" icon="bx bxs-heart" label="Add to Wishlist"></p-button>
               </div>
           </div>

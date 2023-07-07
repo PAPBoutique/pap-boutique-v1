@@ -1,51 +1,32 @@
+<app-navbar></app-navbar>
 
-<head>
-<style>
-    body {
-      padding-top: 20px;
-    }
+<br><br>
 
-    .container {
-      max-width: 800px;
-    }
-
-    .cart-item {
-      border-bottom: 1px solid #ddd;
-      padding-bottom: 10px;
-      margin-bottom: 10px;
-    }
-
-    @media (max-width: 576px) {
-      .container {
-        padding-left: 10px;
-        padding-right: 10px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <h1>Shopping Cart</h1>
-    <div class="cart-item">
-      <h3>Product 1</h3>
-      <p>Description of Product 1</p>
-      <p>Price: $10</p>
+<div class="container" style="display: center;">
+  <div class="col-lg-6 px-5 py-4">
+    <div class="d-flex align-items-center mb-5" *ngFor="let cartItem of cartDetails">
+      <div class="flex-shrink-0">
+        <ng-container *ngIf="cartItem.product.productImages && cartItem.product.productImages.length > 0">
+          <img [src]="cartItem.product.productImages[0].url" class="img-fluid" style="width: 60px;" alt="Product Image">
+        </ng-container>
+      </div>
+      <div class="flex-grow-1 ms-3">
+        <p-button (click)="deleteCartItem(cartItem.product.id)" icon="pi pi-times" styleClass="p-button-rounded p-button-danger float-end text-black"></p-button>
+        <a routerLink="/product/{{cartItem.product.id}}"><h5 class="text-primary">{{ cartItem.product.name }}</h5></a>
+        <div class="d-flex align-items-center">
+          <p class="fw-bold mb-0 me-5 pe-3">Price: {{ cartItem.product.price | currency }}</p>
+          <br>
+          <p>Quantity: {{ cartItem.quantity }}</p>
+        </div>
+      </div>
     </div>
-    <div class="cart-item">
-      <h3>Product 2</h3>
-      <p>Description of Product 2</p>
-      <p>Price: $15</p>
-    </div>
-    <div class="cart-item">
-      <h3>Product 3</h3>
-      <p>Description of Product 3</p>
-      <p>Price: $20</p>
-    </div>
-    <div class="cart-item">
-      <h3>Product 4</h3>
-      <p>Description of Product 4</p>
-      <p>Price: $25</p>
+
+    <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+
+    <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+      <h5 class="fw-bold mb-0">Total:</h5>
+      <h5 class="fw-bold mb-0">{{ totalAmount }}$</h5>
+      <button type="button" class="btn btn-primary btn-block btn-lg">Buy now</button>
     </div>
   </div>
-</body>
+</div>

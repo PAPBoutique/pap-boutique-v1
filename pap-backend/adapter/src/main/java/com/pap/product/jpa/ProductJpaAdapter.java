@@ -1,6 +1,8 @@
 package com.pap.product.jpa;
 
 
+import com.pap.cart.jpa.entity.CartEntity;
+import com.pap.cart.jpa.repository.CartRepository;
 import com.pap.product.exception.ProductNotFoundException;
 import com.pap.product.jpa.entity.ImageDataEntity;
 import com.pap.product.jpa.entity.ProductEntity;
@@ -61,10 +63,18 @@ public class ProductJpaAdapter implements ProductJpaPort {
         return imageDataDomainObjects;
     }
 
-
+    private final CartRepository cartRepository;
     @Override
     public void deleteProduct(Long id) {
-        if(getProductById(id)!=null){
+        Optional<ProductEntity> productOptional = productRepository.findById(id);
+        if (productOptional.isPresent()) {
+            ProductEntity product = productOptional.get();
+
+            List<CartEntity> cartsWithProduct = cartRepository.findByProduct(product);
+            for (CartEntity cart : cartsWithProduct) {
+                cart.setProduct(null);
+                cartRepository.save(cart);
+            }
             productRepository.deleteById(id);
         }
     }

@@ -22,8 +22,8 @@ public class CartController {
 
     @PreAuthorize("hasRole('CLIENT')")
     @DeleteMapping({"/deleteCartItem/{cartId}"})
-    public void deleteCartItem(@PathVariable(name = "cartId") Long cartId) {
-        cartServicePort.deleteCartItem(cartId);
+    public void deleteCartItem(@PathVariable(name = "cartId") Long productId) {
+        cartServicePort.deleteCartItem(productId);
     }
 
     @PreAuthorize("hasRole('CLIENT')")

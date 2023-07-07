@@ -30,7 +30,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.component';
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
-
+import { MenubarModule } from "primeng/menubar";
 
 
 
@@ -46,6 +46,7 @@ import { PanelModule } from 'primeng/panel';
     ConfirmDialogComponent
   ],
   exports: [
+    MenubarModule,
     PageNotFoundComponent,
     ChartModule,
     OverlayPanelModule,
@@ -75,6 +76,7 @@ import { PanelModule } from 'primeng/panel';
     ConfirmDialogComponent,
   ],
   imports: [
+    MenubarModule,
     OverlayPanelModule,
     ChartModule,
     CommonModule,

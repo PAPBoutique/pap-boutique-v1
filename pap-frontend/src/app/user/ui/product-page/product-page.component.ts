@@ -2,8 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, SecurityContext } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { map } from 'rxjs';
 import { Product } from 'src/app/models/product/product';
+import { AuthService } from 'src/app/services/auth/authService';
 import { ImageProcessingService } from 'src/app/services/images/image-processing.service';
 import { ProductService } from 'src/app/services/product/product-service';
 
@@ -18,7 +20,8 @@ export class ProductPageComponent {
     private route: ActivatedRoute,
     private imageProcessingService: ImageProcessingService,
     private sanitizer : DomSanitizer,
-    private router: Router
+    private authService: AuthService,
+    private messageService : MessageService
     ) {}
 
 
@@ -26,6 +29,7 @@ export class ProductPageComponent {
     this.route.params.subscribe(params => {
       const productId = +params['id'];
       this.fetchProduct(productId);
+      
     });
   }
    
@@ -40,8 +44,6 @@ export class ProductPageComponent {
       (product: Product) => {
         this.product = product;
         this.mainImage = this.product.productImages[0]?.url.toString();
-
-        console.log('Single Product Data:', this.product);
       },
       (error: HttpErrorResponse) => {
         console.error(error);
@@ -63,6 +65,44 @@ export class ProductPageComponent {
     const updatedImageList = this.imageList.map((img) => (img === image.toString() ? mainImageSrc : img));
     this.imageList = updatedImageList;
   }
+
+  isLoggedIn!: boolean;
+
+  addToCart() {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    if (idParam) {
+      const productId = +idParam;
+      this.productService.addToCart(productId).subscribe(
+      (response) => {
+        this.isLoggedIn = this.authService.isLoggedIn();
+        
+        if (this.isLoggedIn) {
+          this.showSuccessMessage();
+        } else {
+          this.showAddingToCartError();
+        }
+        
+        setTimeout(() => {
+          this.messageService.clear();
+        }, 3000); 
+        
+        console.log(productId);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );} }
+
+  showSuccessMessage() {
+    this.messageService.add({ severity: 'success', summary: 'Product Added!', detail: 'Your product has been added to your cart.' });
+  }
   
+  showAddingToCartError() {
+    this.messageService.add({
+      severity: 'error',
+      summary: 'Error occurred',
+      detail: 'Please log in before attempting to add items to your cart.'
+    });
+  }
 
 }
