@@ -70,10 +70,31 @@ public class AuthenticationService {
                     .email("admin@example.com")
                     .password(passwordEncoder.encode("admin"))
                     .address("Admin Address")
-                    .phoneNum(0674343223L)
+                    .phoneNum(653564464L)
                     .role(Role.ADMIN)
                     .build();
             userRepository.save(adminUser);
+        };
+    }
+
+
+    @Bean
+    public CommandLineRunner addClientAccount() {
+        return args -> {
+            if (userRepository.findByEmail("client").isPresent() || userRepository.findByEmail("client@gmail.com").isPresent()) {
+                System.out.println("Client user already exists. Skipping creation.");
+                return;
+            }
+
+            UserEntity clientUser = UserEntity.builder()
+                    .username("client")
+                    .email("client@gmail.com")
+                    .password(passwordEncoder.encode("client"))
+                    .address("Client Address")
+                    .phoneNum(653564464L)
+                    .role(Role.CLIENT)
+                    .build();
+            userRepository.save(clientUser);
         };
     }
 
