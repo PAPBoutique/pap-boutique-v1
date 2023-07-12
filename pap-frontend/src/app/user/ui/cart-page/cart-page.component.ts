@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { ImageProcessingService } from 'src/app/services/images/image-processing.service';
 import { ProductService } from 'src/app/services/product/product-service';
+declare function greet(): void;
 
 @Component({
   selector: 'app-cart-page',
@@ -59,7 +60,6 @@ export class CartPageComponent {
   deleteCartItem(cartId: number): void {
     this.productService.deleteCartItem(cartId).subscribe(
       () => {
-        console.log('Item deleted successfully');
         const updatedCartList = this.cartDetails.filter(item => item.cartId !== cartId);
         this.cartDetails = updatedCartList;
         window.location.reload()

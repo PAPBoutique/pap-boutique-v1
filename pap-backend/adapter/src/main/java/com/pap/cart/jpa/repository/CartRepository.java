@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface CartRepository extends JpaRepository<CartEntity, Long> {
      List<CartEntity> findByUser(UserEntity user);
-
      List<CartEntity> findByProduct( ProductEntity product);
 
 }

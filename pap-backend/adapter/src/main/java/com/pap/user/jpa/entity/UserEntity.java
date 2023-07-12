@@ -1,5 +1,6 @@
 package com.pap.user.jpa.entity;
 
+import com.pap.cart.jpa.entity.CartEntity;
 import com.pap.user.model.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

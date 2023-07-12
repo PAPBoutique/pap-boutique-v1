@@ -19,10 +19,8 @@ export class HomepageComponent {
   isLoggedIn!: boolean;
 
   products : Product[] = []
-  ngOnInit(): void {
-    this.getAllProducts();
-    console.log(this.isLoggedIn)
-    
+  ngOnInit() {
+      this.getAllProducts();
   }
  
   constructor(private productService : ProductService, private imageProcessingService : ImageProcessingService, 
@@ -50,7 +48,7 @@ export class HomepageComponent {
   addToCart(productId?: number)
   {
     this.productService.addToCart(productId).subscribe(
-      (response) =>
+      () =>
       {this.isLoggedIn = this.authService.isLoggedIn();
         if (this.isLoggedIn) {
           this.showSuccessMessage();

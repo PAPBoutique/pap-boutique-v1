@@ -1,0 +1,71 @@
+
+<div class="container">
+
+  <div class="card-container">
+      
+      <div class="front">
+          <div class="image">
+              <img src="../../../../assets/img/chip.png" alt="">
+              <img src="" alt="">
+          </div>
+          <div class="card-number-box"></div>
+          <div class="flexbox">
+              <div class="box">
+                  <span>Card holder</span>
+                  <div class="card-holder-name"></div>
+              </div>
+              <div class="box">
+                  <span>Expiration Date</span>
+                  <div class="expiration">
+                      <span class="exp-month">MM / </span>
+                      <span class="exp-year">YY</span>
+                  </div>
+              </div>
+          </div>
+      </div>
+
+      <div class="back">
+          <div class="stripe"></div>
+          <div class="box">
+              <span>CVV</span>
+              <div class="cvv-box"></div>
+              <!--img src="image/visa.png" alt=""-->
+          </div>
+      </div>
+
+  </div>
+
+  <form action="">
+      <div class="inputBox">
+          <span>Card Number</span>
+          <input type="text" maxlength="16" class="card-number-input" #cardNumberInput (input)="updateCardNumberBox(cardNumberInput.value) ; showCardLogo();">
+
+      </div>
+      <div class="inputBox">
+        <span>Name on card</span>
+          <input type="text" class="card-holder-input" #cardHolderInput (input)="updateCardHolderBox(cardHolderInput.value) ; " maxlength="30">
+      </div>
+      <div class="flexbox">
+          <div class="inputBox">
+            <span>Expiry month</span>
+            <select name="" id="" class="month-input" #monthValue (change)="updateExpirationMonthBox(monthValue.value)">
+                <option value="month" selected disabled >Month</option>
+            </select>
+        </div>
+          <div class="inputBox">
+              <span>Expiry year</span>
+              <select name="" id="" class="year-input" #yearValue (change)="updateExpirationYearBox(yearValue.value)">
+                  <option value="year" selected disabled>Year</option>
+              </select>
+          </div>
+          <div class="inputBox">
+              <span>CCV</span>
+              <input type="text" maxlength="4" class="cvv-input" #ccv  (input)="updateCvvBox(ccv.value); " (mouseenter)="rotateCardBack()" (mouseleave)="rotateCardToFront()">
+          </div>
+      </div>
+      <button class="submit-btn">
+        <i class="pi pi-dollar"></i> Pay Now
+      </button>  </form>
+
+</div>    
+  

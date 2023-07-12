@@ -13,6 +13,9 @@ import { DashboardComponent } from './admin/page/dashboard/dashboard.component';
 import { HomepageComponent } from './ui/homepage/homepage.component';
 import { ProductPageComponent } from './ui/product-page/product-page.component';
 import { CartPageComponent } from './ui/cart-page/cart-page.component';
+import { BuyProductComponent } from './ui/buy-product/buy-product.component';
+
+
 
 
 @NgModule({
@@ -26,7 +29,8 @@ import { CartPageComponent } from './ui/cart-page/cart-page.component';
     HomepageComponent,
     DashboardComponent,
     ProductPageComponent,
-    CartPageComponent
+    CartPageComponent,
+    BuyProductComponent,
   ],
   imports: [
     CommonModule,
