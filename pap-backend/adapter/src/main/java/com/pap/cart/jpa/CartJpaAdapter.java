@@ -35,7 +35,7 @@ public class CartJpaAdapter implements CartJpaPort{
 
 
 
-      @Transactional
+    @Transactional
     @Override
     public CartDomainObject addToCart(Long productId) {
         ProductEntity product = productRepository.findById(productId).orElse(null);

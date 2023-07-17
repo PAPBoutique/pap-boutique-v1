@@ -21,6 +21,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
@@ -86,6 +87,7 @@ public class ProductJpaAdapter implements ProductJpaPort {
         return PageableMapper.INSTANCE.toPageableContent(productPage);
     }
 
+    @Transactional
     @Override
     public PageableContent<ProductDomainObject> findAllByName(int page, int size, String name) {
         Pageable pageable = PageRequest.of(page, size);
