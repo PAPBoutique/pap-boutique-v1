@@ -31,6 +31,7 @@ import { ConfirmDialogComponent } from './confirm-dialog/confirm-dialog.componen
 import { ChartModule } from 'primeng/chart';
 import { PanelModule } from 'primeng/panel';
 import { MenubarModule } from "primeng/menubar";
+import { InputMaskModule } from 'primeng/inputmask';
 
 
 
@@ -57,6 +58,7 @@ import { MenubarModule } from "primeng/menubar";
     MessagesModule,
     ToastModule,
     PasswordModule,
+    InputMaskModule,
     ButtonModule,
     PaginatorModule,
     ConfirmDialogModule,
@@ -76,6 +78,8 @@ import { MenubarModule } from "primeng/menubar";
     ConfirmDialogComponent,
   ],
   imports: [
+    InputMaskModule,
+
     MenubarModule,
     OverlayPanelModule,
     ChartModule,

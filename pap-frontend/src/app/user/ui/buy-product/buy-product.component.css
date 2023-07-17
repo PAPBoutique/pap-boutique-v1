@@ -12,26 +12,12 @@
   text-transform: uppercase;
 }
 
-/*.card-container .front .image img:nth-child(2) {
-    display: none;
-}*/
-
-  /*{
-  min-height: 100vh;
-  background: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column;
-  margin-top: 0%;
-}*/
-
   form {
   background: #fff;
   border-radius: 5px;
   box-shadow: 0 10px 15px rgba(0,0,0,.1);
   padding: 20px;
-  width: 600px;
+  width: 100%;
   padding-top: 160px;
 }
 
@@ -65,7 +51,7 @@
 
   form .submit-btn {
   width: 100%;
-  background:  #0D6EFD; /*linear-gradient(45deg, blueviolet, rgb(66, 117, 245));*/
+  background:  #0D6EFD;
   margin-top: 20px;
   padding: 10px;
   font-size: 20px;
@@ -82,12 +68,14 @@
 
   .card-container {
   margin-bottom: -150px;
+  margin-top: 0 ;
   position: relative;
-  height: 250px;
-  width: 400px;
+  height: 60%;
+  width: 80%;
   text-align: center;
   margin-left: 15%;
 }
+
 
   .card-container .front {
   position: absolute;
@@ -109,6 +97,20 @@
   align-items: center;
   justify-content: space-between;
   padding-top: 10px;
+}
+.inputContainer {
+  position: relative;
+}
+
+.card-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.card-number-input {
+  padding-left: 30px; /* Adjust the value to create space for the icon */
 }
 
   .card-container .front .image img {

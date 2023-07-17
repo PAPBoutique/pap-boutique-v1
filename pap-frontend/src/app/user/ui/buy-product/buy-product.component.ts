@@ -18,21 +18,26 @@ export class BuyProductComponent{
 
   updateCardNumberBox(cardNumber: string) {
     const numericRegex = /^\d*$/;
-  
     const cardNumberInput = document.querySelector('.card-number-input') as HTMLInputElement;
     const cardNumberBox = document.querySelector('.card-number-box') as HTMLElement;
   
     if (cardNumberInput && cardNumberBox) {
+      let formattedCardNumber = cardNumber;
+  
       if (!numericRegex.test(cardNumber)) {
         const sanitizedCardNumber = cardNumber.replace(/\D/g, '');
-        cardNumberInput.value = sanitizedCardNumber;
-      } else {
-        cardNumberInput.value = cardNumber;
+        formattedCardNumber = sanitizedCardNumber;
       }
   
-      cardNumberBox.textContent = cardNumberInput.value;
+      formattedCardNumber = formattedCardNumber.slice(0, 16);
+  
+      formattedCardNumber = formattedCardNumber.replace(/(\d{4})(?=\d)/g, '$1 ');
+  
+      cardNumberInput.value = formattedCardNumber;
+      cardNumberBox.textContent = formattedCardNumber;
     }
   }
+  
   
 
 updateCardHolderBox(cardHolderName: string) {
@@ -53,7 +58,8 @@ updateCardHolderBox(cardHolderName: string) {
   }
 }
 
-///////////////////////////////////// 
+////////////////////////////////////////////  
+
   updateExpirationMonthBox(monthValue : string) {
     const expMonthElement = document.querySelector('.exp-month') as HTMLElement;
     if (expMonthElement) {
@@ -62,10 +68,13 @@ updateCardHolderBox(cardHolderName: string) {
   }
 
   showCardLogo()
-  {const cardNumber =  document.querySelector('.card-number-input')  as HTMLInputElement
+  {
+    const cardNumber =  document.querySelector('.card-number-input')  as HTMLInputElement
   const selectedCardNumber = cardNumber.value
 
   const cardLogo = document.querySelector('.front .image img:nth-child(2)') as HTMLImageElement;
+  const cardIcon = document.querySelector('.card-icon') as HTMLImageElement;
+
   const cardFront = document.querySelector('.front') as HTMLDivElement;
   const cardBack = document.querySelector('.back') as HTMLDivElement;
 
@@ -77,7 +86,9 @@ updateCardHolderBox(cardHolderName: string) {
       cardFront.style.backgroundColor = '#0D6EFD';
       cardBack.style.backgroundColor = '#F5B226';
 
+
   } else if (selectedCardNumber.startsWith('5')) {
+     
       cardLogo.style.display = 'block'; 
       cardLogo.alt = 'Mastercard';
       cardLogo.src = '../../../../assets/img/mastercard.png';
@@ -93,7 +104,15 @@ updateCardHolderBox(cardHolderName: string) {
       cardFront.style.backgroundColor = '#F76C00';
       cardBack.style.backgroundColor = '#D8D8D9';
 
-  }
+  } else if (selectedCardNumber.startsWith('3')) {
+    cardLogo.style.display = 'block';
+    cardLogo.style.height = '50px'
+    cardLogo.alt = 'American Express';
+    cardLogo.src = '../../../../assets/img/download.png';
+    cardFront.style.backgroundColor = '#016FD0';
+    cardBack.style.backgroundColor = '#306FC5';
+
+}
   else {
       cardLogo.style.display = 'none';
       cardLogo.src =''

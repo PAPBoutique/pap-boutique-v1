@@ -11,9 +11,12 @@
     <i class="pi pi-angle-left me-2"></i>Back to Shopping
   </a>
 </div>
+
 <div class="row">
+  
+
   <div class="col-lg-6 px-5 py-4">
-    <h3 *ngIf="cartDetails.length !== 0" class="mb-5 pt-2 text-center fw-bold text-uppercase">Your Products</h3>
+    <h3 *ngIf="cartDetails.length !== 0" class="mb-5 pt-2 text-center fw-bold text-uppercase">Order summary</h3>
     
     <div class="d-flex align-items-center mb-5" *ngFor="let cartItem of cartDetails">
       <div class="flex-shrink-0">
@@ -45,12 +48,11 @@
   </div>
 
   <div *ngIf="cartDetails.length !== 0" class="col-lg-1 px-0">
-    <div style="border-right: 2px solid black; height: 100%;"></div>
+    <div style="border-right: 2px solid black; height: 200%;"></div>
   </div>
 
   
-
-<div class="col-lg-5 px-5 py-4">
+  <div class="col-lg-5 px-5 py-4">
     <app-buy-product *ngIf="totalAmount !== 0">
     </app-buy-product>
   </div>

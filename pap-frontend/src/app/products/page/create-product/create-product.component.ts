@@ -63,6 +63,7 @@ export class CreateProductComponent {
       }
     }
   }
+  
   ngAfterViewInit(){
     this.addDialog.onShow.subscribe(() => {
       const closeBtn = this.addDialog.el.nativeElement.querySelector(".p-dialog-header-close");
